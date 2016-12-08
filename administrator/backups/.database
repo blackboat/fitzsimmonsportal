@@ -1,0 +1,16 @@
+###newdump###	fitzsimmonshospitality	/home/themeelision/public_html/themeelision.net/fitzsimmonshospitality/administrator/backups/database-sql.sql
+`fitzsimmonshospitality`.`revsliderpatch_blacklist`	0	
+`fitzsimmonshospitality`.`wp_commentmeta`	0	
+`fitzsimmonshospitality`.`wp_comments`	1	
+`fitzsimmonshospitality`.`wp_links`	0	
+`fitzsimmonshospitality`.`wp_options`	200	
+`fitzsimmonshospitality`.`wp_postmeta`	321	
+`fitzsimmonshospitality`.`wp_posts`	169	
+`fitzsimmonshospitality`.`wp_term_relationships`	16	
+`fitzsimmonshospitality`.`wp_term_taxonomy`	11	
+`fitzsimmonshospitality`.`wp_termmeta`	0	
+`fitzsimmonshospitality`.`wp_terms`	11	
+`fitzsimmonshospitality`.`wp_usermeta`	22	
+`fitzsimmonshospitality`.`wp_users`	1	
+`fitzsimmonshospitality`.`wp_wonderplugin_slider`	1	
+###enddump###
