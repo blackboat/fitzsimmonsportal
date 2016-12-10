@@ -2408,8 +2408,6 @@ p:empty {
 
   padding: 6px 18px !important;
 
-  text-transform: uppercase;
-
   width: 100%;
 
 }
@@ -4143,7 +4141,8 @@ p:empty {
 
 }
 
-.product-detail-page .product-detail-contain .Price .quantity p a{
+.product-detail-page .product-detail-contain .Price .quantity p a,
+.product-detail-page .product-detail-contain .Price .quantity .single_add_to_cart_button{
 
     width: auto;
 
@@ -4167,7 +4166,7 @@ p:empty {
 
     height: 48px !important;
 
-    padding: 0 20px!important;
+    padding: 0 6px!important;
 
     text-align: center !important;
 
@@ -4497,7 +4496,6 @@ p:empty {
     font-family: "Heebo",sans-serif !important;
     font-size: 16px;
     padding: 6px 18px !important;
-    text-transform: uppercase;
     width: 100%;
 }
 .contact-form .textarea {
@@ -4533,4 +4531,9 @@ p:empty {
   .slick-image-slide, .slide-wrap{
     height: auto !important;
   }
+}
+
+.product-box .product-thumb {
+  padding: 0;
+  border: none;
 }

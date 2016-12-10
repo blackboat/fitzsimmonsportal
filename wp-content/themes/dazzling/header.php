@@ -58,13 +58,15 @@
 
 					<ul>
 
-						<li><a href="http://fitzsimmonsportal.com.au/restore/message/">Message</a></li>
+						<li><a href="<?php echo get_home_url(); ?>/message/">Message</a></li>
 
-						<li><a href="http://fitzsimmonsportal.com.au/restore/order-history/">Order History</a></li>
+						<li><a href="<?php echo get_home_url(); ?>/order-history/">Order History</a></li>
 
-						<li><a href="http://fitzsimmonsportal.com.au/restore/shoping-cart/">Shopping Cart</a></li>
+						<li><a href="<?php echo get_home_url(); ?>/shoping-cart/">Shopping Cart</a></li>
 
-						<li><a href="http://fitzsimmonsportal.com.au/restore/login/">Login</a></li>
+						<?php if (!is_user_logged_in()): ?>
+						<li><a href="<?php echo get_home_url(); ?>/login/">Login</a></li>
+						<?php endif; ?>
 
 					</ul>
 
@@ -126,7 +128,7 @@
 
 						<span class="site-title"><a class="navbar-brand" href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></span>
 
-						<a href="http://fitzsimmonsportal.com.au/restore/"><img src="http://fitzsimmonsportal.com.au/restore/wp-content/uploads/2016/12/logo.png" alt="" /></a>
+						<a href="<?php echo get_home_url(); ?>"><img src="<?php echo get_home_url(); ?>/wp-content/uploads/2016/12/logo.png" alt="" /></a>
 
 					</div><!-- end of #logo -->
 
@@ -148,7 +150,7 @@
 
 			</div>
 
-				<?php dazzling_header_menu(); ?>
+				
 
 
 
@@ -158,15 +160,18 @@
 
 				<ul class="right-part">
 
+					<?php if (is_user_logged_in()) : 
+						$current_user = wp_get_current_user();
+					?>
 					<li>
 
 						<div class="uese-info">
 
-							<img src="http://fitzsimmonsportal.com.au/restore/wp-content/uploads/2016/12/user.png" alt="" />
+							<img src="<?php echo get_home_url(); ?>/wp-content/uploads/2016/12/user.png" alt="" />
 
 							<div class="dropdown">
 
-							  <a class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">JOhn Doe
+							  <a class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><?php echo $current_user->user_firstname . ' ' . $current_user->user_lastname; ?>
 
 							    <span class="caret"></span>
 
@@ -174,9 +179,11 @@
 
 							  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
 
-							    <li><a href="#">Action</a></li>
+							    <!-- <li><a href="#">Action</a></li>
 
-							    <li><a href="#">Another action</a></li>
+							    <li><a href="#">Another action</a></li> -->
+
+							    <li><a href="<?php echo wp_logout_url(home_url()); ?>">Logout</a></li>
 
 							  </ul>
 
@@ -185,10 +192,11 @@
 						</div>
 
 					</li>
+					<?php endif; ?>
 
 					<li><a class="btn btn-default btn-venue" href="#">Venue</a></li>
 
-					<li><a class="search-box"><img src="http://fitzsimmonsportal.com.au/restore/wp-content/uploads/2016/12/search-icon.png" alt=""/></a></li>
+					<li><a class="search-box"><img src="<?php echo get_home_url(); ?>/wp-content/uploads/2016/12/search-icon.png" alt=""/></a></li>
 
 				</ul>
 

@@ -34,7 +34,7 @@ get_header();
 				<p>Wendisse quis malesuada ante. Donec tempor leo sit amet fringilla euismod. Aliquam condimen tum velit ut sapien dignissim, ut blandit neque fermentum. Suspendisse ante nunc, eleifend eget turpis sit amet, sodales porttitor felis. Pellentesque et lectus risus. Sed porttitor fermentum luctus. Aliquam condimen tum velit ut sapien dignissim, ut blandit neque fermentum. Suspendisse ante nunc, eleifend eget turpis sit amet, sodales porttitor felis.</p>
 			</div>
 			<div class="col-sm-6 col-xs-12">
-				<img src="http://fitzsimmonsportal.com.au/restore//wp-content/uploads/2016/12/about-photo.jpg" alt="" />
+				<img src="<?php echo get_home_url(); ?>/wp-content/uploads/2016/12/about-photo.jpg" alt="" />
 			</div>
 		</div>
 	</div>
