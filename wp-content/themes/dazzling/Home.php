@@ -38,7 +38,7 @@ get_header();
 			<div class="col-sm-4 col-xs-12">
 				<div class="products-box all-products">
 					<img src="<?php echo get_home_url(); ?>/wp-content/uploads/2016/12/products-6.jpg" alt=""/>
-					<h3><a href="#">Access All Products</a></h3>
+					<h3><a href="<?php echo get_permalink( get_page_by_path( 'all-products' ) ); ?>">Access All Products</a></h3>
 				</div>
 			</div>
 		</div></div>
