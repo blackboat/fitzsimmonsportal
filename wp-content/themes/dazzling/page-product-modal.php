@@ -2,13 +2,13 @@
 $id = $_GET['id'];
 $link = get_permalink( $id );
 $_product = wc_get_product( $id );
-$image = wp_get_attachment_image_src( get_post_thumbnail_id( $pid ), 'single-post-thumbnail' );
+$image = wp_get_attachment_image_src( get_post_thumbnail_id( $id ), 'single-post-thumbnail' );
 if (!$image) {
 	$image = wc_placeholder_img_src();
 } else {
 	$image = $image[0];
 }
-$itemcode = $_product->get_attribute( 'ItemCode' );
+//$itemcode = $_product->get_attribute( 'ItemCode' );
 ?>
 <div class="modal-dialog" role="document">
 <div class="modal-content">  
@@ -16,10 +16,10 @@ $itemcode = $_product->get_attribute( 'ItemCode' );
   <div class="product product-detail-page">
 	<div class="product-detail-contain">
 		<div class="product-box">
-			<div class="img"><img src="http://fitzsimmonsportal.com.au/restore/wp-content/uploads/2016/12/product-7.jpg" /></div>
+			<div class="img"><img src="<?php echo $image; ?>" /></div>
 				<div class="detail-box">
 					<h3><?php echo $_product->get_title(); ?></h3>
-					<p><label>Item Code: <span><?php echo $itemcode; ?></span></label><p>
+					<p><label>Item Code: <span><?php //echo $itemcode; ?></span></label><p>
 					<p><?php echo $_product->post->post_content; ?></p>
 					<div class="Prices">
 						<div class="Units">

@@ -359,7 +359,7 @@ function custom_login() {
             }
         }
         if(!empty($errors)) define('LOGIN_ERROR', serialize($errors));
-        else wp_redirect('/');
+        else wp_redirect('/restore');
     }
 }
 

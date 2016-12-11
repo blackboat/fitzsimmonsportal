@@ -54,7 +54,7 @@ get_header( 'shop' ); ?>
 									while ( $loop->have_posts() ) : $loop->the_post(); ?>
 										<?php
 										global $product;
-										$pid = $product->id;
+										$pid = $product->post->ID;
 										$link = get_permalink( $pid );
 										$image = wp_get_attachment_image_src( get_post_thumbnail_id( $pid ), 'single-post-thumbnail' );
 										if (!$image) {
@@ -97,7 +97,7 @@ get_header( 'shop' ); ?>
 			         	$('.product-thumb').click(function(ev){
 			             	ev.preventDefault();
 							var uid = $(this).data('id');
-							$.get('/product-modal?id=' + uid, function(html){
+							$.get('/restore/product-modal?id=' + uid, function(html){
 								$('#myModal').html(html);
 								$('#myModal').modal('show', {backdrop: 'static'});
 							});
