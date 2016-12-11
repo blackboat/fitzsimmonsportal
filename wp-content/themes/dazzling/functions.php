@@ -392,7 +392,7 @@ function wpse_131562_redirect() {
         && (is_cart() || is_checkout() || is_product())
     ) {
         // feel free to customize the following line to suit your needs
-        wp_redirect('/login');
+        wp_redirect(get_permalink( get_page_by_path( 'login' ) ));
         exit;
     }
 }
