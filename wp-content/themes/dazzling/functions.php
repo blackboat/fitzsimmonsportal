@@ -359,7 +359,7 @@ function custom_login() {
             }
         }
         if(!empty($errors)) define('LOGIN_ERROR', serialize($errors));
-        else wp_redirect('/restore');
+        else wp_redirect(get_home_url());
     }
 }
 
@@ -397,5 +397,19 @@ function wpse_131562_redirect() {
     }
 }
 
+function shortcode_my_orders( $atts ) {
+    extract( shortcode_atts( array(
+        'order_count' => -1
+    ), $atts ) );
+
+    ob_start();
+    wc_get_template( 'myaccount/my-orders.php', array(
+        'current_user'  => get_user_by( 'id', get_current_user_id() ),
+        'order_count'   => $order_count
+    ) );
+    return ob_get_clean();
+}
+
+add_shortcode('my_orders', 'shortcode_my_orders');
 add_action( 'template_redirect', 'custom_login' );
 add_action('template_redirect', 'wpse_131562_redirect');

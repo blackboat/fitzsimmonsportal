@@ -97,10 +97,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	</table>
 
-	<div class="wc-proceed-to-checkout">
-		<?php do_action( 'woocommerce_proceed_to_checkout' ); ?>
-	</div>
-
 	<?php do_action( 'woocommerce_after_cart_totals' ); ?>
 
 </div>
