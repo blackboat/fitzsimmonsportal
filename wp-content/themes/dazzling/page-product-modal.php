@@ -17,7 +17,7 @@ if (!$image) {
 	<div class="product-detail-contain">
 		<div class="product-box">
 			<div class="img" style="width: 40%;"><img src="<?php echo $image; ?>" /></div>
-				<div class="detail-box" style="text-align: center">
+				<div class="detail-box">
 					<?php
 					$fields = get_field_objects($id);
 					if( $fields )
@@ -26,7 +26,7 @@ if (!$image) {
 						{
 							if ($field['label'] && $field['value']) {
 							echo '<div style="margin-bottom: 20px;">';
-								echo '<h4><label>' . $field['label'] . '</label>  :  ' . $field['value'] . '</h4>';
+								echo '<h4 style="color: black;"><label width="30%">' . $field['label'] . ' :</label>' . $field['value'] . '</h4>';
 							echo '</div>';
 							}
 						}
