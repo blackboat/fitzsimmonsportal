@@ -86,7 +86,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			</div>
 		</div>
 		<div class="buttom-box">
-			<a href="<?php echo get_permalink(get_page_by_path('all-products')); ?>" class="btn btn-default">Continue Shopping <i class="fa fa-angle-double-right"></i></a>
+			<a href="<?php echo get_home_url(); ?>" class="btn btn-default">Continue Shopping <i class="fa fa-angle-double-right"></i></a>
 		</div>
 
 	</div><!-- .summary -->

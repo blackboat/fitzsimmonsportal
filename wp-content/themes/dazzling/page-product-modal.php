@@ -11,7 +11,7 @@ if (!$image) {
 //$itemcode = $_product->get_attribute( 'ItemCode' );
 ?>
 <div class="modal-dialog" role="document">
-<div class="modal-content">  
+<div class="modal-content" style="margin-top: 100px;">
   <div class="modal-body">
   <div class="product product-detail-page">
 	<div class="product-detail-contain">
@@ -35,7 +35,8 @@ if (!$image) {
 						</div>
 					</div>
 					<div class="buttom-box text-center">
-						<button type="submit" class="single_add_to_cart_button btn btn-default alt">Add to Cart</button>
+						<button type="submit" class="single_add_to_cart_button btn btn-default alt" style="margin-top: 10px;">Add to Cart</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal" style="margin-top: 10px;">Cancel</button>
 					</div>
 					</form>
 				</div>
