@@ -18,7 +18,7 @@ if (!$image) {
 		<div class="product-box">
 			<div class="img"><img src="<?php echo $image; ?>" /></div>
 				<div class="detail-box">
-					<?php ?>
+					<?php $fields = get_field_objects($id); var_dump( $fields ); ?>
 					<h3><?php echo $_product->get_title(); ?></h3>
 					<p><label>Item Code: <span><?php //echo $itemcode; ?></span></label><p>
 					<p><?php echo $_product->post->post_content; ?></p>
