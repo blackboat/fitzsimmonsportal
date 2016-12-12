@@ -19,7 +19,7 @@ get_header(); ?>
 					</header><!-- .entry-header -->
 	<?php
 						echo do_shortcode( '[breadcrumb]' ); 
-					?>>
+					?>
 
 </div>
 				</div>

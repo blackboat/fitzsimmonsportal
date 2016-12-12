@@ -27,7 +27,7 @@ get_header( 'shop' ); ?>
 			<div class="row">
 				<div class="col-md-12 text-center">
 					<header class="entry-header page-header">
-						<h1 class="entry-title"><?php the_title(); ?></h1>
+						<h1 class="entry-title"><?php echo $wp_query->get_queried_object()->name; ?></h1>
 					</header><!-- .entry-header -->
 					
 					<div class="breadcrumb-container theme1" itemprop="breadcrumb" itemscope="" itemtype="http://schema.org/BreadcrumbList">
