@@ -24,8 +24,8 @@ if (!$image) {
 					{
 						foreach( $fields as $field_name => $field )
 						{
-							echo '<div>';
-								echo '<h3>' . $field['label'] . '</h3>';
+							echo '<div style="width: 50%;">';
+								echo '<h3 style="display: inline;">' . $field['label'] . '</h3>';
 								echo $field['value'];
 							echo '</div>';
 						}

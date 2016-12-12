@@ -77,7 +77,7 @@ get_header( 'shop' ); ?>
 										?>
 										<div class="col-md-4 col-sm-6 col-xs-12">
 											<div class="product-box">
-											<div class="img"><button type="button" class="btn btn-primary btn-lg product-thumb" data-id="<?php echo $pid; ?>" data-toggle="modal" data-target="#myModal"><img src="<?php echo $image; ?>" /></button></div>
+											<div class="img"><button type="button" class="btn btn-primary btn-lg product-thumb" style="background: transparent;" data-id="<?php echo $pid; ?>" data-toggle="modal" data-target="#myModal"><img src="<?php echo $image; ?>" /></button></div>
 												<div class="detail-box">
 												<h5><?php echo $product->get_title(); ?></h5>
 												<p><?php echo $product->post->post_content; ?></p>
