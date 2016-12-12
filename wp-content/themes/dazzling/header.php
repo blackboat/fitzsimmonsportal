@@ -194,9 +194,9 @@
 					</li>
 					<?php endif; ?>
 
-					<li><a class="btn btn-default btn-venue" href="#">Venue</a></li>
+					<!-- <li><a class="btn btn-default btn-venue" href="#">Venue</a></li> 
 
-					<li><a class="search-box"><img src="<?php echo get_home_url(); ?>/wp-content/uploads/2016/12/search-icon.png" alt=""/></a></li>
+					<li><a class="search-box"><img src="<?php echo get_home_url(); ?>/wp-content/uploads/2016/12/search-icon.png" alt=""/></a></li> -->
 
 				</ul>
 
