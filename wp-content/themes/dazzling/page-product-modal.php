@@ -16,7 +16,7 @@ if (!$image) {
   <div class="product product-detail-page">
 	<div class="product-detail-contain">
 		<div class="product-box">
-			<div class="img"><img src="<?php echo $image; ?>" /></div>
+			<div class="img" style="width: 40%;"><img src="<?php echo $image; ?>" /></div>
 				<div class="detail-box" style="text-align: center">
 					<?php
 					$fields = get_field_objects($id);
@@ -33,8 +33,8 @@ if (!$image) {
 					<form class="cart" method="post" enctype="multipart/form-data">
 					<div class="Prices">
 						<div class="quantity">
-							<h3>Cartons</h3>
-							<input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" size="4" pattern="[0-9]*" inputmode="numeric" style="width: 50px;">
+							<h3 style="width: 50%; display: inline;">Cartons</h3>
+							<input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" size="4" pattern="[0-9]*" inputmode="numeric" style="width: 50px; height: 40px;">
 							<input type="hidden" name="add-to-cart" value="<?php echo $id; ?>">
 						</div>
 					</div>
