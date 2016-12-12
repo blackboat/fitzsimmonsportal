@@ -26,7 +26,7 @@ if (!$image) {
 						{
 							if ($field['label'] && $field['value']) {
 							echo '<div style="margin-bottom: 20px;">';
-								echo '<h4 style="color: black;"><label style="width:30%">' . $field['label'] . ' :</label>' . $field['value'] . '</h4>';
+								echo '<h4 style="color: black;"><label style="width:50%">' . $field['label'] . ' :</label><label style="width:45%; text-align: right;">' . $field['value'] . '</label></h4>';
 							echo '</div>';
 							}
 						}
