@@ -166,7 +166,7 @@ do_action( 'woocommerce_before_cart' ); ?>
 <div class="row">
 	<div class="col-xs-12">
 		<div class="btn-row">
-			<div class="btn-group"><a href="<?php echo esc_url( get_home_url() ); ?>" class="btn btn-default">Continue Shopping</a></div>
+			<div class="btn-group"><a href="<?php echo get_permalink(get_page_by_path('all-products')); ?>" class="btn btn-default">Continue Shopping</a></div>
 			<div class="btn-group"><a href="#" class="btn btn-info">Save Order</a></div>
 			<div class="btn-group"><a href="<?php echo esc_url( wc_get_checkout_url() ) ;?>" class="btn btn-success">Submit Apporval</a></div>
 		</div>

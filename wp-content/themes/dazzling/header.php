@@ -60,7 +60,7 @@
 
 						<li><a href="<?php echo get_home_url(); ?>/message/">Message</a></li>
 
-						<li><a href="<?php echo get_home_url(); ?>/order-history/">Order History</a></li>
+						<li><a href="<?php echo get_home_url(); ?>/my-account/orders/">Order History</a></li>
 
 						<li><a href="<?php echo get_home_url(); ?>/cart/">Shopping Cart</a></li>
 
@@ -151,7 +151,7 @@
 			</div>
 
 				
-
+		<?php dazzling_header_menu(); ?>
 
 
 		</div>
@@ -179,9 +179,9 @@
 
 							  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
 
-							    <!-- <li><a href="#">Action</a></li>
+							    <!-- <li><a href="#">Action</a></li> -->
 
-							    <li><a href="#">Another action</a></li> -->
+							    <li><a href="<?php echo get_permalink( get_option('woocommerce_myaccount_page_id') ); ?>">My Profile</a></li>
 
 							    <li><a href="<?php echo wp_logout_url(home_url()); ?>">Logout</a></li>
 

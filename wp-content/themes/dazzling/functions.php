@@ -387,10 +387,8 @@ function add_order(){
 }
 
 function wpse_131562_redirect() {
-    if (
-        ! is_user_logged_in()
-        && (is_cart() || is_checkout() || is_product())
-    ) {
+    if (! is_user_logged_in()&& (is_cart() || is_checkout() || is_product() || is_front_page()))
+    {
         // feel free to customize the following line to suit your needs
         wp_redirect(get_permalink( get_page_by_path( 'login' ) ));
         exit;
