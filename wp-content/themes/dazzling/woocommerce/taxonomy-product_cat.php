@@ -77,15 +77,27 @@ get_header( 'shop' ); ?>
 										?>
 										<div class="col-md-4 col-sm-6 col-xs-12">
 											<div class="product-box">
-											<div class="img"><button type="button" class="btn btn-primary btn-lg product-thumb" style="background: transparent;" data-id="<?php echo $pid; ?>" data-toggle="modal" data-target="#myModal"><img src="<?php echo $image; ?>" /></button></div>
+												<div class="img"><button type="button" class="btn btn-primary btn-lg product-thumb" style="background: transparent;" data-id="<?php echo $pid; ?>" data-toggle="modal" data-target="#myModal"><img src="<?php echo $image; ?>" /></button></div>
 												<div class="detail-box">
-												<h5><?php echo $product->get_title(); ?></h5>
-												<p><?php echo $product->post->post_content; ?></p>
-												<div class="stock-detail"><label>Width: <?php echo $width; ?></label><label>Length: <?php echo $length; ?></label><label>Height/Depth: <?php echo $height; ?></label></div>
-												<div class="stock-detail stock-right"><label>Item Code: <span><?php echo $itemcode; ?></span></label><label>Capacity: <span><?php echo $capacity; ?></span></label><label class="instock">In Stock</label></div>
-												<div class="button-box">
-													<h4 class="prig-title">$<?php echo $product->get_price(); ?></h4><a href="" class="btn btn-default product-thumb" data-id="<?php echo $pid; ?>" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i> Add To Cart</a>
-												</div>
+													<h5><?php echo $product->get_title(); ?></h5>
+													<?php
+													$fields = get_field_objects($id);
+													if( $fields )
+													{
+														echo '<div class="stock-detail">';
+														foreach( $fields as $field_name => $field )
+														{
+															if ($field['label'] && $field['value']) {
+																echo '<label>'.$field['label'].': '.$field['value'].'</label>';
+															}
+														}
+													}
+													?>
+												
+													<div class="stock-detail stock-right"><label>Item Code: <span><?php echo $itemcode; ?></span></label><label>Capacity: <span><?php echo $capacity; ?></span></label><label class="instock">In Stock</label></div>
+													<div class="button-box">
+														<h4 class="prig-title">$<?php echo $product->get_price(); ?></h4><a href="" class="btn btn-default product-thumb" data-id="<?php echo $pid; ?>" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i> Add To Cart</a>
+													</div>
 												</div>
 											</div>
 										</div>
