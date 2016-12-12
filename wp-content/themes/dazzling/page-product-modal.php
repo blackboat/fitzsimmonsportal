@@ -18,7 +18,19 @@ if (!$image) {
 		<div class="product-box">
 			<div class="img"><img src="<?php echo $image; ?>" /></div>
 				<div class="detail-box">
-					<?php $fields = get_field_objects($id); var_dump( $fields ); ?>
+					<?php
+					$fields = get_field_objects($id);
+					if( $fields )
+					{
+						foreach( $fields as $field_name => $field )
+						{
+							echo '<div>';
+								echo '<h3>' . $field['label'] . '</h3>';
+								echo $field['value'];
+							echo '</div>';
+						}
+					}
+					?>
 					<h3><?php echo $_product->get_title(); ?></h3>
 					<p><label>Item Code: <span><?php //echo $itemcode; ?></span></label><p>
 					<p><?php echo $_product->post->post_content; ?></p>
