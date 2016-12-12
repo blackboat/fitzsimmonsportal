@@ -54,10 +54,10 @@ get_header( 'shop' ); ?>
 
 								<?php $cat_slug = $wp_query->get_queried_object()->slug; ?>
 								<div class="product">
-								<div class="row">
 									<?php
 									$args = array( 'post_type' => 'product', 'post_status' => 'publish', 'product_cat' => $cat_slug, 'order' => 'ASC');
 									$loop = new WP_Query( $args );
+									$idx = 0;
 									while ( $loop->have_posts() ) : $loop->the_post(); ?>
 										<?php
 										global $product;
@@ -74,6 +74,11 @@ get_header( 'shop' ); ?>
 										$height = $product->get_attribute( 'Height/Depth' );
 										$itemcode = $product->get_attribute( 'ItemCode' );
 										$capacity = $product->get_attribute( 'Capacity' );
+										?>
+										<?php
+										if ($idx % 3 == 0) {
+											echo '<div class="row">';
+										}
 										?>
 										<div class="col-md-4 col-sm-6 col-xs-12">
 											<div class="product-box">
@@ -96,7 +101,7 @@ get_header( 'shop' ); ?>
 														foreach( $fields as $field_name => $field )
 														{
 															if ($field['label'] && $field['value']) {
-																echo '<label>'.$field['value'].': '.'</label>';
+																echo '<label>'.$field['label'].': '.'</label>';
 															}
 														}
 														echo '</div>';
@@ -109,10 +114,15 @@ get_header( 'shop' ); ?>
 												</div>
 											</div>
 										</div>
+										<?php
+										if ($idx % 3 == 0) {
+											echo '</div>';
+										}
+										$idx += 1;
+										?>
 									<?php endwhile; ?>
 									<?php wp_reset_query(); ?>
 									
-								</div>
 								</div>
 								<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"></div>
 
