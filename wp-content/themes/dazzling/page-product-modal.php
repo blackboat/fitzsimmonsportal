@@ -18,22 +18,27 @@ if (!$image) {
 		<div class="product-box">
 			<div class="img"><img src="<?php echo $image; ?>" /></div>
 				<div class="detail-box">
+					<?php ?>
 					<h3><?php echo $_product->get_title(); ?></h3>
 					<p><label>Item Code: <span><?php //echo $itemcode; ?></span></label><p>
 					<p><?php echo $_product->post->post_content; ?></p>
+					<form class="cart" method="post" enctype="multipart/form-data">
 					<div class="Prices">
 						<div class="Units">
 							<h4>$<?php echo $_product->get_price(); ?></h4>
 							<p>Units / Carton 12</p>
 						</div>
 						<div class="quantity">
-							<label>Quantity</label>
-							<input type="text" class="form-control" id="exampleInputtext" placeholder="02">
+							<label>Cartons</label>
+							<input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" size="4" pattern="[0-9]*" inputmode="numeric" style="width: 50px;">
+							<input type="hidden" name="add-to-cart" value="<?php echo $id; ?>">
 						</div>
 					</div>
 					<div class="buttom-box text-center">
-						<a href="<?php echo $link; ?>" class="btn btn-info">Purchase</a>
+						<a href="<?php echo $link; ?>" class="btn btn-info">Add to Cart</a>
+						<button type="submit" class="single_add_to_cart_button btn btn-default alt">Purchase</button>
 					</div>
+					</form>
 				</div>
 			</div>
 		</div>
@@ -41,3 +46,4 @@ if (!$image) {
 </div>
 </div>
 </div>
+

@@ -393,6 +393,10 @@ function wpse_131562_redirect() {
         wp_redirect(get_permalink( get_page_by_path( 'login' ) ));
         exit;
     }
+    if (is_page('all-products')) {
+        wp_redirect(get_home_url());
+        exit;
+    }
 }
 
 function shortcode_my_orders( $atts ) {
