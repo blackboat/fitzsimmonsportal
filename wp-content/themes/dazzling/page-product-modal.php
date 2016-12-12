@@ -24,16 +24,12 @@ if (!$image) {
 					{
 						foreach( $fields as $field_name => $field )
 						{
-							echo '<div style="width: 50%;">';
-								echo '<h3 style="display: inline;">' . $field['label'] . '</h3>';
-								echo $field['value'];
+							echo '<div style="margin-bottom: 20px;">';
+								echo '<h4>' . $field['label'] . '  :  ' . $field['value'] . '</h4>';
 							echo '</div>';
 						}
 					}
 					?>
-					<h3><?php echo $_product->get_title(); ?></h3>
-					<p><label>Item Code: <span><?php //echo $itemcode; ?></span></label><p>
-					<p><?php echo $_product->post->post_content; ?></p>
 					<form class="cart" method="post" enctype="multipart/form-data">
 					<div class="Prices">
 						<div class="Units">
