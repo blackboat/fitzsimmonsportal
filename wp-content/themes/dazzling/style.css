@@ -2612,7 +2612,7 @@ p:empty {
 
   margin-top: 25px;
 
-  width: 200%;
+  width: 150%;
 
 }
 
@@ -4548,4 +4548,12 @@ p:empty {
 .product-box .product-thumb {
   padding: 0;
   border: none;
+}
+
+.shoping-cart>div{
+  margin: 0;
+}
+
+.shoping-cart tr {
+  text-align: center;
 }
