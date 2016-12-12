@@ -88,13 +88,21 @@ get_header( 'shop' ); ?>
 														foreach( $fields as $field_name => $field )
 														{
 															if ($field['label'] && $field['value']) {
-																echo '<label>'.$field['label'].': '.$field['value'].'</label>';
+																echo '<label>'.$field['label'].': '.'</label>';
 															}
 														}
+														echo '</div>';
+														echo '<div class="stock-detail stock-right">';
+														foreach( $fields as $field_name => $field )
+														{
+															if ($field['label'] && $field['value']) {
+																echo '<label>'.$field['value'].': '.'</label>';
+															}
+														}
+														echo '</div>';
 													}
 													?>
 												
-													<div class="stock-detail stock-right"><label>Item Code: <span><?php echo $itemcode; ?></span></label><label>Capacity: <span><?php echo $capacity; ?></span></label><label class="instock">In Stock</label></div>
 													<div class="button-box">
 														<h4 class="prig-title">$<?php echo $product->get_price(); ?></h4><a href="" class="btn btn-default product-thumb" data-id="<?php echo $pid; ?>" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i> Add To Cart</a>
 													</div>
