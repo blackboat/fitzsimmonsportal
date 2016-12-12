@@ -408,6 +408,14 @@ function shortcode_my_orders( $atts ) {
     return ob_get_clean();
 }
 
+
+add_filter( 'woocommerce_breadcrumb_defaults', 'jk_change_breadcrumb_home_text' );
+function jk_change_breadcrumb_home_text( $defaults ) {
+    // Change the breadcrumb home text from 'Home' to 'Apartment'
+  $defaults['home'] = 'All Products';
+  return $defaults;
+}
+
 add_shortcode('my_orders', 'shortcode_my_orders');
 add_action( 'template_redirect', 'custom_login' );
 add_action('template_redirect', 'wpse_131562_redirect');

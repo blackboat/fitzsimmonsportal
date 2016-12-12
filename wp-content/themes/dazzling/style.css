@@ -2612,6 +2612,18 @@ p:empty {
 
   margin-top: 25px;
 
+  width: 200%;
+
+}
+
+.top-title nav.woocommerce-breadcrumb{
+    font-size: 14px;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+.top-title nav.woocommerce-breadcrumb .separator{
+    padding: 0 12px;
 }
 
 .navbar-nav > li{
