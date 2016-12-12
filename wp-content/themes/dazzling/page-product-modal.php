@@ -35,8 +35,7 @@ if (!$image) {
 						</div>
 					</div>
 					<div class="buttom-box text-center">
-						<a href="<?php echo $link; ?>" class="btn btn-info">Add to Cart</a>
-						<button type="submit" class="single_add_to_cart_button btn btn-default alt">Purchase</button>
+						<button type="submit" class="single_add_to_cart_button btn btn-default alt">Add to Cart</button>
 					</div>
 					</form>
 				</div>
