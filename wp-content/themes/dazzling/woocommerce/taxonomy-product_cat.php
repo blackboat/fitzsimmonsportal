@@ -111,6 +111,6 @@ get_header( 'shop' ); ?>
 				         });
 				    });
 					</script>
-					<?php get_sidebar('left'); ?>
+					<?php get_sidebar('cat'); ?>
 	
 <?php get_footer( 'shop' ); ?>

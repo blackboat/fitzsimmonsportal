@@ -60,7 +60,7 @@
 
 						<li><a href="<?php echo get_home_url(); ?>/message/">Message</a></li>
 
-						<li><a href="<?php echo get_home_url(); ?>/my-account/orders/">Order History</a></li>
+						<li><a href="<?php echo get_home_url(); ?>/order-history/">Order History</a></li>
 
 						<li><a href="<?php echo get_home_url(); ?>/cart/">Shopping Cart</a></li>
 
