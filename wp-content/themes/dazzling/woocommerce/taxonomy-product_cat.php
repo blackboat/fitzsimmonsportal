@@ -115,7 +115,7 @@ get_header( 'shop' ); ?>
 											</div>
 										</div>
 										<?php
-										if ($idx % 3 == 0) {
+										if ($idx % 3 == 2) {
 											echo '</div>';
 										}
 										$idx += 1;
