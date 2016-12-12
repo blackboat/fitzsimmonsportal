@@ -24,9 +24,11 @@ if (!$image) {
 					{
 						foreach( $fields as $field_name => $field )
 						{
+							if ($field['label'] && $field['value']) {
 							echo '<div style="margin-bottom: 20px;">';
 								echo '<h4><label>' . $field['label'] . '</label>  :  ' . $field['value'] . '</h4>';
 							echo '</div>';
+							}
 						}
 					}
 					?>
