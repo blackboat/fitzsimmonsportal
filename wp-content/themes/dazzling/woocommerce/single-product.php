@@ -28,9 +28,14 @@ get_header(); ?>
 					<header class="entry-header page-header">
 						<h1 class="entry-title"><?php the_title(); ?></h1>
 					</header><!-- .entry-header -->
-					<?php
-						echo do_shortcode( '[breadcrumb]' ); 
-					?>
+					<div class="breadcrumb-container theme1" itemprop="breadcrumb" itemscope="" itemtype="http://schema.org/BreadcrumbList">
+						<?php
+							$args = array(
+									'delimiter' => '<span class="separator">»</span>'
+							);
+						?>
+						<?php woocommerce_breadcrumb( $args ); ?>
+					</div>
 				</div>
 			</div>
 		</div>
