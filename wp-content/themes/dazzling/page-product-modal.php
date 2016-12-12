@@ -17,7 +17,7 @@ if (!$image) {
 	<div class="product-detail-contain">
 		<div class="product-box">
 			<div class="img"><img src="<?php echo $image; ?>" /></div>
-				<div class="detail-box">
+				<div class="detail-box" style="text-align: center">
 					<?php
 					$fields = get_field_objects($id);
 					if( $fields )
@@ -25,19 +25,15 @@ if (!$image) {
 						foreach( $fields as $field_name => $field )
 						{
 							echo '<div style="margin-bottom: 20px;">';
-								echo '<h4>' . $field['label'] . '  :  ' . $field['value'] . '</h4>';
+								echo '<h4><label>' . $field['label'] . '</label>  :  ' . $field['value'] . '</h4>';
 							echo '</div>';
 						}
 					}
 					?>
 					<form class="cart" method="post" enctype="multipart/form-data">
 					<div class="Prices">
-						<div class="Units">
-							<h4>$<?php echo $_product->get_price(); ?></h4>
-							<p>Units / Carton 12</p>
-						</div>
 						<div class="quantity">
-							<label>Cartons</label>
+							<h3>Cartons</h3>
 							<input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" size="4" pattern="[0-9]*" inputmode="numeric" style="width: 50px;">
 							<input type="hidden" name="add-to-cart" value="<?php echo $id; ?>">
 						</div>
