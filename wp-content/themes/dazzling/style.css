@@ -4558,6 +4558,6 @@ p:empty {
   text-align: center;
 }
 
-.woocommerce a.remove {
-  float: right;
+.woocommerce td.product-remove {
+  width: 1em;
 }
