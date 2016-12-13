@@ -87,12 +87,16 @@ get_header( 'shop' ); ?>
 													<h5><?php echo $product->get_title(); ?></h5>
 													<?php
 													$fields = get_field_objects($id);
+													$qty = 1;
 													if( $fields )
 													{
 														echo '<div class="stock-detail">';
 														foreach( $fields as $field_name => $field )
 														{
 															if ($field['label'] && $field['value']) {
+																if ($field['name'] == 'qty') {
+																	$qty = $field['value'];
+																}
 																echo '<label>'.$field['label'].': '.'</label>';
 															}
 														}
@@ -109,7 +113,7 @@ get_header( 'shop' ); ?>
 													?>
 												
 													<div class="button-box">
-														<h4 class="prig-title">$<?php echo $product->get_price(); ?></h4><a href="" class="btn btn-default product-thumb" data-id="<?php echo $pid; ?>" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i> Add To Cart</a>
+														<h4 class="prig-title">$<?php echo $qty * $product->get_price(); ?></h4><a href="" class="btn btn-default product-thumb" data-id="<?php echo $pid; ?>" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i> Add To Cart</a>
 													</div>
 												</div>
 											</div>
