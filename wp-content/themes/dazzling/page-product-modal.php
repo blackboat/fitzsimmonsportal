@@ -25,14 +25,14 @@ if (!$image) {
 						$qty = 1;
 						foreach( $fields as $field_name => $field )
 						{
-							if ($field['name'] == 'qty')
-							{
-								$qty = $field['value'];
-							}
 							if ($field['label'] && $field['value']) {
-							echo '<div style="margin-bottom: 20px;">';
-								echo '<h4 style="color: black;"><label style="width:50%">' . $field['label'] . ' :</label><label style="width:45%; text-align: right;">' . $field['value'] . '</label></h4>';
-							echo '</div>';
+								if ($field['name'] == 'qty') {
+									$qty = $field['value'];
+								} else {
+									echo '<div style="margin-bottom: 20px;">';
+										echo '<h4 style="color: black;"><label style="width:50%">' . $field['label'] . ' :</label><label style="width:45%; text-align: right;">' . $field['value'] . '</label></h4>';
+									echo '</div>';
+								}
 							}
 						}
 					}
@@ -40,9 +40,9 @@ if (!$image) {
 					<form class="cart" method="post" enctype="multipart/form-data">
 						<div class="Prices">
 							<div class="Units">
-								<h4>$<?php echo $_product->get_price(); ?></h4>
-								<p>Units / Carton <?php echo $qty; ?></p>
-								<h4>$<?php echo $_product->get_price() * $qty; ?></h4>
+								<p>Cost per Unit: $<?php echo $_product->get_price(); ?></p>
+								<p>Units / Carton: <?php echo $qty; ?></p>
+								<h4>Total Cost: $<?php echo $_product->get_price() * $qty; ?></h4>
 							</div>
 							<div class="quantity">
 								<label>Cartons</label>
