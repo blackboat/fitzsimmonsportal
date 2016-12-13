@@ -99,6 +99,7 @@ get_header( 'shop' ); ?>
 																}
 																echo '<label>'.$field['label'].': '.'</label>';
 															}
+															echo '<label>Price per Unit:</label>';
 														}
 														echo '</div>';
 														echo '<div class="stock-detail stock-right">';
@@ -107,6 +108,7 @@ get_header( 'shop' ); ?>
 															if ($field['label'] && $field['value']) {
 																echo '<label>'.$field['value'].'</label>';
 															}
+															echo '<label>'.$product->get_price().'</label>';
 														}
 														echo '</div>';
 													}
