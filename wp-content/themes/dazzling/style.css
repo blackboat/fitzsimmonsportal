@@ -4166,7 +4166,7 @@ p:empty {
 
 }
 
-.product-detail-page .product-detail-contain .Price .form-control {
+.product-detail-page .product-detail-contain .Price input {
 
     border: 1px solid rgba(0, 0, 0, 0.1) !important;
 
@@ -4185,6 +4185,8 @@ p:empty {
     vertical-align: middle;
 
     width: 68px !important;
+
+    background-color: #f1f1f1;
 
 }
 
