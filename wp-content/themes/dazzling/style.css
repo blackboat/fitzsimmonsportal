@@ -4563,3 +4563,8 @@ p:empty {
 .cart-subtotal span.woocommerce-Price-amount {
   margin-left: 70px;
 }
+
+.our-products .products-box img {
+    width: 360px;
+    height: 152px;
+}
