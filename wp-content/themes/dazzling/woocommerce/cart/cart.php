@@ -49,7 +49,6 @@ do_action( 'woocommerce_before_cart' ); ?>
 			$_product   = apply_filters( 'woocommerce_cart_item_product', $cart_item['data'], $cart_item, $cart_item_key );
 			$product_id = apply_filters( 'woocommerce_cart_item_product_id', $cart_item['product_id'], $cart_item, $cart_item_key );
 
-			$fields = get_field_objects($id);
 			$unit = get_field_object('qty', $product_id);
 			$brand = get_field_object('brand', $product_id);
 
