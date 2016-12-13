@@ -90,7 +90,7 @@ do_action( 'woocommerce_before_cart' ); ?>
 
 					<td class="product-brand" data-title="<?php _e( 'Brand', 'woocommerce' ); ?>">
 						<?php
-							echo $brand;
+							echo $brand['value'];
 						?>
 					</td>
 
@@ -102,7 +102,7 @@ do_action( 'woocommerce_before_cart' ); ?>
 
 					<td class="product-unit" data-title="<?php _e( 'Units', 'woocommerce' ); ?>">
 						<?php
-							echo $unit;
+							echo $unit['value'];
 						?>
 					</td>
 
