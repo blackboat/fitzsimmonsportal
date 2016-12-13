@@ -147,7 +147,7 @@ do_action( 'woocommerce_before_cart' ); ?>
 		do_action( 'woocommerce_cart_contents' );
 		?>
 		<tr>
-			<td colspan="6" class="actions">
+			<td colspan="7" class="actions">
 
 				<?php if ( wc_coupons_enabled() ) { ?>
 					<div class="coupon">

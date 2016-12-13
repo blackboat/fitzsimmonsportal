@@ -68,23 +68,26 @@ if ( ! defined( 'ABSPATH' ) ) {
 			woocommerce_template_single_title();
 			the_content();
 		?>
-		<div class="Price">
-			<div class="Units">
-				<label>Price</label>
+		<form class="cart" method="post" enctype="multipart/form-data">
+			<div class="Price">
+				<div class="Units">
+					<p>Cost per Unit: <?php woocommerce_template_single_price(); ?></p>
+					<?php global $product; $qty = get_field_object('qty', $product->post->ID)['value']; ?>
+					<p>Units / Carton: <?php// echo $qty; ?></p>
+				</div>
+				<div class="quantity">
+					<label>Quantity</label>
+					<?php
+					woocommerce_template_single_add_to_cart();
+					?>
+				</div>
+			</div>
+			<!-- <div class="buttom-box text-center">
+				<button type="submit" class="single_add_to_cart_button btn btn-default alt" style="margin-top: 10px;">Add to Cart</button>
+				<button type="button" class="btn btn-default btn-danger" data-dismiss="modal" style="margin-top: 10px;">Cancel</button>
+			</div> -->
+		</form>
 
-				<?php
-				woocommerce_template_single_price();
-				?>
-				<p>Units / Carton 12</p>
-			</div>
-			<div class="quantity">
-				<label>Quantity</label>
-				<br>
-				<?php
-				woocommerce_template_single_add_to_cart();
-				?>
-			</div>
-		</div>
 		<div class="buttom-box">
 			<a href="<?php echo get_home_url(); ?>" class="btn btn-default">Continue Shopping <i class="fa fa-angle-double-right"></i></a>
 		</div>

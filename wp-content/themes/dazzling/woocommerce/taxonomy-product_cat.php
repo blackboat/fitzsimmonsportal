@@ -115,7 +115,7 @@ get_header( 'shop' ); ?>
 													?>
 												
 													<div class="button-box">
-														<h4 class="prig-title">$<?php echo $qty * $product->get_price(); ?></h4><a href="" class="btn btn-default product-thumb" data-id="<?php echo $pid; ?>" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i> Add To Cart</a>
+														<h4 class="prig-title">$<?php echo $product->get_price(); ?></h4><a href="" class="btn btn-default product-thumb" data-id="<?php echo $pid; ?>" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i> Add To Cart</a>
 													</div>
 												</div>
 											</div>

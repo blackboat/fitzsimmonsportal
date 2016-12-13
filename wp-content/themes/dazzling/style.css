@@ -4559,3 +4559,7 @@ p:empty {
 .woocommerce td.product-remove {
   width: 1em;
 }
+
+.cart-subtotal span.woocommerce-Price-amount {
+  margin-left: 70px;
+}
