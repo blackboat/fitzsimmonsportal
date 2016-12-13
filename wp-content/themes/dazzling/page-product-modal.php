@@ -24,6 +24,7 @@ if (!$image) {
 					{
 						foreach( $fields as $field_name => $field )
 						{
+							var_dump($field);
 							if ($field['label'] && $field['value']) {
 							echo '<div style="margin-bottom: 20px;">';
 								echo '<h4 style="color: black;"><label style="width:50%">' . $field['label'] . ' :</label><label style="width:45%; text-align: right;">' . $field['value'] . '</label></h4>';
@@ -37,6 +38,7 @@ if (!$image) {
 							<div class="Units">
 								<h4>$<?php echo $_product->get_price(); ?></h4>
 								<p>Units / Carton 12</p>
+								<h4>$<?php echo $_product->get_price() * 2; ?></h4>
 							</div>
 							<div class="quantity">
 								<label>Cartons</label>
