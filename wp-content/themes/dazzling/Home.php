@@ -16,7 +16,7 @@ get_header();
 		<div class="row"><div class="col-xs-12"><h2>Our Products</h2></div></div>
 		<div class="row">
 			<?php
-			$product_categories = get_terms( 'product_cat', array('orderby' => 'id', 'parent' => 0) );
+			$product_categories = get_terms( 'product_cat', array('orderby' => 'id', 'parent' => 0, 'hide_empty' => 0) );
 			foreach ($product_categories as $cat) {
 			?>
 			<div class="col-sm-4 col-xs-12">

@@ -65,7 +65,7 @@ get_header(); ?>
 							</div>
 						</main>
 					</div>
-					<?php get_sidebar('left'); ?>
+					<?php get_sidebar('cat'); ?>
 				</div>
 			</div>
 		</div>
