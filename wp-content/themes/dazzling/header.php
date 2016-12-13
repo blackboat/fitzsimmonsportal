@@ -60,7 +60,7 @@
 
 						<li><a href="<?php echo get_home_url(); ?>/message/">Message</a></li>
 
-						<li><a href="<?php echo get_home_url(); ?>/order-history/">Order History</a></li>
+						<li><a href="<?php echo get_home_url(); ?>/my-account/orders/">Order History</a></li>
 
 						<li><a href="<?php echo get_home_url(); ?>/cart/">Shopping Cart</a></li>
 
@@ -194,6 +194,7 @@
 					</li>
 					<?php endif; ?>
 
+					
 					<!-- <li><a class="btn btn-default btn-venue" href="#">Venue</a></li> 
 
 					<li><a class="search-box"><img src="<?php echo get_home_url(); ?>/wp-content/uploads/2016/12/search-icon.png" alt=""/></a></li> -->
