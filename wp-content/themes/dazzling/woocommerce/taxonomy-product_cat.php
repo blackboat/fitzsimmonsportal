@@ -101,7 +101,7 @@ get_header( 'shop' ); ?>
 														foreach( $fields as $field_name => $field )
 														{
 															if ($field['label'] && $field['value']) {
-																echo '<label>'.$field['value'].': '.'</label>';
+																echo '<label>'.$field['value'].'</label>';
 															}
 														}
 														echo '</div>';
