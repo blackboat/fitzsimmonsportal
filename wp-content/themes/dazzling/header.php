@@ -62,7 +62,7 @@
 
 						<li><a href="<?php echo get_home_url(); ?>/my-account/orders/">Order History</a></li>
 
-						<li><a href="<?php echo get_home_url(); ?>/cart/">Shopping Cart</a></li>
+						<li class="header-cart"><a href="<?php echo get_home_url(); ?>/cart/">Shopping Cart</a></li>
 
 						<?php if (!is_user_logged_in()): ?>
 						<li><a href="<?php echo get_home_url(); ?>/login/">Login</a></li>
