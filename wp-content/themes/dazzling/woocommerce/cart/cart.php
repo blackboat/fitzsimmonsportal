@@ -32,9 +32,11 @@ do_action( 'woocommerce_before_cart' ); ?>
 	<thead>
 		<tr>
 			<th class="product-thumbnail">&nbsp;</th>
-			<th class="product-name"><?php _e( 'Product', 'woocommerce' ); ?></th>
-			<th class="product-price"><?php _e( 'Price', 'woocommerce' ); ?></th>
-			<th class="product-quantity"><?php _e( 'Cartons', 'woocommerce' ); ?></th>
+			<th class="product-itemcode"><?php _e( 'Item Code', 'woocommerce' ); ?></th>
+			<th class="product-brand"><?php _e( 'Brand', 'woocommerce' ); ?></th>
+			<th class="product-price"><?php _e( 'Unit Price', 'woocommerce' ); ?></th>
+			<th class="product-unit"><?php _e( 'Qty', 'woocommerce' ); ?></th>
+			<th class="product-carton"><?php _e( 'Cartons', 'woocommerce' ); ?></th>
 			<th class="product-subtotal"><?php _e( 'SubTotal', 'woocommerce' ); ?></th>
 			<th class="product-remove">&nbsp;</th>
 		</tr>
@@ -46,6 +48,10 @@ do_action( 'woocommerce_before_cart' ); ?>
 		foreach ( WC()->cart->get_cart() as $cart_item_key => $cart_item ) {
 			$_product   = apply_filters( 'woocommerce_cart_item_product', $cart_item['data'], $cart_item, $cart_item_key );
 			$product_id = apply_filters( 'woocommerce_cart_item_product_id', $cart_item['product_id'], $cart_item, $cart_item_key );
+
+			$fields = get_field_objects($id);
+			$unit = get_field_object('qty', $product_id);
+			$brand = get_field_object('brand', $product_id);
 
 			if ( $_product && $_product->exists() && $cart_item['quantity'] > 0 && apply_filters( 'woocommerce_cart_item_visible', true, $cart_item, $cart_item_key ) ) {
 				$product_permalink = apply_filters( 'woocommerce_cart_item_permalink', $_product->is_visible() ? $_product->get_permalink( $cart_item ) : '', $cart_item, $cart_item_key );
@@ -64,7 +70,7 @@ do_action( 'woocommerce_before_cart' ); ?>
 						?>
 					</td>
 
-					<td class="product-name" data-title="<?php _e( 'Product', 'woocommerce' ); ?>">
+					<td class="product-itemcode" data-title="<?php _e( 'Product', 'woocommerce' ); ?>">
 						<?php
 							if ( ! $product_permalink ) {
 								echo apply_filters( 'woocommerce_cart_item_name', $_product->get_title(), $cart_item, $cart_item_key ) . '&nbsp;';
@@ -82,9 +88,21 @@ do_action( 'woocommerce_before_cart' ); ?>
 						?>
 					</td>
 
+					<td class="product-brand" data-title="<?php _e( 'Brand', 'woocommerce' ); ?>">
+						<?php
+							echo $brand;
+						?>
+					</td>
+
 					<td class="product-price" data-title="<?php _e( 'Price', 'woocommerce' ); ?>">
 						<?php
 							echo apply_filters( 'woocommerce_cart_item_price', WC()->cart->get_product_price( $_product ), $cart_item, $cart_item_key );
+						?>
+					</td>
+
+					<td class="product-unit" data-title="<?php _e( 'Units', 'woocommerce' ); ?>">
+						<?php
+							echo $unit;
 						?>
 					</td>
 
