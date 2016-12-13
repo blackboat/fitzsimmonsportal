@@ -67,13 +67,32 @@ if ( ! defined( 'ABSPATH' ) ) {
 			// do_action( 'woocommerce_single_product_summary' );
 			woocommerce_template_single_title();
 			the_content();
+			global $product; 
+		?>
+
+		<?php
+		$fields = get_field_objects($product->post->ID);
+		if ($fields){
+			$qty = 1;
+			foreach( $fields as $field_name => $field )
+			{
+				if ($field['label'] && $field['value']) {
+					if ($field['name'] == 'qty') {
+						$qty = $field['value'];
+					} else {
+						echo '<div style="margin-bottom: 20px;">';
+							echo '<h4 style="color: black;"><label style="width:50%">' . $field['label'] . ' :</label><label style="width:45%; text-align: right;">' . $field['value'] . '</label></h4>';
+						echo '</div>';
+					}
+				}
+			}
+		}
 		?>
 		<form class="cart" method="post" enctype="multipart/form-data">
 			<div class="Price">
 				<div class="Units">
 					<p>Cost per Unit: <?php woocommerce_template_single_price(); ?></p>
-					<?php global $product; $qty = get_field_object('qty', $product->post->ID)['value']; ?>
-					<p>Units / Carton: <?php// echo $qty; ?></p>
+					<p>Units / Carton: <?php echo $qty; ?></p>
 				</div>
 				<div class="quantity">
 					<label>Quantity</label>
