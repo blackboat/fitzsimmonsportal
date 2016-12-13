@@ -24,4 +24,4 @@ global $product;
 
 ?>
 
-<h4><?php echo esc_attr( $product->get_display_price() ); ?></h4>
+<h4>$<?php echo esc_attr( $product->get_display_price() ); ?></h4>

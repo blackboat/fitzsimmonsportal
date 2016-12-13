@@ -50,21 +50,10 @@ if (!$image) {
 								<input type="hidden" name="add-to-cart" value="<?php echo $id; ?>">
 							</div>
 						</div>
-					<!-- <div class="Prices">
-						<div class="Units">
-							<h4>$54.76</h4>
-							<p>Units / Carton 12</p>
+						<div class="buttom-box text-center">
+							<button type="submit" class="single_add_to_cart_button btn btn-default alt" style="margin-top: 10px;">Add to Cart</button>
+							<button type="button" class="btn btn-default btn-danger" data-dismiss="modal" style="margin-top: 10px;">Cancel</button>
 						</div>
-						<div class="quantity">
-							<h3 style="width: 50%; display: inline;">Cartons</h3>
-							<input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" size="4" pattern="[0-9]*" inputmode="numeric" style="width: 50px; height: 40px;">
-							<input type="hidden" name="add-to-cart" value="<?php echo $id; ?>">
-						</div>
-					</div> -->
-					<div class="buttom-box text-center">
-						<button type="submit" class="single_add_to_cart_button btn btn-default alt" style="margin-top: 10px;">Add to Cart</button>
-						<button type="button" class="btn btn-default btn-danger" data-dismiss="modal" style="margin-top: 10px;">Cancel</button>
-					</div>
 					</form>
 				</div>
 			</div>
