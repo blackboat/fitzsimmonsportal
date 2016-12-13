@@ -147,6 +147,34 @@ get_header( 'shop' ); ?>
 																	echo '<label>'.$field['value'].'</label>';
 																}
 															}
+														} else if ($cat_slug == 'barware') {
+															$description = get_field_object('description', $id);
+															$description = $description ? $description['value'] : '';
+															$capacity = get_field_object('capacity', $id);
+															$capacity = $capacity ? $capacity['value'] : '';
+															
+															echo '<label style="width: 200%;max-width: 200%;">' . $description . '&nbsp;&nbsp;' . $capacity . '</label>';
+															foreach( $fields as $field_name => $field )
+															{
+																if ($field['label'] && $field['value']) {
+																	if ($field['name'] == 'description' || $field['name'] == 'capacity') {
+																		continue;
+																	}
+																	echo '<label>'.$field['label'].': '.'</label>';
+																}
+															}
+															echo '</div>';
+															echo '<div class="stock-detail stock-right">';
+															echo '<label></label>';
+															foreach( $fields as $field_name => $field )
+															{
+																if ($field['label'] && $field['value']) {
+																	if ($field['name'] == 'description' || $field['name'] == 'capacity') {
+																		continue;
+																	}
+																	echo '<label>'.$field['value'].'</label>';
+																}
+															}
 														}
 														echo '</div>';
 													}
