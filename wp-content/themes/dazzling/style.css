@@ -4605,3 +4605,7 @@ p:empty {
 .products .add_to_cart_btn {
   display: none;
 }
+
+.wpb_wl_preview_area a.wpb_wl_preview {
+  display: none !important;
+}
