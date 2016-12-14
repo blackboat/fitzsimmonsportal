@@ -4521,7 +4521,6 @@ p:empty {
     font-size: 16px;
     height: 210px;
     padding: 6px 18px !important;
-    text-transform: uppercase;
     width: 100%;
 }
 .contact-form label {
