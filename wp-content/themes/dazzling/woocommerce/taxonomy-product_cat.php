@@ -54,8 +54,12 @@ get_header( 'shop' ); ?>
 
 								<div class="product">
 									<?php
-									$cat_slug = $wp_query->get_queried_object()->slug;
-									$args = array( 'post_type' => 'product', 'post_status' => 'publish', 'product_cat' => $cat_slug, 'order' => 'ASC');
+									$cat = $wp_query->get_queried_object();
+									$args = array( 'post_type' => 'product', 'post_status' => 'publish', 'product_cat' => $cat->slug, 'order' => 'ASC');
+									$cat_slug = $cat->slug;
+									if ($cat->parent != 0)
+										$cat_slug = get_category($cat->parent)->slug;
+									// var_dump(get_category_parents( $cat->term_id ));
 									$loop = new WP_Query( $args );
 									$idx = 0;
 									if (!$loop->have_posts()) {
@@ -84,15 +88,15 @@ get_header( 'shop' ); ?>
 												<div class="detail-box">
 													<h5><?php echo $product->get_title(); ?></h5>
 													<?php
-													$fields = get_field_objects($id);
+													$fields = get_field_objects($pid);
 													$qty = 1;
 													if( $fields )
 													{
 														echo '<div class="stock-detail">';
 														if ($cat_slug == 'tableware') {
-															$product_ = get_field_object('product_', $id);
+															$product_ = get_field_object('product_', $pid);
 															$product_ = $product_ ? $product_['value'] : '';
-															$dimensions = get_field_object('dimensions', $id);
+															$dimensions = get_field_object('dimensions', $pid);
 															$dimensions = $dimensions ? $dimensions['value'] : '';
 
 															echo '<label style="width: 200%;max-width: 200%;">' . $product_ . '&nbsp;&nbsp;&nbsp;&nbsp;' . $dimensions . '</label>';
@@ -121,11 +125,11 @@ get_header( 'shop' ); ?>
 																}
 															}
 														} else if ($cat_slug == 'drinkware') {
-															$range = get_field_object('range', $id);
+															$range = get_field_object('range', $pid);
 															$range = $range ? $range['value'] : '';
-															$description = get_field_object('description', $id);
+															$description = get_field_object('description', $pid);
 															$description = $description ? $description['value'] : '';
-															$capacity = get_field_object('capacity', $id);
+															$capacity = get_field_object('capacity', $pid);
 															$capacity = $capacity ? $capacity['value'] : '';
 
 															echo '<label style="width: 200%;max-width: 200%;">' . $range . '&nbsp;&nbsp;' . $description . '&nbsp;&nbsp;' . $capacity . '</label>';
@@ -151,9 +155,9 @@ get_header( 'shop' ); ?>
 																}
 															}
 														} else if ($cat_slug == 'barware') {
-															$description = get_field_object('description', $id);
+															$description = get_field_object('description', $pid);
 															$description = $description ? $description['value'] : '';
-															$capacity = get_field_object('capacity', $id);
+															$capacity = get_field_object('capacity', $pid);
 															$capacity = $capacity ? $capacity['value'] : '';
 															
 															echo '<label style="width: 200%;max-width: 200%;">' . $description . '&nbsp;&nbsp;' . $capacity . '</label>';
