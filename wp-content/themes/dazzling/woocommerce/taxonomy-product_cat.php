@@ -55,7 +55,12 @@ get_header( 'shop' ); ?>
 								<div class="product">
 									<?php
 									$cat = $wp_query->get_queried_object();
-									$args = array( 'post_type' => 'product', 'post_status' => 'publish', 'product_cat' => $cat->slug, 'order' => 'ASC');
+									$args = array(
+										'post_type' => 'product',
+										'post_status' => 'publish',
+										'product_cat' => $cat->slug,
+										'orderby' => 'name',
+										'order' => 'ASC');
 									$cat_slug = $cat->slug;
 									if ($cat->parent != 0)
 										$cat_slug = get_category($cat->parent)->slug;
@@ -84,7 +89,7 @@ get_header( 'shop' ); ?>
 										?>
 										<div class="col-md-4 col-sm-6 col-xs-12">
 											<div class="product-box">
-												<div class="img"><button type="button" class="btn btn-primary btn-lg product-thumb" style="background: transparent;" data-id="<?php echo $pid; ?>" data-toggle="modal" data-target="#myModal"><img src="<?php echo $image; ?>" /></button></div>
+												<div class="img"><img src="<?php echo $image; ?>" /></div>
 												<div class="detail-box">
 													<h5><?php echo $product->get_title(); ?></h5>
 													<?php

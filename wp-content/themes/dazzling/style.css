@@ -4576,7 +4576,7 @@ p:empty {
 }
 
 .widget_product_categories .product-categories>li>ul.children {
-  margin-left: 30px;
+  padding-left: 30px;
 }
 
 .widget_product_categories .product-categories>li>ul.children li a {
