@@ -3248,7 +3248,7 @@ p:empty {
 
   display: inline-block;
 
-  margin: 0 0 30px;
+  margin: 0 0 10px;
 
   width: 100%;
 
@@ -4292,9 +4292,9 @@ p:empty {
 
 }
 
-.modal .product-box .detail-box .Prices .Units{
+.mfp-content .Prices .Units{
 
-  float:left;
+  float:none;
 
   text-align: center;
 
@@ -4304,7 +4304,7 @@ p:empty {
 
 }
 
-.modal .product-box .detail-box .Prices .Units h4{
+.mfp-content .Prices .Units h4{
 
   font-size: 30px;
 
@@ -4318,7 +4318,7 @@ p:empty {
 
 }
 
-.modal .product-box .detail-box .Prices .Units p {
+.mfp-content .Prices .Units p {
 
     display: inline-block;
 
@@ -4332,7 +4332,7 @@ p:empty {
 
 }
 
-.modal .product-box .detail-box .Prices .quantity{
+.mfp-content .Prices .quantity{
 
   display: table;
 
@@ -4344,9 +4344,11 @@ p:empty {
 
   padding: 15px 0;
 
+  float: none;
+
 }
 
-.modal .product-box .detail-box .Prices .quantity label {
+.mfp-content .Prices .quantity label {
 
     color: #999999;
 
@@ -4360,7 +4362,7 @@ p:empty {
 
 }
 
-.modal .product-box .detail-box .Prices .quantity {
+.mfp-content .Prices .quantity {
 
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 
@@ -4376,7 +4378,7 @@ p:empty {
 
 }
 
-.modal .product-box .detail-box .Prices .quantity input {
+.mfp-content .Prices .quantity input {
 
     background: rgba(0, 0, 0, 0) none repeat scroll 0 0 !important;
 
@@ -4390,7 +4392,7 @@ p:empty {
 
 }
 
-.modal .buttom-box {
+.mfp-content .buttom-box {
 
     margin-top: 20px;
 
@@ -4589,4 +4591,17 @@ p:empty {
 
 .widget_product_categories .product-categories ul li {
   padding: 10px 0;
+}
+
+.woocommerce ul.products li.product, .woocommerce-page ul.products li.product {
+  margin: 0 3% 4.992em 0;
+  width: 30%;
+}
+
+.products .quick_view {
+  display: none !important;
+}
+
+.products .add_to_cart_btn {
+  display: none;
 }

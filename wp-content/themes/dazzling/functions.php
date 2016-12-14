@@ -452,6 +452,13 @@ function my_product_update( $post_id ) {
     }
 }
 
+add_filter('loop_shop_columns', 'loop_columns');
+if (!function_exists('loop_columns')) {
+  function loop_columns() {
+    return 3; // 3 products per row
+  }
+}
+
 add_shortcode('my_orders', 'shortcode_my_orders');
 add_action( 'template_redirect', 'custom_login' );
 add_action('template_redirect', 'wpse_131562_redirect');
