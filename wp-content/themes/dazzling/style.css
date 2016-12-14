@@ -3272,7 +3272,7 @@ p:empty {
 
 
 
-.product-box .detail-box h5 {
+.product-box .detail-box h3 {
 
   color: #333;
 
@@ -4608,4 +4608,8 @@ p:empty {
 
 .wpb_wl_preview_area a.wpb_wl_preview {
   display: none !important;
+}
+
+.wpb_wl_product_title {
+  color: #333;
 }
