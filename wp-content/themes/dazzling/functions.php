@@ -447,7 +447,7 @@ function my_product_update( $post_id ) {
         if ($qty_obj) {
           $qty = $qty_obj['value'];
         }
-        change_product_price( $post_id, $unit_price * $qty );
+        change_product_price( $post_id, $unit_price['value'] * $qty );
       }
     }
 }
