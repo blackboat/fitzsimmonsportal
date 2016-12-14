@@ -92,17 +92,18 @@ get_header( 'shop' ); ?>
 													$qty = 1;
 													if( $fields )
 													{
-														echo '<div class="stock-detail">';
 														if ($cat_slug == 'tableware') {
 															$product_ = get_field_object('product_', $pid);
 															$product_ = $product_ ? $product_['value'] : '';
 															$dimensions = get_field_object('dimensions', $pid);
 															$dimensions = $dimensions ? $dimensions['value'] : '';
 
-															echo '<label style="width: 200%;max-width: 200%;">' . $product_ . '&nbsp;&nbsp;&nbsp;&nbsp;' . $dimensions . '</label>';
+															echo '<h6 style="color:#333;">' . $product_ . '&nbsp;&nbsp;&nbsp;&nbsp;' . $dimensions . '</h6>';
+															echo '<div class="stock-detail">';
+
 															foreach( $fields as $field_name => $field )
 															{
-																if ($field['label'] && $field['value']) {
+																if ($field['label']) {
 																	if ($field['name'] == 'qty') {
 																		$qty = $field['value'];
 																	}
@@ -114,16 +115,16 @@ get_header( 'shop' ); ?>
 															}
 															echo '</div>';
 															echo '<div class="stock-detail stock-right">';
-															echo '<label></label>';
 															foreach( $fields as $field_name => $field )
 															{
-																if ($field['label'] && $field['value']) {
+																if ($field['label']) {
 																	if ($field['name'] == 'product_' || $field['name'] == 'dimensions') {
 																		continue;
 																	}
 																	echo '<label>'.$field['value'].'</label>';
 																}
 															}
+															echo '</div>';
 														} else if ($cat_slug == 'drinkware') {
 															$range = get_field_object('range', $pid);
 															$range = $range ? $range['value'] : '';
@@ -132,10 +133,11 @@ get_header( 'shop' ); ?>
 															$capacity = get_field_object('capacity', $pid);
 															$capacity = $capacity ? $capacity['value'] : '';
 
-															echo '<label style="width: 200%;max-width: 200%;">' . $range . '&nbsp;&nbsp;' . $description . '&nbsp;&nbsp;' . $capacity . '</label>';
+															echo '<h6 style="color:#333;">' . $range . '&nbsp;&nbsp;' . $description . '&nbsp;&nbsp;' . $capacity . '</h6>';
+															echo '<div class="stock-detail">';
 															foreach( $fields as $field_name => $field )
 															{
-																if ($field['label'] && $field['value']) {
+																if ($field['label']) {
 																	if ($field['name'] == 'range' || $field['name'] == 'description' || $field['name'] == 'capacity') {
 																		continue;
 																	}
@@ -144,26 +146,27 @@ get_header( 'shop' ); ?>
 															}
 															echo '</div>';
 															echo '<div class="stock-detail stock-right">';
-															echo '<label></label>';
 															foreach( $fields as $field_name => $field )
 															{
-																if ($field['label'] && $field['value']) {
+																if ($field['label']) {
 																	if ($field['name'] == 'range' || $field['name'] == 'description' || $field['name'] == 'capacity') {
 																		continue;
 																	}
 																	echo '<label>'.$field['value'].'</label>';
 																}
 															}
+															echo '</div>';
 														} else if ($cat_slug == 'barware') {
 															$description = get_field_object('description', $pid);
 															$description = $description ? $description['value'] : '';
 															$capacity = get_field_object('capacity', $pid);
 															$capacity = $capacity ? $capacity['value'] : '';
-															
-															echo '<label style="width: 200%;max-width: 200%;">' . $description . '&nbsp;&nbsp;' . $capacity . '</label>';
+
+															echo '<h6 style="color:#333;">' . $description . '&nbsp;&nbsp;' . $capacity . '</h6>';
+															echo '<div class="stock-detail">';
 															foreach( $fields as $field_name => $field )
 															{
-																if ($field['label'] && $field['value']) {
+																if ($field['label']) {
 																	if ($field['name'] == 'description' || $field['name'] == 'capacity') {
 																		continue;
 																	}
@@ -172,23 +175,22 @@ get_header( 'shop' ); ?>
 															}
 															echo '</div>';
 															echo '<div class="stock-detail stock-right">';
-															echo '<label></label>';
 															foreach( $fields as $field_name => $field )
 															{
-																if ($field['label'] && $field['value']) {
+																if ($field['label']) {
 																	if ($field['name'] == 'description' || $field['name'] == 'capacity') {
 																		continue;
 																	}
 																	echo '<label>'.$field['value'].'</label>';
 																}
 															}
+															echo '</div>';
 														}
-														echo '</div>';
 													}
 													?>
 												
 													<div class="button-box">
-														<h4 class="prig-title">$<?php echo $product->get_price(); ?></h4><a href="" class="btn btn-default product-thumb" data-id="<?php echo $pid; ?>" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i> Add To Cart</a>
+														<h4 class="prig-title">$<?php echo $product->get_price(); ?> EA</h4><a href="" class="btn btn-default product-thumb" data-id="<?php echo $pid; ?>" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i> Add To Cart</a>
 													</div>
 												</div>
 											</div>
