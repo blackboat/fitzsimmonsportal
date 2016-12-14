@@ -51,6 +51,7 @@ do_action( 'woocommerce_before_cart' ); ?>
 
 			$unit = get_field_object('qty', $product_id);
 			$brand = get_field_object('brand', $product_id);
+			$unit_price = get_field_object('unit_price', $product_id);
 
 			if ( $_product && $_product->exists() && $cart_item['quantity'] > 0 && apply_filters( 'woocommerce_cart_item_visible', true, $cart_item, $cart_item_key ) ) {
 				$product_permalink = apply_filters( 'woocommerce_cart_item_permalink', $_product->is_visible() ? $_product->get_permalink( $cart_item ) : '', $cart_item, $cart_item_key );
@@ -93,9 +94,9 @@ do_action( 'woocommerce_before_cart' ); ?>
 						?>
 					</td>
 
-					<td class="product-price" data-title="<?php _e( 'Price', 'woocommerce' ); ?>">
+					<td class="product-price" data-title="<?php _e( 'Unit Price', 'woocommerce' ); ?>">
 						<?php
-							echo apply_filters( 'woocommerce_cart_item_price', WC()->cart->get_product_price( $_product ), $cart_item, $cart_item_key );
+							echo $unit_price['value'];
 						?>
 					</td>
 
