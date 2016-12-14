@@ -420,6 +420,39 @@ function jk_change_breadcrumb_home_text( $defaults ) {
   return $defaults;
 }
 
+function change_price_by_type( $product_id, $new_price, $price_type ) {
+    // $the_price = get_post_meta( $product_id, '_' . $price_type, true );
+    // $the_price *= $new_price;
+    update_post_meta( $product_id, '_' . $price_type, $new_price );
+}
+ 
+function change_price_all_types( $product_id, $new_price ) {
+    change_price_by_type( $product_id, $new_price, 'price' );
+    change_price_by_type( $product_id, $new_price, 'sale_price' );
+    change_price_by_type( $product_id, $new_price, 'regular_price' );
+}
+ 
+/*
+ * `change_product_price` is main function you should call to change product's price
+ */
+function change_product_price( $product_id, $new_price ) {
+    change_price_all_types( $product_id, $new_price );
+}
+function my_product_update( $post_id ) {
+    if (wc_get_product($post_id)) {
+      $unit_price = get_field_object('unit_price', $post_id);
+      if ($unit_price) {
+        $qty_obj = get_field_object('qty', $post_id);
+        $qty = 1;
+        if ($qty_obj) {
+          $qty = $qty_obj['value'];
+        }
+        change_product_price( $post_id, $unit_price * $qty );
+      }
+    }
+}
+
 add_shortcode('my_orders', 'shortcode_my_orders');
 add_action( 'template_redirect', 'custom_login' );
 add_action('template_redirect', 'wpse_131562_redirect');
+add_action( 'save_post', 'my_product_update' );

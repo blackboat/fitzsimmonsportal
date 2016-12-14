@@ -4561,7 +4561,7 @@ p:empty {
   width: 1em;
 }
 
-.cart-subtotal span.woocommerce-Price-amount {
+.cart_totals span.woocommerce-Price-amount {
   margin-left: 70px;
 }
 
