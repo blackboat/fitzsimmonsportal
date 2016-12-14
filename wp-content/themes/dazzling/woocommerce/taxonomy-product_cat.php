@@ -191,7 +191,7 @@ get_header( 'shop' ); ?>
 												
 													<div class="button-box">
 														<?php $unit_price = get_field_object('unit_price', $pid); ?>
-														<h4 class="prig-title">$<?php echo $unit_price; ?> EA</h4><a href="" class="btn btn-default product-thumb" data-id="<?php echo $pid; ?>" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i> Add To Cart</a>
+														<h4 class="prig-title">$<?php echo $unit_price['value']; ?> EA</h4><a href="" class="btn btn-default product-thumb" data-id="<?php echo $pid; ?>" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i> Add To Cart</a>
 													</div>
 												</div>
 											</div>
