@@ -429,7 +429,7 @@ function change_price_by_type( $product_id, $new_price, $price_type ) {
 function change_price_all_types( $product_id, $new_price ) {
     change_price_by_type( $product_id, $new_price, 'price' );
     change_price_by_type( $product_id, $new_price, 'sale_price' );
-    change_price_by_type( $product_id, $new_price+1, 'regular_price' );
+    change_price_by_type( $product_id, $new_price, 'regular_price' );
 }
  
 /*
