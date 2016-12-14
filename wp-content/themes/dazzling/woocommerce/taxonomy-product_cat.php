@@ -58,6 +58,9 @@ get_header( 'shop' ); ?>
 									$args = array( 'post_type' => 'product', 'post_status' => 'publish', 'product_cat' => $cat_slug, 'order' => 'ASC');
 									$loop = new WP_Query( $args );
 									$idx = 0;
+									if (!$loop->have_posts()) {
+										echo '<h3>No product.</h3>';
+									}
 									while ( $loop->have_posts() ) : $loop->the_post(); ?>
 										<?php
 										global $product;
@@ -213,6 +216,6 @@ get_header( 'shop' ); ?>
 				         });
 				    });
 					</script>
-					<?php get_sidebar('cat'); ?>
+					<?php get_sidebar(); ?>
 	
 <?php get_footer( 'shop' ); ?>

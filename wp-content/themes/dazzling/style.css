@@ -4569,3 +4569,24 @@ p:empty {
     height: 160px;
     float: right;
 }
+
+.widget_product_categories .product-categories>li>a {
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.widget_product_categories .product-categories>li>ul.children {
+  margin-left: 30px;
+}
+
+.widget_product_categories .product-categories>li>ul.children li a {
+  font-size: 14px;
+}
+
+.widget_product_categories .product-categories>li .current-cat>a {
+  font-weight: 700;
+}
+
+.widget_product_categories .product-categories ul li {
+  padding: 10px 0;
+}
