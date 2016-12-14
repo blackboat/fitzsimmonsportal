@@ -4567,6 +4567,6 @@ p:empty {
 }
 
 .our-products .products-box img {
-    width: 360px;
-    height: 152px;
+    height: 160px;
+    float: right;
 }
