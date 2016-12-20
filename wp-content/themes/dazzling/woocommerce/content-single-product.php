@@ -81,18 +81,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 						$qty = $field['value'];
 					} else {
 						echo '<div style="margin-bottom: 20px;">';
-							echo '<h4 style="color: black;"><label style="width:50%">' . $field['label'] . ' :</label><label style="width:45%; text-align: right;">' . $field['value'] . '</label></h4>';
+							echo '<h4 style="color: black;"><label style="width:50%">' . $field['label'] . ' :</label><label class="'.$field_name.'" style="width:45%; text-align: right;">' . $field['value'] . '</label></h4>';
 						echo '</div>';
 					}
 				}
 			}
+			$unit_price = get_field_object('unit_price', $product->post->ID)['value'];
 		}
 		?>
 		<form class="cart" method="post" enctype="multipart/form-data">
 			<div class="Price">
 				<div class="Units">
-					<p>Total Price: <?php woocommerce_template_single_price(); ?></p>
-					<p>Units / Carton: <?php echo $qty; ?></p>
+					<p>Total Price: </p><h4 class="totalcost">$<?php echo $unit_price * $qty; ?></h4>
+					<p>Units / Carton: <label class="units" style="display: inline;"><?php echo $qty; ?></label></p>
 				</div>
 				<div class="quantity product-quantity">
 					<label>Quantity</label>
