@@ -463,3 +463,152 @@ add_shortcode('my_orders', 'shortcode_my_orders');
 add_action( 'template_redirect', 'custom_login' );
 add_action('template_redirect', 'wpse_131562_redirect');
 add_action( 'save_post', 'my_product_update' );
+add_filter( 'loop_shop_per_page', create_function( '$cols', 'return 15;' ), 12 );
+
+
+// change item numbers on cart menu
+add_filter('wp_nav_menu_items','sk_wcmenucart', 10, 2);
+function sk_wcmenucart($menu, $args) {
+  // Check if WooCommerce is active and add a new item to a menu assigned to Primary Navigation Menu location
+  if ( !in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) || 'primary' !== $args->theme_location )
+    return $menu;
+
+  ob_start();
+    global $woocommerce;
+    $viewing_cart = __('View your shopping cart', 'your-theme-slug');
+    $start_shopping = __('Start shopping', 'your-theme-slug');
+    $cart_url = $woocommerce->cart->get_cart_url();
+    $shop_page_url = get_permalink( woocommerce_get_page_id( 'shop' ) );
+    // $cart_contents_count = $woocommerce->cart->cart_contents_count;
+    $cart_contents_count = count($woocommerce->cart->cart_contents);    // change cart item number
+    $cart_contents = sprintf(_n('%d item', '%d items', $cart_contents_count, 'your-theme-slug'), $cart_contents_count);
+    $cart_total = $woocommerce->cart->get_cart_total();
+    // Uncomment the line below to hide nav menu cart item when there are no items in the cart
+    // if ( $cart_contents_count > 0 ) {
+      if ($cart_contents_count == 0) {
+        $menu_item = '<li class="right"><a class="wcmenucart-contents" href="'. $shop_page_url .'" title="'. $start_shopping .'">';
+      } else {
+        $menu_item = '<li class="right"><a class="wcmenucart-contents" href="'. $cart_url .'" title="'. $viewing_cart .'">';
+      }
+
+      $menu_item .= '<i class="fa fa-shopping-cart"></i> ';
+
+      $menu_item .= $cart_contents.' - '. $cart_total;
+      $menu_item .= '</a></li>';
+    // Uncomment the line below to hide nav menu cart item when there are no items in the cart
+    // }
+    echo $menu_item;
+  $social = ob_get_clean();
+  return $menu . $social;
+}
+
+
+// qty add/minus button
+add_action( 'wp_enqueue_scripts', 'wcqi_enqueue_polyfill' );
+function wcqi_enqueue_polyfill() {
+    wp_enqueue_script( 'wcqi-number-polyfill' );
+}
+
+
+// remove order status
+function so_39252649_remove_processing_status( $statuses ){
+    if( isset( $statuses['wc-on-hold'] ) ){
+        unset( $statuses['wc-on-hold'] );
+    }
+    if( isset( $statuses['wc-cancelled'] ) ){
+        unset( $statuses['wc-cancelled'] );
+    }
+    if( isset( $statuses['wc-refunded'] ) ){
+        unset( $statuses['wc-refunded'] );
+    }
+    return $statuses;
+}
+add_filter( 'wc_order_statuses', 'so_39252649_remove_processing_status' );
+
+// change order name
+function wc_renaming_order_status( $order_statuses ) {
+    foreach ( $order_statuses as $key => $status ) {
+        $new_order_statuses[ $key ] = $status;
+        if ( 'wc-processing' === $key ) {
+            $order_statuses['wc-processing'] = _x( 'Approved/Awaiting Dispatch', 'Order status', 'woocommerce' );
+        }
+        if ( 'wc-pending' === $key ) {
+            $order_statuses['wc-pending'] = _x( 'Pending Approval', 'Order status', 'woocommerce' );
+        }
+        if ( 'wc-completed' === $key ) {
+            $order_statuses['wc-completed'] = _x( 'Dispatch', 'Order status', 'woocommerce' );
+        }
+        if ( 'wc-failed' === $key ) {
+            $order_statuses['wc-failed'] = _x( 'Reject', 'Order status', 'woocommerce' );
+        }
+    }
+    return $order_statuses;
+}
+add_filter( 'wc_order_statuses', 'wc_renaming_order_status' );
+
+// add order status to admin order actions column
+add_filter( 'woocommerce_admin_order_actions', 'add_cancel_order_actions_button', PHP_INT_MAX, 2 );
+function add_cancel_order_actions_button( $actions, $the_order ) {
+    // save old view status to put it to last
+    $tmp = $actions['view'];
+    unset($actions['view']);
+    if ( $the_order->has_status( array( 'pending' ) ) ) {
+        // $actions['pending'] = array(
+        //     'url'       => wp_nonce_url( admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status=pending&order_id=' . $the_order->id ), 'woocommerce-mark-order-status' ),
+        //     'name'      => __( 'Approved/Awaiting Dispatch', 'woocommerce' ),
+        //     'action'    => "view pending", // setting "view" for proper button CSS
+        // );
+        $actions['failed'] = array(
+            'url'       => wp_nonce_url( admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status=failed&order_id=' . $the_order->id ), 'woocommerce-mark-order-status' ),
+            'name'      => __( 'Reject', 'woocommerce' ),
+            'action'    => "view failed", // setting "view" for proper button CSS
+        );
+    }
+    $actions['view'] = $tmp;
+    return $actions;
+}
+add_action( 'admin_head', 'add_order_actions_button_css' );
+function add_order_actions_button_css() {
+    echo '<style>
+      .view.failed::after { content: "\e016"; font-family: WooCommerce; color: #d0c21f; }
+    </style>';
+}
+
+
+// add order admin link to new order email
+add_action( 'woocommerce_email_after_order_table', 'add_link_back_to_order', 10, 2 );
+function add_link_back_to_order( $order, $is_admin ) {
+  // Only for admin emails
+  if ( ! $is_admin ) {
+    return;
+  }
+  $link = '<p>';
+  $link .= '<a href="'. admin_url( 'post.php?post=' . absint( $order->id ) . '&action=edit' ) .'" >';
+  $link .= __( 'Click here to go to the order page', 'your_domain' );
+  $link .= '</a>';
+  $link .= '</p>';
+  echo $link;
+}
+
+
+// Reset status of new orders from “processing” to "pending" 
+add_action( 'woocommerce_thankyou', 'custom_woocommerce_auto_complete_order' );
+function custom_woocommerce_auto_complete_order( $order_id ) {
+global $woocommerce;
+if ( !$order_id )
+return;
+$order = new WC_Order( $order_id );
+$order->update_status( 'pending' );
+}
+
+
+/* Message */
+
+// remove setting menu button
+add_filter( 'fep_menu_buttons', 'fep_cus_fep_menu_buttons' );
+function fep_cus_fep_menu_buttons( $menu )
+{
+    unset( $menu['settings'] );
+    unset( $menu['announcements'] );
+    return $menu;
+}

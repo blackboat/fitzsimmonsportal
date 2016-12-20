@@ -91,10 +91,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<form class="cart" method="post" enctype="multipart/form-data">
 			<div class="Price">
 				<div class="Units">
-					<p>Cost per Unit: <?php woocommerce_template_single_price(); ?></p>
+					<p>Total Price: <?php woocommerce_template_single_price(); ?></p>
 					<p>Units / Carton: <?php echo $qty; ?></p>
 				</div>
-				<div class="quantity">
+				<div class="quantity product-quantity">
 					<label>Quantity</label>
 					<?php
 					woocommerce_template_single_add_to_cart();

@@ -24,7 +24,7 @@ wc_print_notices();
 
 do_action( 'woocommerce_before_cart' ); ?>
 
-<form action="<?php echo esc_url( wc_get_cart_url() ); ?>" method="post">
+<form class="cart-form" action="<?php echo esc_url( wc_get_cart_url() ); ?>" method="post">
 
 <?php do_action( 'woocommerce_before_cart_table' ); ?>
 
@@ -34,9 +34,10 @@ do_action( 'woocommerce_before_cart' ); ?>
 			<th class="product-thumbnail">&nbsp;</th>
 			<th class="product-itemcode"><?php _e( 'Item Code', 'woocommerce' ); ?></th>
 			<th class="product-brand"><?php _e( 'Brand', 'woocommerce' ); ?></th>
+			<th class="product-description"><?php _e( 'Description', 'woocommerce' ); ?></th>
 			<th class="product-price"><?php _e( 'Unit Price', 'woocommerce' ); ?></th>
-			<th class="product-unit"><?php _e( 'Qty', 'woocommerce' ); ?></th>
 			<th class="product-carton"><?php _e( 'Cartons', 'woocommerce' ); ?></th>
+			<th class="product-unit"><?php _e( 'Units', 'woocommerce' ); ?></th>
 			<th class="product-subtotal"><?php _e( 'SubTotal', 'woocommerce' ); ?></th>
 			<th class="product-remove">&nbsp;</th>
 		</tr>
@@ -51,6 +52,7 @@ do_action( 'woocommerce_before_cart' ); ?>
 
 			$unit = get_field_object('qty', $product_id);
 			$brand = get_field_object('brand', $product_id);
+			$description = get_field_object('description', $product_id);
 			$unit_price = get_field_object('unit_price', $product_id);
 
 			if ( $_product && $_product->exists() && $cart_item['quantity'] > 0 && apply_filters( 'woocommerce_cart_item_visible', true, $cart_item, $cart_item_key ) ) {
@@ -94,15 +96,15 @@ do_action( 'woocommerce_before_cart' ); ?>
 						?>
 					</td>
 
-					<td class="product-price" data-title="<?php _e( 'Unit Price', 'woocommerce' ); ?>">
+					<td class="product-description" data-title="<?php _e( 'Description', 'woocommerce' ); ?>">
 						<?php
-							echo $unit_price['value'];
+							echo $description['value'];
 						?>
 					</td>
 
-					<td class="product-unit" data-title="<?php _e( 'Units', 'woocommerce' ); ?>">
+					<td class="product-price" data-title="<?php _e( 'Unit Price', 'woocommerce' ); ?>">
 						<?php
-							echo $unit['value'];
+							echo $unit_price['value'];
 						?>
 					</td>
 
@@ -120,6 +122,12 @@ do_action( 'woocommerce_before_cart' ); ?>
 							}
 
 							echo apply_filters( 'woocommerce_cart_item_quantity', $product_quantity, $cart_item_key, $cart_item );
+						?>
+					</td>
+
+					<td class="product-unit" data-title="<?php _e( 'Units', 'woocommerce' ); ?>">
+						<?php
+							echo $unit['value'];
 						?>
 					</td>
 
@@ -147,7 +155,7 @@ do_action( 'woocommerce_before_cart' ); ?>
 
 		do_action( 'woocommerce_cart_contents' );
 		?>
-		<tr>
+		<tr style="display:none;">
 			<td colspan="7" class="actions">
 
 				<?php if ( wc_coupons_enabled() ) { ?>
@@ -159,7 +167,7 @@ do_action( 'woocommerce_before_cart' ); ?>
 					</div>
 				<?php } ?>
 
-				<input type="submit" class="button" name="update_cart" value="<?php esc_attr_e( 'Update Cart', 'woocommerce' ); ?>" />
+				<input type="submit" class="update-cart-button button" name="update_cart" value="<?php esc_attr_e( 'Update Cart', 'woocommerce' ); ?>" />
 
 				<?php do_action( 'woocommerce_cart_actions' ); ?>
 

@@ -2487,9 +2487,9 @@ p:empty {
   color: #ffffff;
 }
 .btn-danger {
-  background-color: #ec908b;
-  border-color: #ec908b;
-  color: #ffffff;
+  background-color: #ec908b !important;
+  border-color: #ec908b !important;
+  color: #ffffff !important;
 }
 .btn-danger:hover,.btn-danger.focus, .btn-danger:focus {
   background-color: #dc807b;
@@ -3901,12 +3901,41 @@ p:empty {
   box-shadow: none;
   outline: 0 none;
 }
-.ordered-box span {
+.ordered-box .plus,
+.ordered-box .minus {
+  font-size: 16px !important;
   float: left;
+  position: static !important;
   height: 50px;
   line-height: 50px;
   text-align: center;
   width: 33px;
+  margin: 0;
+  background-color: #fff;
+  border: none;
+  border-left: 1px solid #e5e5e5;
+}
+.wpb_wl_summary .quantity .ordered-box {
+}
+.wpb_wl_summary .quantity .ordered-box .qty {
+  font-size: 16px !important;
+  height: 50px !important;
+  max-width: 50px !important;
+  border: none !important;
+}
+.wpb_wl_summary .quantity .ordered-box .plus,
+.wpb_wl_summary .quantity .ordered-box .minus {
+  font-size: 16px !important;
+  float: left;
+  position: static !important;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  width: 34px;
+  margin: 0;
+  background-color: #f7f7f7!important;
+  border: none;
+  border-left: 1px solid #e5e5e5;
 }
 .btn-row .btn {
   margin-left: 16px !important;
@@ -4166,9 +4195,9 @@ p:empty {
 
 }
 
-.product-detail-page .product-detail-contain .Price input {
+.product-detail-page .product-detail-contain .Price input.qty {
 
-    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    /*border: 1px solid rgba(0, 0, 0, 0.1) !important;*/
 
     color: #333333 !important;
 
@@ -4176,7 +4205,7 @@ p:empty {
 
     float: left;
 
-    height: 48px !important;
+    /*height: 48px !important;*/
 
     padding: 0 6px!important;
 
@@ -4184,10 +4213,27 @@ p:empty {
 
     vertical-align: middle;
 
-    width: 68px !important;
+    /*width: 68px !important;*/
 
     background-color: #f1f1f1;
+    border: none;
+    height: 40px;
 
+}
+
+.product-detail-page .product-detail-contain .Price input.plus,
+.product-detail-page .product-detail-contain .Price input.minus {
+  float: left;
+  position: static;
+  background-color: #f1f1f1;
+  height: 40px;
+  width: 33px;
+  border: none;
+  border-left: 1px solid #e5e5e5;
+}
+
+.product-detail-page .product-detail-contain .Price .quantity>p {
+  display: none;
 }
 
 .title-product{
@@ -4292,7 +4338,7 @@ p:empty {
 
 }
 
-.mfp-content .Prices .Units{
+.Prices .Units{
 
   float:none;
 
@@ -4304,7 +4350,7 @@ p:empty {
 
 }
 
-.mfp-content .Prices .Units h4{
+.Prices .Units h4{
 
   font-size: 30px;
 
@@ -4318,7 +4364,7 @@ p:empty {
 
 }
 
-.mfp-content .Prices .Units p {
+.Prices .Units p {
 
     display: inline-block;
 
@@ -4329,10 +4375,10 @@ p:empty {
     vertical-align: middle;
 
     width: 48%;
-
+    font-size: 16px;
 }
 
-.mfp-content .Prices .quantity{
+.Prices .quantity{
 
   display: table;
 
@@ -4348,7 +4394,7 @@ p:empty {
 
 }
 
-.mfp-content .Prices .quantity label {
+.Prices .quantity label {
 
     color: #999999;
 
@@ -4359,10 +4405,10 @@ p:empty {
     margin: 0 23px 0 0;
 
     width: auto;
-
+    font-size: 18px;
 }
 
-.mfp-content .Prices .quantity {
+.Prices .quantity {
 
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 
@@ -4377,21 +4423,6 @@ p:empty {
     width: 100%;
 
 }
-
-.mfp-content .Prices .quantity input {
-
-    background: rgba(0, 0, 0, 0) none repeat scroll 0 0 !important;
-
-    border: 1px solid rgba(0, 0, 0, 0.2) !important;
-
-    display: inline-block;
-
-    padding-left: 20px !important;
-
-    width: 68px !important;
-
-}
-
 .mfp-content .buttom-box {
 
     margin-top: 20px;
@@ -4612,4 +4643,31 @@ p:empty {
 
 .wpb_wl_product_title {
   color: #333;
+}
+
+.ordered-box input.qty[type="number"]::-webkit-outer-spin-button,
+.ordered-box input.qty[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+.ordered-box input.qty[type="number"] {
+  -moz-appearance: textfield !important;
+}
+
+.cart-form .update-cart-button {
+  display: none;
+}
+
+table.my_account_orders .order-actions .pay {
+  display: none;
+}
+
+table.my_account_orders .order-actions .button {
+  background-color: #ebe9eb;
+  cursor: pointer;
+  padding: .318em 1em;
+  border-radius: 3px;
+  margin: .125em 0 .125em .25em;
+  color: #515151;
+  float: left;
 }
