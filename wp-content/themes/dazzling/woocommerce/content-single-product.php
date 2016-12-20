@@ -102,10 +102,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 					?>
 				</div>
 			</div>
-			<!-- <div class="buttom-box text-center">
-				<button type="submit" class="single_add_to_cart_button btn btn-default alt" style="margin-top: 10px;">Add to Cart</button>
-				<button type="button" class="btn btn-default btn-danger" data-dismiss="modal" style="margin-top: 10px;">Cancel</button>
-			</div> -->
 		</form>
 
 		<div class="buttom-box">

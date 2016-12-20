@@ -88,10 +88,7 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 			foreach( $fields as $field_name => $field )
 			{
 				if ($field['label']) {
-					if ($field['name'] == 'qty') {
-						$qty = $field['value'];
-					}
-					if ($field['name'] == 'product_' || $field['name'] == 'dimensions') {
+					if ($field['name'] == 'product_' || $field['name'] == 'dimensions' || $field['name'] == 'unit_price') {
 						continue;
 					}
 					echo '<label>'.$field['label'].': '.'</label>';
@@ -102,7 +99,7 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 			foreach( $fields as $field_name => $field )
 			{
 				if ($field['label']) {
-					if ($field['name'] == 'product_' || $field['name'] == 'dimensions') {
+					if ($field['name'] == 'product_' || $field['name'] == 'dimensions' || $field['name'] == 'unit_price') {
 						continue;
 					}
 					echo '<label>'.$field['value'].'</label>';
@@ -122,7 +119,7 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 			foreach( $fields as $field_name => $field )
 			{
 				if ($field['label']) {
-					if ($field['name'] == 'range' || $field['name'] == 'description' || $field['name'] == 'capacity') {
+					if ($field['name'] == 'range' || $field['name'] == 'description' || $field['name'] == 'capacity' || $field['name'] == 'unit_price') {
 						continue;
 					}
 					echo '<label>'.$field['label'].': '.'</label>';
@@ -133,7 +130,7 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 			foreach( $fields as $field_name => $field )
 			{
 				if ($field['label']) {
-					if ($field['name'] == 'range' || $field['name'] == 'description' || $field['name'] == 'capacity') {
+					if ($field['name'] == 'range' || $field['name'] == 'description' || $field['name'] == 'capacity' || $field['name'] == 'unit_price') {
 						continue;
 					}
 					echo '<label>'.$field['value'].'</label>';
@@ -151,7 +148,7 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 			foreach( $fields as $field_name => $field )
 			{
 				if ($field['label']) {
-					if ($field['name'] == 'description' || $field['name'] == 'capacity') {
+					if ($field['name'] == 'description' || $field['name'] == 'capacity' || $field['name'] == 'unit_price') {
 						continue;
 					}
 					echo '<label>'.$field['label'].': '.'</label>';
@@ -162,7 +159,7 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 			foreach( $fields as $field_name => $field )
 			{
 				if ($field['label']) {
-					if ($field['name'] == 'description' || $field['name'] == 'capacity') {
+					if ($field['name'] == 'description' || $field['name'] == 'capacity' || $field['name'] == 'unit_price') {
 						continue;
 					}
 					echo '<label>'.$field['value'].'</label>';
