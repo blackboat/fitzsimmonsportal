@@ -612,3 +612,11 @@ function fep_cus_fep_menu_buttons( $menu )
     unset( $menu['announcements'] );
     return $menu;
 }
+
+
+/* ACF Google Map API */
+function my_acf_google_map_api( $api ){
+  $api['key'] = 'AIzaSyA85VhdXktocyIysDEGwTdIzN7FLorERjY';
+  return $api;
+}
+add_filter('acf/fields/google_map/api', 'my_acf_google_map_api');
