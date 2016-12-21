@@ -620,3 +620,29 @@ function my_acf_google_map_api( $api ){
   return $api;
 }
 add_filter('acf/fields/google_map/api', 'my_acf_google_map_api');
+
+
+/* Display posts shortcode */
+
+// display address for each venue
+add_filter( 'display_posts_shortcode_output', 'be_display_posts_facebook', 10, 7 );
+function be_display_posts_facebook( $output, $atts, $image, $title, $date, $excerpt, $inner_wrapper ) { 
+  // $excerpt = '<span class="address">' . get_the_excerpt() . $facebook . '</span>';
+  global $post;
+  $map_obj = get_field_object('address', $post->ID);
+  $address = $map_obj['value']['address'];
+  $output = '<' . $inner_wrapper . ' class="col-md-3 col-sm-6 col-xs-12">' .
+    '<div class="venues-box">' .
+      '<div class="venues-img">' .
+        $image .
+      '</div>' .
+      '<div class="venues-text">' .
+        '<h5>' . $title . '</h5>' .
+        '<p><img src="http://fitzsimmonsportal.com.au/restore/wp-content/uploads/2016/12/map-marker.png" alt="">' .
+          $address .
+        '</p>' .
+      '</div>' .
+    '</div>' .
+    '</' . $inner_wrapper . '>';
+  return $output;
+}
