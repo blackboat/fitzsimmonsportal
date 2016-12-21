@@ -70,7 +70,7 @@ function login_header( $title = 'Log In', $message = '', $wp_error = '' ) {
 	<title><?php echo get_bloginfo( 'name', 'display' ) . $separator . $title; ?></title>
 	<?php
 
-	wp_enqueue_style( 'login' );
+	// wp_enqueue_style( 'login' );
 
 	/*
 	 * Remove all stored post data on logging out.
@@ -137,6 +137,7 @@ function login_header( $title = 'Log In', $message = '', $wp_error = '' ) {
 		if ( 'success' ===  $interim_login )
 			$classes[] = 'interim-login-success';
 	}
+	wp_head();
 	$classes[] =' locale-' . sanitize_html_class( strtolower( str_replace( '_', '-', get_locale() ) ) );
 
 	/**
@@ -151,7 +152,7 @@ function login_header( $title = 'Log In', $message = '', $wp_error = '' ) {
 
 	?>
 	</head>
-	<body class="login <?php echo esc_attr( implode( ' ', $classes ) ); ?>">
+	<body class="page login-page">
 	<?php
 	/**
 	 * Fires in the login page header after the body tag is opened.
@@ -160,8 +161,10 @@ function login_header( $title = 'Log In', $message = '', $wp_error = '' ) {
 	 */
 	do_action( 'login_header' );
 	?>
-	<div id="login">
-		<h1><a href="<?php echo esc_url( $login_header_url ); ?>" title="<?php echo esc_attr( $login_header_title ); ?>" tabindex="-1"><?php bloginfo( 'name' ); ?></a></h1>
+	<div id="page" class="feed site">
+	<div class="login-wp">
+	<div class="row">
+		<div class="col-xs-12">
 	<?php
 
 	unset( $login_header_url, $login_header_title );
@@ -902,35 +905,48 @@ default:
 ?>
 
 <form name="loginform" id="loginform" action="<?php echo esc_url( site_url( 'wp-login.php', 'login_post' ) ); ?>" method="post">
-	<p>
-		<label for="user_login"><?php _e('Username or Email') ?><br />
-		<input type="text" name="log" id="user_login"<?php echo $aria_describedby_error; ?> class="input" value="<?php echo esc_attr( $user_login ); ?>" size="20" /></label>
-	</p>
-	<p>
-		<label for="user_pass"><?php _e('Password') ?><br />
-		<input type="password" name="pwd" id="user_pass"<?php echo $aria_describedby_error; ?> class="input" value="" size="20" /></label>
-	</p>
-	<?php
-	/**
-	 * Fires following the 'Password' field in the login form.
-	 *
-	 * @since 2.1.0
-	 */
-	do_action( 'login_form' );
-	?>
-	<p class="forgetmenot"><label for="rememberme"><input name="rememberme" type="checkbox" id="rememberme" value="forever" <?php checked( $rememberme ); ?> /> <?php esc_attr_e('Remember Me'); ?></label></p>
-	<p class="submit">
-		<input type="submit" name="wp-submit" id="wp-submit" class="button button-primary button-large" value="<?php esc_attr_e('Log In'); ?>" />
-<?php	if ( $interim_login ) { ?>
-		<input type="hidden" name="interim-login" value="1" />
-<?php	} else { ?>
-		<input type="hidden" name="redirect_to" value="<?php echo esc_attr($redirect_to); ?>" />
-<?php 	} ?>
-<?php   if ( $customize_login ) : ?>
-		<input type="hidden" name="customize-login" value="1" />
-<?php   endif; ?>
-		<input type="hidden" name="testcookie" value="1" />
-	</p>
+	<div class="form-group">
+		<div class="logo-login">
+				<a href="http://fitzsimmonsportal.com.au/restore/"><img src="http://fitzsimmonsportal.com.au/restore/wp-content/uploads/2016/12/fh-logo-2.png" alt="" /></a>
+		</div>
+	</div>
+	<div class="login-inner">
+		<div class="form-group">
+			<h1>Login to Portal</h1>
+		</div>
+	  	<div class="form-group username">
+	    	<input type="text" name="log" id="user_login"<?php echo $aria_describedby_error; ?> class="form-control" placeholder="Username" value="<?php echo esc_attr( $user_login ); ?>" />
+	  	</div>
+	  	<div class="form-group password">
+	    	<input type="password" name="pwd" id="user_pass"<?php echo $aria_describedby_error; ?> class="form-control" placeholder="Password" value="" /><i class="password-icon fa fa-eye"></i>
+	  	</div>
+	  	<?php
+		/**
+		 * Fires following the 'Password' field in the login form.
+		 *
+		 * @since 2.1.0
+		 */
+		do_action( 'login_form' );
+		?>
+	  	<div class="checkbox">
+	  		<label>
+	  		<input name="rememberme" type="checkbox" id="rememberme" value="forever" <?php checked( $rememberme ); ?> /> <?php esc_attr_e('Remember Me'); ?>
+	  		</label>
+	  	</div>
+	  	<div class="btn-row text-center">
+		  	<input type="submit" name="wp-submit" id="wp-submit" class="btn btn-default" value="<?php esc_attr_e('Login'); ?>" />
+		  	<?php	if ( $interim_login ) { ?>
+				<input type="hidden" name="interim-login" value="1" />
+			<?php	} else { ?>
+				<input type="hidden" name="redirect_to" value="<?php echo esc_attr($redirect_to); ?>" />
+			<?php 	} ?>
+			<?php   if ( $customize_login ) : ?>
+				<input type="hidden" name="customize-login" value="1" />
+			<?php   endif; ?>
+				<input type="hidden" name="testcookie" value="1" />
+	  	</div>
+  	</div>
+
 </form>
 
 <?php if ( ! $interim_login ) { ?>

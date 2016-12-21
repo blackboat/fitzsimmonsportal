@@ -327,70 +327,12 @@ function of_get_option( $name, $default = false ) {
 }
 endif;
 
-// custom_login.
-function custom_login() {
-    if(isset($_GET['do']) && $_GET['do'] == 'login') {
-        $user_pass = $_POST['password'];
-        $user_login = esc_attr( $_POST['username'] );
 
-        $sanitized_user_login = sanitize_user($user_login);
-        // $user_email = apply_filters('user_registration_email', $user_login);
-
-        if(empty($sanitized_user_login)) {
-            $errors[] = 'Please Input Username or Email';
-        } else if (!validate_username($user_login)) {
-            $errors[] = 'Invalid user name.';
-        }
-
-        if(empty($user_pass)) {
-            $errors[] = 'Please Input Password';
-        }
-
-        if (empty($errors)){
-            $creds = array(
-                'user_login'    => $sanitized_user_login,
-                'user_password' => $user_pass
-            );
-         
-            $user = wp_signon( $creds, false );
-         
-            if ( is_wp_error( $user ) ) {
-                $errors[] = $user->get_error_message();
-            }
-        }
-        if(!empty($errors)) define('LOGIN_ERROR', serialize($errors));
-        else wp_redirect(get_home_url());
-    }
-}
-
-function add_order(){
-    $address = array(
-            'first_name' => 'Fresher',
-            'last_name'  => 'StAcK OvErFloW',
-            'company'    => 'stackoverflow',
-            'email'      => 'test@test.com',
-            'phone'      => '777-777-777-777',
-            'address_1'  => '31 Main Street',
-            'address_2'  => '', 
-            'city'       => 'Chennai',
-            'state'      => 'TN',
-            'postcode'   => '12345',
-            'country'    => 'IN'
-        );
-
-        $order = wc_create_order();
-        $order->add_product( get_product( '189' ), 2 ); //(get_product with id and next is for quantity)
-        $order->set_address( $address, 'billing' );
-        $order->set_address( $address, 'shipping' );
-        // $order->add_coupon('Fresher','10','2'); // accepted param $couponcode, $couponamount,$coupon_tax
-        $order->calculate_totals();
-}
-
+add_action('template_redirect', 'wpse_131562_redirect');
 function wpse_131562_redirect() {
-    if (! is_user_logged_in() && (!is_page('login')))
+    if (! is_user_logged_in() )
     {
-        // feel free to customize the following line to suit your needs
-        wp_redirect(get_permalink( get_page_by_path( 'login' ) ));
+        wp_safe_redirect(wp_login_url( get_permalink() ));
         exit;
     }
     if (is_page('all-products')) {
@@ -399,6 +341,8 @@ function wpse_131562_redirect() {
     }
 }
 
+
+add_shortcode('my_orders', 'shortcode_my_orders');
 function shortcode_my_orders( $atts ) {
     extract( shortcode_atts( array(
         'order_count' => -1
@@ -459,9 +403,7 @@ if (!function_exists('loop_columns')) {
   }
 }
 
-add_shortcode('my_orders', 'shortcode_my_orders');
-add_action( 'template_redirect', 'custom_login' );
-add_action('template_redirect', 'wpse_131562_redirect');
+
 add_action( 'save_post', 'my_product_update' );
 add_filter( 'loop_shop_per_page', create_function( '$cols', 'return 15;' ), 12 );
 
