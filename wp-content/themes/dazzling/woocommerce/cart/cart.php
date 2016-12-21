@@ -104,7 +104,7 @@ do_action( 'woocommerce_before_cart' ); ?>
 
 					<td class="product-price" data-title="<?php _e( 'Unit Price', 'woocommerce' ); ?>">
 						<?php
-							echo $unit_price['value'];
+							echo '$'.$unit_price['value'];
 						?>
 					</td>
 
@@ -125,9 +125,9 @@ do_action( 'woocommerce_before_cart' ); ?>
 						?>
 					</td>
 
-					<td class="product-unit" data-title="<?php _e( 'Units', 'woocommerce' ); ?>">
+					<td class="product-unit" data-title="<?php _e( 'Units', 'woocommerce' ); ?>" unit="<?php echo $unit['value']; ?>">
 						<?php
-							echo $unit['value'];
+							echo $unit['value'] * $cart_item['quantity'];
 						?>
 					</td>
 
