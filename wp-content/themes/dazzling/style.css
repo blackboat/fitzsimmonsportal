@@ -4671,3 +4671,11 @@ table.my_account_orders .order-actions .button {
   color: #515151;
   float: left;
 }
+
+.woocommerce-view-order .woocommerce-MyAccount-navigation {
+  display: none;
+}
+.woocommerce-view-order .woocommerce-MyAccount-content {
+  margin: auto;
+  float: none;
+}
