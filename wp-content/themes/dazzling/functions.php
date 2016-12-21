@@ -630,7 +630,9 @@ function be_display_posts_facebook( $output, $atts, $image, $title, $date, $exce
   // $excerpt = '<span class="address">' . get_the_excerpt() . $facebook . '</span>';
   global $post;
   $map_obj = get_field_object('address', $post->ID);
-  $address = $map_obj['value']['address'];
+  $address = '';
+  if ($map_obj['value'])
+    $address = $map_obj['value']['address'];
   $output = '<' . $inner_wrapper . ' class="col-md-3 col-sm-6 col-xs-12">' .
     '<div class="venues-box">' .
       '<div class="venues-img">' .
