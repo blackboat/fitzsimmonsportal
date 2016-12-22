@@ -10,9 +10,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 $my_orders_columns = apply_filters( 'woocommerce_my_account_my_orders_columns', array(
-	'order-number'  => __( 'Order References', 'woocommerce' ),
+	'order-number'  => __( 'Order Number', 'woocommerce' ),
 	'order-date'    => __( 'Date', 'woocommerce' ),
-	'order-total'   => __( 'Value', 'woocommerce' ),
+	'order-total'   => __( 'Amount', 'woocommerce' ),
 	'order-status'  => __( 'Order Status', 'woocommerce' ),
 	'order-actions' => '&nbsp;',
 ) );
@@ -60,13 +60,13 @@ if ( $customer_orders ) : ?>
 								</a>
 
 							<?php elseif ( 'order-date' === $column_id ) : ?>
-								<time datetime="<?php echo date( 'Y-m-d', strtotime( $order->order_date ) ); ?>" title="<?php echo esc_attr( strtotime( $order->order_date ) ); ?>"><?php echo date_i18n( get_option( 'date_format' ), strtotime( $order->order_date ) ); ?></time>
+								<time datetime="<?php echo date( 'DD/MM/YYYY', strtotime( $order->order_date ) ); ?>" title="<?php echo esc_attr( strtotime( $order->order_date ) ); ?>"><?php echo date_i18n( get_option( 'date_format' ), strtotime( $order->order_date ) ); ?></time>
 
 							<?php elseif ( 'order-status' === $column_id ) : ?>
 								<?php echo wc_get_order_status_name( $order->get_status() ); ?>
 
 							<?php elseif ( 'order-total' === $column_id ) : ?>
-								<?php echo sprintf( _n( '%s for %s item', '%s for %s items', $item_count, 'woocommerce' ), $order->get_formatted_order_total(), $item_count ); ?>
+								<?php echo sprintf( _n( '%s', '%s', 'woocommerce' ), $order->get_formatted_order_total() ); ?>
 
 							<?php elseif ( 'order-actions' === $column_id ) : ?>
 								<?php
