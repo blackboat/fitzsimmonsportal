@@ -119,7 +119,7 @@ if ( ! class_exists ( 'YITH_WCMG_Frontend' ) ) {
 
             wp_register_style ( 'yith-magnifier', YITH_WCMG_URL . 'assets/css/yith_magnifier.css' );
 
-            if ( is_product () || ( ! empty( $post->post_content ) && strstr ( $post->post_content, '[product_page' ) ) ) {
+            if ( is_product () || is_product_category() || ( ! empty( $post->post_content ) && strstr ( $post->post_content, '[product_page' ) ) ) {
                 wp_enqueue_script ( 'yith-magnifier-slider' );
                 wp_enqueue_script ( 'yith-magnifier' );
                 wp_enqueue_script ( 'yith_wcmg_frontend' );
