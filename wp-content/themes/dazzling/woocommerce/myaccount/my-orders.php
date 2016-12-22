@@ -60,7 +60,7 @@ if ( $customer_orders ) : ?>
 								</a>
 
 							<?php elseif ( 'order-date' === $column_id ) : ?>
-								<time datetime="<?php echo date( 'DD/MM/YYYY', strtotime( $order->order_date ) ); ?>" title="<?php echo esc_attr( strtotime( $order->order_date ) ); ?>"><?php echo date_i18n( get_option( 'date_format' ), strtotime( $order->order_date ) ); ?></time>
+								<time datetime="<?php echo date( 'Y-m-d', strtotime( $order->order_date ) ); ?>" title="<?php echo esc_attr( strtotime( $order->order_date ) ); ?>"><?php echo date( 'd/m/Y', strtotime( $order->order_date ) ); ?></time>
 
 							<?php elseif ( 'order-status' === $column_id ) : ?>
 								<?php echo wc_get_order_status_name( $order->get_status() ); ?>
