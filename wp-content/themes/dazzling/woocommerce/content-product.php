@@ -29,12 +29,16 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 ?>
 <li <?php post_class(); ?>>
 	<?php
+	echo '<div class="product-box">';
+	$pid = $product->post->ID;
 	/**
 	 * woocommerce_before_shop_loop_item hook.
 	 *
 	 * @hooked woocommerce_template_loop_product_link_open - 10
 	 */
-	do_action( 'woocommerce_before_shop_loop_item' );
+	// do_action( 'woocommerce_before_shop_loop_item' );
+	$src = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'full', false );
+	echo '<a href="' . $src[0] . '" class="yith_magnifier_zoom">';
 
 	/**
 	 * woocommerce_before_shop_loop_item_title hook.
@@ -64,14 +68,6 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 	$cat_slug = $cat->slug;
 	if ($cat->parent != 0)
 		$cat_slug = get_category($cat->parent)->slug;
-	$pid = $product->post->ID;
-	$link = get_permalink( $pid );
-	$image = wp_get_attachment_image_src( get_post_thumbnail_id( $pid ), 'single-post-thumbnail' );
-	if (!$image) {
-		$image = wc_placeholder_img_src();
-	} else {
-		$image = $image[0];
-	}
 	$fields = get_field_objects($pid);
 	$qty = 1;
 	if( $fields )
