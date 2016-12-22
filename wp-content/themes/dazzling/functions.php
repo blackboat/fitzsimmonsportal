@@ -590,3 +590,12 @@ function be_display_posts_facebook( $output, $atts, $image, $title, $date, $exce
     '</' . $inner_wrapper . '>';
   return $output;
 }
+
+
+/* remove some product sort */
+function my_woocommerce_catalog_orderby( $orderby ) {
+  unset($orderby["popularity"]);
+  unset($orderby["date"]);
+  return $orderby;
+}
+add_filter( "woocommerce_catalog_orderby", "my_woocommerce_catalog_orderby", 20 );
