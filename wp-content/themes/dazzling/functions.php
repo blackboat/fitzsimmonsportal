@@ -630,11 +630,13 @@ function remove_built_in_roles() {
 /* admin customize */
 
 // remove some rows on email settings
-$emails = WC()->mailer();
-$row_to_remove = array('WC_Email_Failed_Order', 'WC_Email_Customer_On_Hold_Order', 'WC_Email_Customer_Refunded_Order', 'WC_Email_Customer_Invoice'); 
-foreach ($row_to_remove as $row) {
-  if (isset($emails->emails[$row])) {
-    unset($emails->emails[$row]);
+add_filter('woocommerce_email_classes', 'my_woocommerce_email_classes');
+function my_woocommerce_email_classes($emails) {
+  $row_to_remove = array('WC_Email_Failed_Order', 'WC_Email_Customer_On_Hold_Order', 'WC_Email_Customer_Refunded_Order', 'WC_Email_Customer_Invoice'); 
+  foreach ($row_to_remove as $row) {
+    if (isset($emails[$row])) {
+      unset($emails[$row]);
+    }
   }
+  return $emails;
 }
-// var_dump(array_keys($emails->emails));
