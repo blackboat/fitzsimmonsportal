@@ -457,8 +457,8 @@ function so_39252649_remove_processing_status( $statuses ){
     if( isset( $statuses['wc-on-hold'] ) ){
         unset( $statuses['wc-on-hold'] );
     }
-    if( isset( $statuses['wc-cancelled'] ) ){
-        unset( $statuses['wc-cancelled'] );
+    if( isset( $statuses['wc-failed'] ) ){
+        unset( $statuses['wc-failed'] );
     }
     if( isset( $statuses['wc-refunded'] ) ){
         unset( $statuses['wc-refunded'] );
@@ -480,9 +480,9 @@ function wc_renaming_order_status( $order_statuses ) {
         if ( 'wc-completed' === $key ) {
             $order_statuses['wc-completed'] = _x( 'Dispatch', 'Order status', 'woocommerce' );
         }
-        if ( 'wc-failed' === $key ) {
-            $order_statuses['wc-failed'] = _x( 'Reject', 'Order status', 'woocommerce' );
-        }
+        // if ( 'wc-cancelled' === $key ) {
+        //     $order_statuses['wc-cancelled'] = _x( 'Reject', 'Order status', 'woocommerce' );
+        // }
     }
     return $order_statuses;
 }
@@ -495,15 +495,10 @@ function add_cancel_order_actions_button( $actions, $the_order ) {
     $tmp = $actions['view'];
     unset($actions['view']);
     if ( $the_order->has_status( array( 'pending' ) ) ) {
-        // $actions['pending'] = array(
-        //     'url'       => wp_nonce_url( admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status=pending&order_id=' . $the_order->id ), 'woocommerce-mark-order-status' ),
-        //     'name'      => __( 'Approved/Awaiting Dispatch', 'woocommerce' ),
-        //     'action'    => "view pending", // setting "view" for proper button CSS
-        // );
-        $actions['failed'] = array(
-            'url'       => wp_nonce_url( admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status=failed&order_id=' . $the_order->id ), 'woocommerce-mark-order-status' ),
+        $actions['cancelled'] = array(
+            'url'       => wp_nonce_url( admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status=cancelled&order_id=' . $the_order->id ), 'woocommerce-mark-order-status' ),
             'name'      => __( 'Reject', 'woocommerce' ),
-            'action'    => "view failed", // setting "view" for proper button CSS
+            'action'    => "view cancelled", // setting "view" for proper button CSS
         );
     }
     $actions['view'] = $tmp;
@@ -512,7 +507,7 @@ function add_cancel_order_actions_button( $actions, $the_order ) {
 add_action( 'admin_head', 'add_order_actions_button_css' );
 function add_order_actions_button_css() {
     echo '<style>
-      .view.failed::after { content: "\e016"; font-family: WooCommerce; color: #d0c21f; }
+      .view.cancelled::after { content: "\e013"; font-family: WooCommerce; color: #a00; }
     </style>';
 }
 
@@ -616,3 +611,30 @@ function remove_built_in_roles() {
         }
     }
 }
+
+// $note = 'Testing Note';
+// $comment_post_ID        = 344;
+// $comment_author_url     = '';
+// $comment_content        = $note;
+// $comment_agent          = 'WooCommerce';
+// $comment_type           = 'order_note';
+// $comment_parent         = 0;
+// $comment_approved       = 1;
+// $compact =  compact( 'comment_post_ID', 'comment_author', 'comment_author_email', 'comment_author_url', 'comment_content', 'comment_agent', 'comment_type', 'comment_parent', 'comment_approved' );
+// $array = array( 'order_id' => 344, 'is_customer_note' => 0 );
+// $commentdata = apply_filters( 'woocommerce_new_order_note_data', $compact, $array );
+// $comment_id = wp_insert_comment( $commentdata );
+// var_dump($comment_id);
+
+
+/* admin customize */
+
+// remove some rows on email settings
+$emails = WC()->mailer();
+$row_to_remove = array('WC_Email_Failed_Order', 'WC_Email_Customer_On_Hold_Order', 'WC_Email_Customer_Refunded_Order', 'WC_Email_Customer_Invoice'); 
+foreach ($row_to_remove as $row) {
+  if (isset($emails->emails[$row])) {
+    unset($emails->emails[$row]);
+  }
+}
+// var_dump(array_keys($emails->emails));
