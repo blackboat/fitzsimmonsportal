@@ -18,6 +18,9 @@ get_header(); ?>
 						<h1 class="entry-title"><?php the_title(); ?></h1>
 					</header><!-- .entry-header -->
 	<?php
+						if(is_wc_endpoint_url( 'view-order' )){
+							//echo 'view order';
+						}
 						echo do_shortcode( '[breadcrumb]' ); 
 					?>
 

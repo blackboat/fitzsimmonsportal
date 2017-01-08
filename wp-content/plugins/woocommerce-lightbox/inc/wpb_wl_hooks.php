@@ -80,7 +80,7 @@ function wpb_wl_hook_quickview_content(){
 					<div class="Units">
 						<h5 style="font-size:22px;">Cost per Unit: $<label class="cost"><?php echo $unit_price!=0?$unit_price:''; ?></label></h5>
 						<p style="display:none;">Units / Carton: <label class="units"><?php echo $qty; ?></label></p>
-						<h4>Total Carton Cost: $<label class="totalcost"><?php echo $unit_price * $qty; ?></label></h4>
+						<h4 class="total_cost_heading">Total Carton Cost: $<label class="totalcost"><?php echo $unit_price * $qty; ?></label></h4>
 					</div>
 					<div class="quantity product-quantity">
 						<label>Cartons</label>

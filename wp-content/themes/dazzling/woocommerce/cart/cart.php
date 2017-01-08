@@ -53,6 +53,7 @@ do_action( 'woocommerce_before_cart' ); ?>
 			$unit = get_field_object('qty', $product_id);
 			$brand = get_field_object('brand', $product_id);
 			$description = get_field_object('description', $product_id);
+			$description_tbl = get_field_object('product_', $product_id);
 			$unit_price = get_field_object('unit_price', $product_id);
 
 			if ( $_product && $_product->exists() && $cart_item['quantity'] > 0 && apply_filters( 'woocommerce_cart_item_visible', true, $cart_item, $cart_item_key ) ) {
@@ -97,8 +98,12 @@ do_action( 'woocommerce_before_cart' ); ?>
 					</td>
 
 					<td class="product-description" data-title="<?php _e( 'Description', 'woocommerce' ); ?>">
-						<?php
-							echo $description['value'];
+						<?php if($description['value']) { 
+						echo $description['value']; }
+						else
+						{
+							echo $description_tbl['value'];
+						}
 						?>
 					</td>
 
@@ -116,8 +121,9 @@ do_action( 'woocommerce_before_cart' ); ?>
 								$product_quantity = woocommerce_quantity_input( array(
 									'input_name'  => "cart[{$cart_item_key}][qty]",
 									'input_value' => $cart_item['quantity'],
-									'max_value'   => $_product->backorders_allowed() ? '' : $_product->get_stock_quantity(),
-									'min_value'   => '0'
+									'min_value'   => '0',
+									'max_value'   => $_product->backorders_allowed() ? '' : $_product->get_stock_quantity()
+									
 								), $_product, false );
 							}
 
@@ -193,7 +199,7 @@ do_action( 'woocommerce_before_cart' ); ?>
 	<div class="col-xs-12">
 		<div class="btn-row">
 			<div class="btn-group"><a href="<?php echo get_home_url(); ?>" class="btn btn-default">Continue Shopping</a></div>
-			<div class="btn-group"><a href="<?php echo esc_url( wc_get_checkout_url() ) ;?>" class="btn btn-success">Submit Approval</a></div>
+			<div class="btn-group"><a href="<?php echo esc_url( wc_get_checkout_url() ) ;?>" class="btn btn-success">Submit Order</a></div>
 		</div>
 	</div>
 </div>

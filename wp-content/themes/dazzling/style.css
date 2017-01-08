@@ -3903,8 +3903,8 @@ p:empty {
 }
 .ordered-box .plus,
 .ordered-box .minus {
-  font-size: 16px !important;
-  float: left;
+  font-size: 32px !important;
+  float: right;
   position: static !important;
   height: 50px;
   line-height: 50px;
@@ -3925,8 +3925,8 @@ p:empty {
 }
 .wpb_wl_summary .quantity .ordered-box .plus,
 .wpb_wl_summary .quantity .ordered-box .minus {
-  font-size: 16px !important;
-  float: left;
+  font-size: 32px !important;
+  float: right;
   position: static !important;
   height: 50px;
   line-height: 50px;
@@ -4223,7 +4223,7 @@ p:empty {
 
 .product-detail-page .product-detail-contain .Price input.plus,
 .product-detail-page .product-detail-contain .Price input.minus {
-  float: left;
+  float: right; 
   position: static;
   background-color: #f1f1f1;
   height: 40px;
@@ -4682,4 +4682,19 @@ table.my_account_orders .order-actions .button {
 
 .login-wp #nav, .login-wp #backtoblog {
   display: none;
+}
+.total_cost_heading{
+font-size:21px!important;
+}
+.aws-container{
+display:none;
+}
+.daz_top_search{
+width:268px;
+}
+.dazz_head_style{
+font-weight:bold;
+}
+.archive .woocommerce .woocommerce-ordering, .woocommerce-page .woocommerce-ordering {
+ margin-right: 4%;
 }

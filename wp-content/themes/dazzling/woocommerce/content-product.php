@@ -78,7 +78,7 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 			$dimensions = get_field_object('dimensions', $pid);
 			$dimensions = $dimensions ? $dimensions['value'] : '';
 
-			echo '<h6 style="color:#333;">' . $product_ . '&nbsp;&nbsp;&nbsp;&nbsp;' . $dimensions . '</h6>';
+			echo '<h6 style="color:#333;" class="dazz_head_style">' . $product_ . '&nbsp;&nbsp;&nbsp;&nbsp;' . $dimensions . '</h6>';
 			echo '<div class="stock-detail">';
 
 			foreach( $fields as $field_name => $field )
@@ -110,12 +110,12 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 			$capacity = get_field_object('capacity', $pid);
 			$capacity = $capacity ? $capacity['value'] : '';
 
-			echo '<h6 style="color:#333;">' . $range . '&nbsp;&nbsp;' . $description . '&nbsp;&nbsp;' . $capacity . '</h6>';
+			echo '<h6 style="color:#333;" class="dazz_head_style">' . $range . '&nbsp;&nbsp;' . $description . '&nbsp;&nbsp;' . $capacity . '</h6>';
 			echo '<div class="stock-detail">';
 			foreach( $fields as $field_name => $field )
 			{
 				if ($field['label']) {
-					if ($field['name'] == 'range' || $field['name'] == 'description' || $field['name'] == 'capacity' || $field['name'] == 'unit_price') {
+					if ($field['name'] == 'range' ||  $field['name'] == 'capacity' || $field['name'] == 'unit_price') {
 						continue;
 					}
 					echo '<label>'.$field['label'].': '.'</label>';
@@ -126,7 +126,7 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 			foreach( $fields as $field_name => $field )
 			{
 				if ($field['label']) {
-					if ($field['name'] == 'range' || $field['name'] == 'description' || $field['name'] == 'capacity' || $field['name'] == 'unit_price') {
+					if ($field['name'] == 'range'  || $field['name'] == 'capacity' || $field['name'] == 'unit_price') {
 						continue;
 					}
 					echo '<label>'.$field['value'].'</label>';
@@ -139,12 +139,12 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 			$capacity = get_field_object('capacity', $pid);
 			$capacity = $capacity ? $capacity['value'] : '';
 
-			echo '<h6 style="color:#333;">' . $description . '&nbsp;&nbsp;' . $capacity . '</h6>';
+			echo '<h6 style="color:#333;" class="dazz_head_style">' . $description . '&nbsp;&nbsp;' . $capacity . '</h6>';
 			echo '<div class="stock-detail">';
 			foreach( $fields as $field_name => $field )
 			{
 				if ($field['label']) {
-					if ($field['name'] == 'description' || $field['name'] == 'capacity' || $field['name'] == 'unit_price') {
+					if ( $field['name'] == 'capacity' || $field['name'] == 'unit_price') {
 						continue;
 					}
 					echo '<label>'.$field['label'].': '.'</label>';
@@ -155,7 +155,7 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 			foreach( $fields as $field_name => $field )
 			{
 				if ($field['label']) {
-					if ($field['name'] == 'description' || $field['name'] == 'capacity' || $field['name'] == 'unit_price') {
+					if ($field['name'] == 'capacity' || $field['name'] == 'unit_price') {
 						continue;
 					}
 					echo '<label>'.$field['value'].'</label>';

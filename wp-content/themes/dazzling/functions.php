@@ -640,3 +640,73 @@ function my_woocommerce_email_classes($emails) {
   }
   return $emails;
 }
+
+/**
+ * Add custom where statement to product search query
+ * @param  string $where
+ * @return string
+ */
+
+//add_filter('pre_get_posts', 'jc_search_post_excerpt');
+function jc_search_post_excerpt($where = ''){
+ 
+    global $wp_the_query;
+ 
+    // escape if not woocommerce search query
+    if ( empty( $wp_the_query->query_vars['wc_query'] ) || empty( $wp_the_query->query_vars['s'] ) )
+            return $where;
+ 
+    $where = preg_replace("/post_title LIKE ('%[^%]+%')/", "post_title LIKE $1) OR (post_content LIKE $1) OR (jcmt1.meta_key = 'acf-field-description' AND CAST(jcmt1.meta_value AS CHAR) LIKE $1 ", $where);
+ 
+    return $where;
+}
+
+//custom css
+add_action( 'admin_enqueue_scripts', 'wp_proaject_thm_admin_scripts' );
+function wp_proaject_thm_admin_scripts(){
+	//wp_enqueue_style( 'main-css', get_template_directory_uri().'/css/font-awesome.min.css' );
+	wp_enqueue_style('dazz_custom_css',get_stylesheet_directory_uri().'/dazz_customcss.css');
+	
+}
+
+
+
+
+function skyverge_add_postmeta_ordering_args( $sort_args ) {
+		
+	$orderby_value = isset( $_GET['orderby'] ) ? wc_clean( $_GET['orderby'] ) : apply_filters( 'woocommerce_default_catalog_orderby', get_option( 'woocommerce_default_catalog_orderby' ) );
+	switch( $orderby_value ) {
+	
+		// Name your sortby key whatever you'd like; must correspond to the $sortby in the next function
+		case 'acf-field-unit_price':
+			$sort_args['orderby']  = 'meta_value';
+			// Sort by meta_value because we're using alphabetic sorting
+			$sort_args['order']    = 'asc';
+			$sort_args['meta_key'] = 'acf-field-unit_price';
+			// use the meta key you've set for your custom field, i.e., something like "location" or "_wholesale_price"
+			break;
+
+		
+	}
+	
+	return $sort_args;
+}
+add_filter( 'woocommerce_get_catalog_ordering_args', 'skyverge_add_postmeta_ordering_args' );
+// Add these new sorting arguments to the sortby options on the frontend
+function skyverge_add_new_postmeta_orderby( $sortby ) {
+	
+	// Adjust the text as desired
+	$sortby['acf-field-unit_price'] = __( 'Sort by unit price', 'woocommerce' );
+	
+    
+	return $sortby;
+}
+//add_filter( 'woocommerce_default_catalog_orderby_options', 'skyverge_add_new_postmeta_orderby' );
+//add_filter( 'woocommerce_catalog_orderby', 'skyverge_add_new_postmeta_orderby' );
+
+add_action( 'woocommerce_order_details_after_order_table', 'nolo_custom_field_display_cust_order_meta', 10, 1 );
+
+function nolo_custom_field_display_cust_order_meta($order){
+    echo '<p><strong>'.__('Pickup Location').':</strong> ' . get_post_meta( $order->id, 'Pickup Location', true ). '</p>';
+    echo '<p><strong>'.__('Pickup Date').':</strong> ' . get_post_meta( $order->id, 'Pickup Date', true ). '</p>';
+}

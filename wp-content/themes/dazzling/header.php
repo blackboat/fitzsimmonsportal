@@ -167,7 +167,18 @@
 
 						<div class="uese-info">
 
-							<img src="<?php echo get_home_url(); ?>/wp-content/uploads/2016/12/user.png" alt="" />
+							<?php
+    // Retrieve The Post's Author ID
+    $user_id = get_the_author_meta('ID');
+    // Set the image size. Accepts all registered images sizes and array(int, int)
+    $size = 'thumbnail';
+
+    // Get the image URL using the author ID and image size params
+    $imgURL = get_cupp_meta($user_id, $size);
+
+    // Print the image on the page
+    echo '<img src="'. $imgURL .'" alt="">';
+?>
 
 							<div class="dropdown">
 
@@ -194,10 +205,15 @@
 					</li>
 					<?php endif; ?>
 
-					
-					<li><a class="btn btn-default btn-venue" href="#">Venue</a></li> 
+					<li>
+<!-- <form id="search" action="" method="post">
+<div id="input"><input type="text" name="s" id="search-terms" placeholder="Enter search terms..."><button type="submit"><img src="<?php echo get_home_url(); ?>/wp-content/uploads/2016/12/search-icon.png" alt=""/></button></div>
+<!--<a class="search-box"><img src="<?php echo get_home_url(); ?>/wp-content/uploads/2016/12/search-icon.png" alt=""/></a>
 
-					<li><a class="search-box"><img src="<?php echo get_home_url(); ?>/wp-content/uploads/2016/12/search-icon.png" alt=""/></a></li>
+</form> -->
+<a class="search-box"><img src="<?php echo get_home_url(); ?>/wp-content/uploads/2016/12/search-icon.png" alt=""/></a>
+</li>
+<li class="daz_top_search"><?php echo do_shortcode('[aws_search_form]'); ?></li>
 
 				</ul>
 
