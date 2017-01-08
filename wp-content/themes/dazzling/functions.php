@@ -591,6 +591,8 @@ function be_display_posts_facebook( $output, $atts, $image, $title, $date, $exce
 function my_woocommerce_catalog_orderby( $orderby ) {
   unset($orderby["popularity"]);
   unset($orderby["date"]);
+  unset($orderby["price"]);
+  unset($orderby["price-desc"]);
   return $orderby;
 }
 add_filter( "woocommerce_catalog_orderby", "my_woocommerce_catalog_orderby", 20 );
@@ -670,39 +672,37 @@ function wp_proaject_thm_admin_scripts(){
 }
 
 
-
-
-function skyverge_add_postmeta_ordering_args( $sort_args ) {
+/* add new sort in category page */
+function add_postmeta_ordering_args( $sort_args ) {
 		
 	$orderby_value = isset( $_GET['orderby'] ) ? wc_clean( $_GET['orderby'] ) : apply_filters( 'woocommerce_default_catalog_orderby', get_option( 'woocommerce_default_catalog_orderby' ) );
 	switch( $orderby_value ) {
-	
-		// Name your sortby key whatever you'd like; must correspond to the $sortby in the next function
 		case 'acf-field-unit_price':
-			$sort_args['orderby']  = 'meta_value';
-			// Sort by meta_value because we're using alphabetic sorting
+			$sort_args['orderby']  = 'meta_value_num';
 			$sort_args['order']    = 'asc';
-			$sort_args['meta_key'] = 'acf-field-unit_price';
-			// use the meta key you've set for your custom field, i.e., something like "location" or "_wholesale_price"
+			$sort_args['meta_key'] = 'unit_price';
 			break;
-
-		
+    case 'acf-field-unit_price_desc':
+      $sort_args['orderby']  = 'meta_value_num';
+      $sort_args['order']    = 'desc';
+      $sort_args['meta_key'] = 'unit_price';
+      break;
 	}
 	
 	return $sort_args;
 }
-add_filter( 'woocommerce_get_catalog_ordering_args', 'skyverge_add_postmeta_ordering_args' );
+add_filter( 'woocommerce_get_catalog_ordering_args', 'add_postmeta_ordering_args' );
 // Add these new sorting arguments to the sortby options on the frontend
-function skyverge_add_new_postmeta_orderby( $sortby ) {
-	
+function add_new_postmeta_orderby( $sortby ) {
 	// Adjust the text as desired
-	$sortby['acf-field-unit_price'] = __( 'Sort by unit price', 'woocommerce' );
-	
-    
+	$sortby['acf-field-unit_price'] = __( 'Sort by unit price: low to high', 'woocommerce' );
+  $sortby['acf-field-unit_price_desc'] = __( 'Sort by unit price: high to low', 'woocommerce' );
 	return $sortby;
 }
-//add_filter( 'woocommerce_default_catalog_orderby_options', 'skyverge_add_new_postmeta_orderby' );
-//add_filter( 'woocommerce_catalog_orderby', 'skyverge_add_new_postmeta_orderby' );
+add_filter( 'woocommerce_default_catalog_orderby_options', 'add_new_postmeta_orderby' );
+add_filter( 'woocommerce_catalog_orderby', 'add_new_postmeta_orderby' );
+
+
 
 add_action( 'woocommerce_order_details_after_order_table', 'nolo_custom_field_display_cust_order_meta', 10, 1 );
 
