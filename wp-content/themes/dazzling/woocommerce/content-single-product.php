@@ -92,7 +92,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<form class="cart" method="post" enctype="multipart/form-data">
 			<div class="Price">
 				<div class="Units">
-					<p>Total Price: </p><h4 class="totalcost">$<?php echo $unit_price * $qty; ?></h4>
+					<p>Total Price: </p><h4 class="totalcost">$<?php echo number_format($unit_price * $qty, 2); ?></h4>
 					<p>Units / Carton: <label class="units" style="display: inline;"><?php echo $qty; ?></label></p>
 				</div>
 				<div class="quantity product-quantity">
