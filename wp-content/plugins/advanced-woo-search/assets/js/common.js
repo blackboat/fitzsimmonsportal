@@ -39,9 +39,9 @@
 
             init: function() {
 
-                $('body').append('<div class="custom_div"><div id="aws-search-result-' + instance + '" class="aws-search-result" style="display: none; width:266px; left:954.5px; top:189.8px;" style=""></div></div>');
+                $('body').append('<div class="custom_div"><div id="aws-search-result-' + instance + '" class="aws-search-result" style="display: none; width:266px; left:1254.5px; top:189.8px;" style=""></div></div>');
 
-                setTimeout(function() { methods.resultLayout(); }, 500)
+                //setTimeout(function() { methods.resultLayout(); }, 500)
 
             },
 
@@ -224,7 +224,7 @@
 
                 if ( offset ) {
 
-          /*        var width = self.outerWidth();
+                  var width = self.outerWidth();
                     var top = offset.top + $(self).innerHeight();
                     var left = offset.left;
 
@@ -232,7 +232,7 @@
                         width : width,
                         top : top,
                         left: left
-                    }); */
+                    }); 
 
                 }
 
