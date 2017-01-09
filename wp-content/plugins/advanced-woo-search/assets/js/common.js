@@ -211,6 +211,7 @@
                 if ( searchFor !== '' ) {
                     $(d.resultBlock).show();
                 }
+                methods.resultLayout();
             },
 
             hideResults: function( event ) {
