@@ -83,7 +83,7 @@ if ( ! class_exists( 'AWS_Search' ) ) :
             $description_ids = $this->get_acf('description');
             $brand_ids = $this->get_acf('brand');
             $posts_ids = array_unique(array_merge($posts_ids, $description_ids), SORT_REGULAR);
-            $posts_ids = array_unique(array_merge($posts_ids, $$brand_ids), SORT_REGULAR);
+            $posts_ids = array_unique(array_merge($posts_ids, $brand_ids), SORT_REGULAR);
             $products_array = $this->get_products( $posts_ids );
 
 
