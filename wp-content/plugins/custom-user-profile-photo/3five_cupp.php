@@ -237,8 +237,9 @@ function get_cupp_meta( $user_id, $size = 'thumbnail' ) {
 		 * Also, many themes use get_avatar on the single post pages and pass it the author email address so this
 		 * acts as a fall back.
 		 */
-		$user_id = $post->post_author;
+		// $user_id = $post->post_author;
 	}
+	$user_id = get_current_user_id();
 
 	// Check first for a custom uploaded image.
 	$attachment_upload_url = esc_url( get_the_author_meta( 'cupp_upload_meta', $user_id ) );
