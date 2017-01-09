@@ -30,6 +30,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 		</tr>
 	<?php endif; ?>
 
+	<tr>
+		<th><?php _e( 'Name:', 'woocommerce' ); ?></th>
+		<td>
+			<?php global $current_user;
+				// get_currentuserinfo();
+				echo $current_user->display_name; ?>
+		</td>
+	</tr>
+
 	<?php if ( $order->billing_email ) : ?>
 		<tr>
 			<th><?php _e( 'Email:', 'woocommerce' ); ?></th>
