@@ -22,9 +22,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 foreach ( $items as $item_id => $item ) :
 	$_product     = apply_filters( 'woocommerce_order_item_product', $order->get_product_from_item( $item ), $item );
-	var_dump($_product);
-	$product_id   = $_product->id;
 	$item_meta    = new WC_Order_Item_Meta( $item, $_product );
+	$product_id   = $_product->id;
+	$brand = get_field_object('brand', $product_id);
+	$brand = isset($brand['value'])?$brand['value']:'';
+	$description = get_field_object('description', $product_id);
+	$description = isset($description['value'])?$description['value']:'';
+	$unit_price = get_field_object('unit_price', $product_id);
+	$unit_price = isset($unit_price['value'])?$unit_price['value']:'';
+	$qty = get_field_object('qty', $product_id);
+	$qty = isset($qty['value'])?$qty['value']:'';
 
 	if ( apply_filters( 'woocommerce_order_item_visible', true, $item ) ) {
 		?>
@@ -57,14 +64,15 @@ foreach ( $items as $item_id => $item ) :
 					$order->display_item_downloads( $item );
 				}
 
-				$brand = get_field_object('brand', $product_id);
-				echo $brand['value'];
-
 				// allow other plugins to add additional product information here
 				do_action( 'woocommerce_order_item_meta_end', $item_id, $item, $order, $plain_text );
 
 			?></td>
+			<td class="td" style="text-align:left; vertical-align:middle; border: 1px solid #eee; font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif; word-wrap:break-word;"><?php echo $brand; ?></td>
+			<td class="td" style="text-align:left; vertical-align:middle; border: 1px solid #eee; font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif; word-wrap:break-word;"><?php echo $description; ?></td>
+			<td class="td" style="text-align:left; vertical-align:middle; border: 1px solid #eee; font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;"><?php echo $unit_price; ?></td>
 			<td class="td" style="text-align:left; vertical-align:middle; border: 1px solid #eee; font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;"><?php echo apply_filters( 'woocommerce_email_order_item_quantity', $item['qty'], $item ); ?></td>
+			<td class="td" style="text-align:left; vertical-align:middle; border: 1px solid #eee; font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;"><?php echo $qty; ?></td>
 			<td class="td" style="text-align:left; vertical-align:middle; border: 1px solid #eee; font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;"><?php echo $order->get_formatted_line_subtotal( $item ); ?></td>
 		</tr>
 		<?php
