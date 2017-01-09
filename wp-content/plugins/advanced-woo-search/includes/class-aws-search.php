@@ -81,7 +81,7 @@ if ( ! class_exists( 'AWS_Search' ) ) :
 
             $posts_ids = $this->query_index_table();
             $meta_query = array('relation' => 'OR');
-            foreach ($search_array as $search) {
+            foreach ($this->data['search_terms'] as $search) {
                 $tmp = array(array(
                     'key'       => 'description',
                     'value'     => $search,
@@ -524,105 +524,6 @@ if ( ! class_exists( 'AWS_Search' ) ) :
 
             return $result_array;
 
-        }
-
-        private function get_acf($custom_field) {
-            global $wpdb;
-
-            $result_array = array();
-            $search_array = array();
-            $excludes = '';
-            $search_query = '';
-
-            foreach ( $this->data['search_terms'] as $search_term ) {
-                $like = '%' . $wpdb->esc_like($search_term) . '%';
-                $search_array[] = $wpdb->prepare('( name LIKE %s )', $like);
-            }
-
-            $search_query .= sprintf( ' AND ( %s )', implode( ' OR ', $search_array ) );
-
-            $products = get_posts(array(
-                'numberposts'   => 10,
-                'post_type'     => 'product',
-                'meta_query'    => array(
-                    'relation'      => 'OR',
-                    array(
-                        'key'       => 'description',
-                        'value'     => 'spirit',
-                        'compare'   => 'LIKE',
-                    ),
-                    array(
-                        'key'       => 'description',
-                        'value'     => 'pvc',
-                        'compare'   => 'LIKE',
-                    ),
-                ),
-            ));
-
-            $products_array = array();
-            foreach ( $products as $product ) {
-                $_product = new WC_product( $product->ID );
-                $post_data = $_product->get_post_data();
-
-                $title = $_product->get_title();
-                $title = AWS_Helpers::html2txt( $title );
-
-                $excerpt = '';
-                $price   = '';
-                $on_sale = '';
-                $image = '';
-                $sku = '';
-
-                if ( $show_excerpt === 'true' ) {
-                    $excerpt = ( $excerpt_source === 'excerpt' && $post_data->post_excerpt ) ? $post_data->post_excerpt : $post_data->post_content;
-                    $excerpt = AWS_Helpers::html2txt( $excerpt );
-                    $excerpt = str_replace('"', "'", $excerpt);
-                }
-
-                if ( $mark_search_words === 'true'  ) {
-
-                    $marked_content = $this->mark_search_words( $title, $excerpt );
-
-                    $title   = $marked_content['title'];
-                    $excerpt = $marked_content['content'];
-
-                } else {
-                    $excerpt = wp_trim_words( $excerpt, $excerpt_length, '...' );
-                }
-
-                $price = $_product->get_price_html();
-
-                if ( $show_sale === 'true' ) {
-                    $on_sale = $_product->is_on_sale();
-                }
-
-                $image_id = $_product->get_image_id();
-                $image_attributes = wp_get_attachment_image_src( $image_id );
-                $image = $image_attributes[0];
-
-                if ( $show_sku === 'true' ) {
-                    $sku = $_product->get_sku();
-                }
-
-                $categories = $_product->get_categories( ',' );
-
-                $tags = $_product->get_tags( ',' );
-
-                $new_result = array(
-                    'title'      => $title,
-                    'excerpt'    => $excerpt,
-                    'link'       => get_permalink( $post_id ),
-                    'image'      => $image,
-                    'price'      => $price,
-                    'categories' => $categories,
-                    'tags'       => $tags,
-                    'on_sale'    => $on_sale,
-                    'sku'        => $sku
-                );
-
-                $products_array[] = $new_result;
-            }
-            return $products_array;
         }
 
     }
