@@ -80,31 +80,10 @@ if ( ! class_exists( 'AWS_Search' ) ) :
 
 
             $posts_ids = $this->query_index_table();
-            $meta_query = array('relation' => 'OR');
-            foreach ($this->data['search_terms'] as $search) {
-                $tmp = array(array(
-                    'key'       => 'description',
-                    'value'     => $search,
-                    'compare'   => 'LIKE'
-                ));
-                $meta_query = array_merge($meta_query, $tmp);
-                $tmp = array(array(
-                    'key'       => 'brand',
-                    'value'     => $search,
-                    'compare'   => 'LIKE'
-                ));
-                $meta_query = array_merge($meta_query, $tmp);
-            }
-            $products = get_posts(array(
-                'numberposts'   => 10,
-                'post_type'     => 'product',
-                'meta_query'    => $meta_query,
-            ));
-            $acf_ids = array();
-            foreach ($products as $product) {
-                $acf_ids[] = $product->ID;
-            }
-            $posts_ids = array_unique(array_merge($posts_ids, $acf_ids), SORT_REGULAR);
+            $description_ids = $this->get_acf('description');
+            $brand_ids = $this->get_acf('brand');
+            $posts_ids = array_unique(array_merge($posts_ids, $description_ids), SORT_REGULAR);
+            $posts_ids = array_unique(array_merge($posts_ids, $$brand_ids), SORT_REGULAR);
             $products_array = $this->get_products( $posts_ids );
 
 
@@ -132,6 +111,28 @@ if ( ! class_exists( 'AWS_Search' ) ) :
 
             die;
 
+        }
+
+        private function get_acf($custom_field) {
+            $meta_query = array('relation' => 'OR');
+            foreach ($this->data['search_terms'] as $search) {
+                $tmp = array(array(
+                    'key'       => $custom_field,
+                    'value'     => $search,
+                    'compare'   => 'LIKE'
+                ));
+                $meta_query = array_merge($meta_query, $tmp);
+            }
+            $products = get_posts(array(
+                'numberposts'   => 10,
+                'post_type'     => 'product',
+                'meta_query'    => $meta_query,
+            ));
+            $acf_ids = array();
+            foreach ($products as $product) {
+                $acf_ids[] = $product->ID;
+            }
+            return $acf_ids;
         }
 
         /*
