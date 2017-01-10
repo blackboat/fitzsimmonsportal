@@ -3344,7 +3344,7 @@ p:empty {
 
 
 
-.product-box .detail-box .stock-detail.stock-right label {
+.product-box .detail-box .stock-detail.stock-right {
 
   text-transform: uppercase;
 
@@ -4072,7 +4072,7 @@ p:empty {
 
 .detail-box {
 
-    display: inline-block;
+    /*display: inline-block;*/
 
 }
 

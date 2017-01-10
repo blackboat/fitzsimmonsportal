@@ -140,28 +140,21 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 			$capacity = $capacity ? $capacity['value'] : '';
 
 			echo '<h6 style="color:#333;" class="dazz_head_style">' . $description . '&nbsp;&nbsp;' . $capacity . '</h6>';
-			echo '<div class="stock-detail">';
+			echo '<table style="width:100%;">';
 			foreach( $fields as $field_name => $field )
 			{
 				if ($field['label']) {
+					echo '<tr>';
 					if ( $field['name'] == 'capacity' || $field['name'] == 'unit_price') {
 						continue;
 					}
-					echo '<label>'.$field['label'].': '.'</label>';
+					echo '<td class="stock-detail">'.$field['label'].': '.'</td>';
+					echo '<td class="stock-detail stock-right">'.$field['value'].'</td>';
+					echo '</tr>';
 				}
 			}
-			echo '</div>';
-			echo '<div class="stock-detail stock-right">';
-			foreach( $fields as $field_name => $field )
-			{
-				if ($field['label']) {
-					if ($field['name'] == 'capacity' || $field['name'] == 'unit_price') {
-						continue;
-					}
-					echo '<label>'.$field['value'].'</label>';
-				}
-			}
-			echo '</div>';
+			echo '</table>';
+			
 		}
 	}
 	echo '</div></div>';
