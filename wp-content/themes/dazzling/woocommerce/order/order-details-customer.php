@@ -22,6 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 ?>
 <header><h2><?php _e( 'Customer Details', 'woocommerce' ); ?></h2></header>
 
+<?php global $current_user; ?>
 <table class="shop_table customer_details">
 	<?php if ( $order->customer_note ) : ?>
 		<tr>
@@ -31,10 +32,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<?php endif; ?>
 
 	<tr>
+		<th><?php _e( 'Venue Name:', 'woocommerce' ); ?></th>
+		<td>
+			<?php echo 'Dutchess'; ?>
+		</td>
+	</tr>
+
+	<tr>
 		<th><?php _e( 'Name:', 'woocommerce' ); ?></th>
 		<td>
-			<?php global $current_user;
-				// get_currentuserinfo();
+			<?php 
 				echo $current_user->display_name; ?>
 		</td>
 	</tr>
