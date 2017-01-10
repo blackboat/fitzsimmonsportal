@@ -24,23 +24,42 @@ if ( ! apply_filters( 'woocommerce_order_item_visible', true, $item ) ) {
 	return;
 }
 ?>
+<?php
+$unit = get_field_object('qty', $product->id);
+$unit = isset($unit['value'])?$unit['value']:'';
+$brand = get_field_object('brand', $product->id);
+$brand = isset($brand['value'])?$brand['value']:'';
+$description = get_field_object('description', $product->id);
+$description = isset($description['value'])?$description['value']:'';
+$description_tbl = get_field_object('product_', $product->id);
+$description_tbl = isset($description_tbl['value'])?$description_tbl['value']:'';
+$unit_price = get_field_object('unit_price', $product->id);
+$unit_price = isset($unit_price['value'])?$unit_price['value']:'';
+?>
 <tr class="<?php echo esc_attr( apply_filters( 'woocommerce_order_item_class', 'order_item', $item, $order ) ); ?>">
-	<td class="product-name">
+	<td>
 		<?php
-			$is_visible        = $product && $product->is_visible();
+			$thumbnail = $product->get_image(array(32, 32));
+			$is_visible        = $product && $product->is_visible();			
 			$product_permalink = apply_filters( 'woocommerce_order_item_permalink', $is_visible ? $product->get_permalink( $item ) : '', $item, $order );
-
-			echo apply_filters( 'woocommerce_order_item_name', $product_permalink ? sprintf( '<a href="%s">%s</a>', $product_permalink, $item['name'] ) : $item['name'], $item, $is_visible );
-			echo apply_filters( 'woocommerce_order_item_quantity_html', ' <strong class="product-quantity">' . sprintf( '&times; %s', $item['qty'] ) . '</strong>', $item );
-
-			do_action( 'woocommerce_order_item_meta_start', $item_id, $item, $order );
-
-			$order->display_item_meta( $item );
-			$order->display_item_downloads( $item );
-
-			do_action( 'woocommerce_order_item_meta_end', $item_id, $item, $order );
+			printf( '<a href="%s">%s</a>', esc_url( $product_permalink ), $thumbnail );
 		?>
 	</td>
+	<td class="product-name">
+		<?php
+			
+			echo apply_filters( 'woocommerce_order_item_name', $product_permalink ? sprintf( '<a href="%s">%s</a>', $product_permalink, $item['name'] ) : $item['name'], $item, $is_visible );
+		?>
+	</td>
+	<td><?php echo $brand; ?></td>
+	<td><?php echo $description==''?$description_tbl:$description; ?></td>
+	<td><?php echo $unit_price; ?></td>
+	<td style="text-align: center;">
+		<?php
+			echo apply_filters( 'woocommerce_order_item_quantity_html', sprintf( '%s', $item['qty'] ), $item );
+		?>
+	</td>
+	<td><?php echo $unit; ?></td>
 	<td class="product-total">
 		<?php echo $order->get_formatted_line_subtotal( $item ); ?>
 	</td>

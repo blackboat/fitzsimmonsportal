@@ -4698,3 +4698,6 @@ font-weight:bold;
 .archive .woocommerce .woocommerce-ordering, .woocommerce-page .woocommerce-ordering {
  margin-right: 4%;
 }
+.woocommerce .order_details {
+  background: white;
+}
