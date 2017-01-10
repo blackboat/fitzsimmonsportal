@@ -53,7 +53,7 @@ $unit_price = isset($unit_price['value'])?$unit_price['value']:'';
 	</td>
 	<td><?php echo $brand; ?></td>
 	<td><?php echo $description==''?$description_tbl:$description; ?></td>
-	<td><?php echo $unit_price; ?></td>
+	<td><?php echo '$'.$unit_price; ?></td>
 	<td style="text-align: center;">
 		<?php
 			echo apply_filters( 'woocommerce_order_item_quantity_html', sprintf( '%s', $item['qty'] ), $item );
