@@ -21,6 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 global $product;
+global $wpdb;
 
 // Ensure visibility
 if ( empty( $product ) || ! $product->is_visible() ) {
@@ -30,6 +31,11 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 <li <?php post_class(); ?>>
 	<?php
 	$pid = $product->post->ID;
+	$dummy_venue = 'Dutchess';
+	$venue = $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE post_title = %s AND post_type= 'venue'", $dummy_venue));
+	$venue = get_post($venue);
+	$scopes = get_field_object('product', $venue->ID);
+
 	/**
 	 * woocommerce_before_shop_loop_item hook.
 	 *
@@ -152,8 +158,13 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 	echo '<div class="button-box">';
 		$unit_price = get_field_object('unit_price', $pid);
 		echo '<h4 class="prig-title">$' . $unit_price['value'] . '  EA</h4>';
-		// echo '<a href="" class="btn btn-default"><i class="fa fa-plus"></i> Add To Cart</a>';
 		echo '<a class="wpb_wl_preview open-popup-link btn btn-default" href="#wpb_wl_quick_view_'.$pid.'" data-effect="mfp-zoom-in"><i class="fa fa-plus"></i> Add To Cart</a>';
+		
+		$term_list = wp_get_post_terms($pid,'product_cat',array('fields'=>'ids'));
+		$cat_id = (int)$term_list[0];
+		if ($scopes['value'] != false)
+			if (in_array($cat_id, $scopes['value']))
+				echo '<div class="oos-panel">OOS</div>';
 	echo '</div>';
 	?>
 </li>

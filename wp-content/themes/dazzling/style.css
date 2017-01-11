@@ -4701,3 +4701,12 @@ font-weight:bold;
 .woocommerce .order_details {
   background: white;
 }
+.products .button-box .oos-panel {
+  display: inline-block;
+  background: yellow;
+  width: 46px;
+  height: 30px;
+  text-align: center;
+  line-height: 30px;
+  margin-left: 20px;
+}
