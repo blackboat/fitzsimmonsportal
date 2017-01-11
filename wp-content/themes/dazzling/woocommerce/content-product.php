@@ -31,7 +31,7 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 <li <?php post_class(); ?>>
 	<?php
 	$pid = $product->post->ID;
-	$dummy_venue = 'Dutchess';
+	$dummy_venue = 'AUBURN HOTEL';
 	$venue = $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE post_title = %s AND post_type= 'venue'", $dummy_venue));
 	$venue = get_post($venue);
 	$scopes = get_field_object('product', $venue->ID);
@@ -162,6 +162,7 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 		
 		$term_list = wp_get_post_terms($pid,'product_cat',array('fields'=>'ids'));
 		$cat_id = (int)$term_list[0];
+		var_dump($term_list);
 		if ($scopes['value'] != false)
 			if (in_array($cat_id, $scopes['value']))
 				echo '<div class="oos-panel">OOS</div>';
