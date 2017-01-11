@@ -31,7 +31,7 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 <li <?php post_class(); ?>>
 	<?php
 	$pid = $product->post->ID;
-	$dummy_venue = 'AUBURN HOTEL';
+	$dummy_venue = 'Dutchess';
 	$venue = $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE post_title = %s AND post_type= 'venue'", $dummy_venue));
 	$venue = get_post($venue);
 	$scopes = get_field_object('product', $venue->ID);
@@ -160,12 +160,14 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 		echo '<h4 class="prig-title">$' . $unit_price['value'] . '  EA</h4>';
 		echo '<a class="wpb_wl_preview open-popup-link btn btn-default" href="#wpb_wl_quick_view_'.$pid.'" data-effect="mfp-zoom-in"><i class="fa fa-plus"></i> Add To Cart</a>';
 		
-		$term_list = wp_get_post_terms($pid,'product_cat',array('fields'=>'ids'));
-		$cat_id = (int)$term_list[0];
-		var_dump($term_list);
-		if ($scopes['value'] != false)
-			if (in_array($cat_id, $scopes['value']))
-				echo '<div class="oos-panel">OOS</div>';
+		$catid_list = wp_get_post_terms($pid,'product_cat',array('fields'=>'ids'));
+		foreach( $catid_list as $cat_id ) {
+			if ($scopes['value'] != false)
+				if (in_array($cat_id, $scopes['value'])) {
+					echo '<div class="oos-panel">OOS</div>';
+					break;
+				}
+		}
 	echo '</div>';
 	?>
 </li>
