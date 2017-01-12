@@ -215,9 +215,9 @@ class WC_Checkout {
 
 				$order = wc_create_order( $order_data );
 				if ($order->get_total() < 1500) {
-					$this->$is_new_order = 1;
+					$this->is_new_order = 1;
 				} else {
-					$this->$is_new_order = 2;
+					$this->is_new_order = 2;
 				}
 
 				if ( is_wp_error( $order ) ) {
@@ -670,9 +670,9 @@ class WC_Checkout {
 					$result = $available_gateways[ $this->posted['payment_method'] ]->process_payment( $order_id );
 
 					$order = wc_get_order( $order_id );
-					if ($this->$is_new_order == 1) {
+					if ($this->is_new_order == 1) {
 						$order->update_status('processing');
-					} else if ($this->$is_new_order == 2) {
+					} else if ($this->is_new_order == 2) {
 						$order->update_status('pending');
 					}
 
