@@ -519,14 +519,56 @@ function add_link_back_to_order( $order, $is_admin ) {
   if ( ! $is_admin || $order->get_total() < 1500) {
     return;
   }
-  $link = '<p style="margin-top:20px;">';
+  $link = '<p style="margin-top:20px !important;">';
   // $link .= '<a href="'. admin_url( 'post.php?post=' . absint( $order->id ) . '&action=edit' ) .'" >';
   // $link .= __( 'Go to the order page to approve or reject', 'your_domain' );
   // $link .= '</a>';
-  $link .= '<a class="btn btn-success" href="'. admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status=processing&order_id=' . $order->id . '&_wpnonce=c497720798' ) .'">';
+  $link .= '<a class="btn btn-success" 
+        style="display: inline-block;
+          font-weight: 400;
+          line-height: 1.25;
+          text-align: center;
+          white-space: nowrap;
+          vertical-align: middle;
+          -webkit-user-select: none;
+          -moz-user-select: none;
+          -ms-user-select: none;
+          user-select: none;
+          border: 1px solid transparent;
+          padding: .5rem 1rem;
+          font-size: 1rem;
+          border-radius: .25rem;
+          -webkit-transition: all .2s ease-in-out;
+          -o-transition: all .2s ease-in-out;
+          transition: all .2s ease-in-out;
+          background-color: #5cb85c;
+          border-color: #5cb85c;
+          display: inline-block;" 
+        href="'. admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status=processing&order_id=' . $order->id . '&_wpnonce=c497720798' ) .'">';
   $link .= __( 'Approve', 'your_domain' );
   $link .= '</a>';
-  $link .= '<a class="btn btn-danger" href="'. admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status=cancelled&order_id=' . $order->id . '&_wpnonce=c497720798' ) .'">';
+  $link .= '<a class="btn btn-danger" 
+        style="display: inline-block;
+          font-weight: 400;
+          line-height: 1.25;
+          text-align: center;
+          white-space: nowrap;
+          vertical-align: middle;
+          -webkit-user-select: none;
+          -moz-user-select: none;
+          -ms-user-select: none;
+          user-select: none;
+          border: 1px solid transparent;
+          padding: .5rem 1rem;
+          font-size: 1rem;
+          border-radius: .25rem;
+          -webkit-transition: all .2s ease-in-out;
+          -o-transition: all .2s ease-in-out;
+          transition: all .2s ease-in-out;
+          background-color: #d9534f;
+          border-color: #d9534f;
+          color: #fff;"
+        href="'. admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status=cancelled&order_id=' . $order->id . '&_wpnonce=c497720798' ) .'">';
   $link .= __( 'Reject', 'your_domain' );
   $link .= '</a>';
   $link .= '</p>';
@@ -633,7 +675,7 @@ function my_woocommerce_email_classes($emails) {
     }
   }
 
-  $emails['WC_Email_Customer_On_Hold_Order']->title = 'Pending Approval order';
+  $emails['WC_Email_Customer_Pending_Order']->title = 'Pending Approval order';
   $emails['WC_Email_Customer_Processing_Order']->title = 'Approved/Awaiting Dispatch order';
   $emails['WC_Email_Customer_Completed_Order']->title = 'Dispatch order';
   $emails['WC_Email_Cancelled_Order']->title = 'Reject order';
