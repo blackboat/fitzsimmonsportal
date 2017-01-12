@@ -454,9 +454,6 @@ function wcqi_enqueue_polyfill() {
 
 // remove order status
 function so_39252649_remove_processing_status( $statuses ){
-    if( isset( $statuses['wc-pending'] ) ){
-        unset( $statuses['wc-pending'] );
-    }
     if( isset( $statuses['wc-failed'] ) ){
         unset( $statuses['wc-failed'] );
     }
