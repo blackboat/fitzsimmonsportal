@@ -519,14 +519,14 @@ function add_link_back_to_order( $order, $is_admin ) {
   if ( ! $is_admin || $order->get_total() < 1500) {
     return;
   }
-  $link = '<p>';
-  $link .= '<a href="'. admin_url( 'post.php?post=' . absint( $order->id ) . '&action=edit' ) .'" >';
-  $link .= __( 'Go to the order page to approve or reject', 'your_domain' );
-  $link .= '</a>';
-  $link .= '<a href="'. wp_nonce_url( admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status=processing&order_id=' . $order->id ), 'woocommerce-mark-order-status' ) .'">';
+  $link = '<p style="margin-top:20px;">';
+  // $link .= '<a href="'. admin_url( 'post.php?post=' . absint( $order->id ) . '&action=edit' ) .'" >';
+  // $link .= __( 'Go to the order page to approve or reject', 'your_domain' );
+  // $link .= '</a>';
+  $link .= '<a class="btn btn-success" href="'. admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status=processing&order_id=' . $order->id . '&_wpnonce=c497720798' ) .'">';
   $link .= __( 'Approve', 'your_domain' );
   $link .= '</a>';
-  $link .= '<a href="'. wp_nonce_url( admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status=processing&order_id=' . $order->id ), 'woocommerce-mark-order-status' ) .'">';
+  $link .= '<a class="btn btn-danger" href="'. admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status=cancelled&order_id=' . $order->id . '&_wpnonce=c497720798' ) .'">';
   $link .= __( 'Reject', 'your_domain' );
   $link .= '</a>';
   $link .= '</p>';

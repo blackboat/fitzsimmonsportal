@@ -665,6 +665,8 @@ class WC_Checkout {
 					$order = wc_get_order( $order_id );
 					if ($order->get_total() < 1500) {
 						$order->update_status('processing');
+					} else {
+						$order->update_status('pending');
 					}
 
 					// Redirect to success/confirmation/payment page
