@@ -214,11 +214,7 @@ class WC_Checkout {
 			} else {
 
 				$order = wc_create_order( $order_data );
-				if ($order->get_total() < 1500) {
-					$this->is_new_order = 1;
-				} else {
-					$this->is_new_order = 2;
-				}
+				$this->is_new_order = 1;
 
 				if ( is_wp_error( $order ) ) {
 					throw new Exception( sprintf( __( 'Error %d: Unable to create order. Please try again.', 'woocommerce' ), 520 ) );
@@ -670,11 +666,12 @@ class WC_Checkout {
 					$result = $available_gateways[ $this->posted['payment_method'] ]->process_payment( $order_id );
 
 					$order = wc_get_order( $order_id );
-					if ($this->is_new_order == 1) {
+					if ($this->is_new_order == 1 && $order->get_total() < 1500) {
 						$order->update_status('processing');
-					} else if ($this->is_new_order == 2) {
+					} else if ($this->is_new_order == 1 && $order->get_total() >= 1500) {
 						$order->update_status('pending');
 					}
+					$this->is_new_order = 0;
 
 					// Redirect to success/confirmation/payment page
 					if ( isset( $result['result'] ) && 'success' === $result['result'] ) {
