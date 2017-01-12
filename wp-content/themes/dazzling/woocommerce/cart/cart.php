@@ -20,6 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
+global $wpdb;
 wc_print_notices();
 
 do_action( 'woocommerce_before_cart' ); ?>
@@ -39,6 +40,7 @@ do_action( 'woocommerce_before_cart' ); ?>
 			<th class="product-carton"><?php _e( 'Cartons', 'woocommerce' ); ?></th>
 			<th class="product-unit"><?php _e( 'Units', 'woocommerce' ); ?></th>
 			<th class="product-subtotal"><?php _e( 'SubTotal', 'woocommerce' ); ?></th>
+			<th class="product-oos">&nbsp;</th>
 			<th class="product-remove">&nbsp;</th>
 		</tr>
 	</thead>
@@ -55,6 +57,11 @@ do_action( 'woocommerce_before_cart' ); ?>
 			$description = get_field_object('description', $product_id);
 			$description_tbl = get_field_object('product_', $product_id);
 			$unit_price = get_field_object('unit_price', $product_id);
+
+			$dummy_venue = 'Dutchess';
+			$venue = $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE post_title = %s AND post_type= 'venue'", $dummy_venue));
+			$venue = get_post($venue);
+			$scopes = get_field_object('product', $venue->ID);
 
 			if ( $_product && $_product->exists() && $cart_item['quantity'] > 0 && apply_filters( 'woocommerce_cart_item_visible', true, $cart_item, $cart_item_key ) ) {
 				$product_permalink = apply_filters( 'woocommerce_cart_item_permalink', $_product->is_visible() ? $_product->get_permalink( $cart_item ) : '', $cart_item, $cart_item_key );
@@ -141,6 +148,19 @@ do_action( 'woocommerce_before_cart' ); ?>
 						<?php
 							echo apply_filters( 'woocommerce_cart_item_subtotal', WC()->cart->get_product_subtotal( $_product, $cart_item['quantity'] ), $cart_item, $cart_item_key );
 						?>
+					</td>
+
+					<td class="product-oos" data-title="<?php _e( 'OOS', 'woocommerce' ); ?>">
+					<?php
+					$scope_list = array();
+					foreach ($scopes['value'] as $scope) {
+						$scope_list[] = $scope->ID;
+					}
+					if ($scopes['value'] != false)
+						if (in_array($product_id, $scope_list)) {
+							echo '<div class="oos-panel">OOS</div>';
+						}
+					?>
 					</td>
 
 					<td class="product-remove">

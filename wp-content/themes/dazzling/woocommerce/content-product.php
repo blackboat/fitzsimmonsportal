@@ -163,13 +163,14 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 		$catid_list = wp_get_post_terms($pid,'product_cat',array('fields'=>'ids'));
 		// var_dump($scopes['value']);
 		$scope_list = array();
-		foreach ($scopes['value'] as $scope) {
-			$scope_list[] = $scope->ID;
-		}
-		if ($scopes['value'] != false)
+		if ($scopes['value'] != false) {
+			foreach ($scopes['value'] as $scope) {
+				$scope_list[] = $scope->ID;
+			}
 			if (in_array($pid, $scope_list)) {
 				echo '<div class="oos-panel">OOS</div>';
 			}
+		}
 	echo '</div>';
 	?>
 </li>

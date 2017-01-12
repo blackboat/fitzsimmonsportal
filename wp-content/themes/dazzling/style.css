@@ -4701,7 +4701,7 @@ font-weight:bold;
 .woocommerce .order_details {
   background: white;
 }
-.products .button-box .oos-panel {
+.oos-panel {
   display: inline-block;
   background: yellow;
   width: 46px;
