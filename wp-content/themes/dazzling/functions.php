@@ -617,15 +617,20 @@ function remove_built_in_roles() {
 
 /* admin customize */
 
-// remove some rows on email settings
+// remove or change some rows on email settings
 add_filter('woocommerce_email_classes', 'my_woocommerce_email_classes');
 function my_woocommerce_email_classes($emails) {
-  $row_to_remove = array('WC_Email_Failed_Order', 'WC_Email_Customer_On_Hold_Order', 'WC_Email_Customer_Refunded_Order', 'WC_Email_Customer_Invoice'); 
+  $row_to_remove = array('WC_Email_Failed_Order', 'WC_Email_Customer_Refunded_Order', 'WC_Email_Customer_Invoice');
   foreach ($row_to_remove as $row) {
     if (isset($emails[$row])) {
       unset($emails[$row]);
     }
   }
+
+  $emails['WC_Email_Customer_On_Hold_Order']->title = 'Pending Approval order';
+  $emails['WC_Email_Customer_Processing_Order']->title = 'Approved/Awaiting Dispatch order';
+  $emails['WC_Email_Customer_Completed_Order']->title = 'Dispatch order';
+  $emails['WC_Email_Cancelled_Order']->title = 'Reject order';
   return $emails;
 }
 
