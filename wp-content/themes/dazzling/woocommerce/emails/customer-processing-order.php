@@ -23,9 +23,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * @hooked WC_Emails::email_header() Output the email header
  */
-do_action( 'woocommerce_email_header', $email_heading, $email ); ?>
+do_action( 'woocommerce_email_header', $email_heading, $email ); 
+$email_heading = 'Order is approved successfully';
+?>
 
-<p><?php _e( "Your order has been received and is now awaiting approval from your Area Manager. Your order details are shown below for your reference:", 'woocommerce' ); ?></p>
+<p><?php _e( "Your Area Manager approved your order . Your order details are shown below for your reference:", 'woocommerce' ); ?></p>
 
 <?php
 
