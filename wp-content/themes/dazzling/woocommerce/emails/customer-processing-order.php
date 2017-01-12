@@ -26,7 +26,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 $total = $order->get_total();
 $status = $order->status;
 $email_heading = $total<1500?'Order is approved successfully':'Order sent to Area Manager for approval';
-$email_heading = $status!='pending'?'Order sent to Area Manager for approval';
+if ($order->status!='pending')
+	$email_heading = 'Order sent to Area Manager for approval':;
 do_action( 'woocommerce_email_header', $email_heading, $email ); 
 ?>
 
