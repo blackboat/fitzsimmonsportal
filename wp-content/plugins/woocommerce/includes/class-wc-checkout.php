@@ -662,8 +662,8 @@ class WC_Checkout {
 					// Process Payment
 					$result = $available_gateways[ $this->posted['payment_method'] ]->process_payment( $order_id );
 
+					$order = wc_get_order( $order_id );
 					if ($order->get_total() < 1500) {
-						$order = wc_get_order( $order_id );
 						$order->update_status('processing');
 					}
 

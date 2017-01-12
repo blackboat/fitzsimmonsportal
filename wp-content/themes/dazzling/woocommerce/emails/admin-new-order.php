@@ -25,7 +25,13 @@
   */
  do_action( 'woocommerce_email_header', $email_heading, $email ); ?>
 
- <p><?php printf( __( 'You have received an order from %s. The order is as follows:', 'woocommerce' ), $order->get_formatted_billing_full_name() ); ?></p>
+ <p><?php
+  if ($order->get_total() < 1500) {
+    printf( __( 'Order from %s is approved automatically. The order is as follows:', 'woocommerce' ), $order->get_formatted_billing_full_name() );
+  } else {
+    printf( __( 'You have received an order from %s. You need to approve or reject this order. The order is as follows:', 'woocommerce' ), $order->get_formatted_billing_full_name() );
+  } ?>
+ </p>
 
  <?php
 

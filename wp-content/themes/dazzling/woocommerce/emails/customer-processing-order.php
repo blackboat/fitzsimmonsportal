@@ -31,7 +31,7 @@ do_action( 'woocommerce_email_header', $email_heading, $email );
 <p>
 	<?php
 	if ($total < 1500) {
-		_e( "Your Area Manager approved your order . Your order details are shown below for your reference:", 'woocommerce' );
+		_e( "Your order is approved automatically. Your order details are shown below for your reference:", 'woocommerce' );
 	} else {
 		_e( "Your order is delivered and waiting your Area Manager to approve it. Your order details are shown below for your reference:", 'woocommerce' );
 	}

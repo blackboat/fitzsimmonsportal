@@ -454,6 +454,9 @@ function wcqi_enqueue_polyfill() {
 
 // remove order status
 function so_39252649_remove_processing_status( $statuses ){
+    if( isset( $statuses['wc-on-hold'] ) ){
+        unset( $statuses['wc-on-hold'] );
+    }
     if( isset( $statuses['wc-failed'] ) ){
         unset( $statuses['wc-failed'] );
     }
@@ -471,8 +474,8 @@ function wc_renaming_order_status( $order_statuses ) {
         if ( 'wc-processing' === $key ) {
             $order_statuses['wc-processing'] = _x( 'Approved/Awaiting Dispatch', 'Order status', 'woocommerce' );
         }
-        if ( 'wc-on-hold' === $key ) {
-            $order_statuses['wc-on-hold'] = _x( 'Pending Approval', 'Order status', 'woocommerce' );
+        if ( 'wc-pending' === $key ) {
+            $order_statuses['wc-pending'] = _x( 'Pending Approval', 'Order status', 'woocommerce' );
         }
         if ( 'wc-completed' === $key ) {
             $order_statuses['wc-completed'] = _x( 'Dispatch', 'Order status', 'woocommerce' );
@@ -513,12 +516,18 @@ function add_order_actions_button_css() {
 add_action( 'woocommerce_email_after_order_table', 'add_link_back_to_order', 10, 2 );
 function add_link_back_to_order( $order, $is_admin ) {
   // Only for admin emails
-  if ( ! $is_admin ) {
+  if ( ! $is_admin || $order->get_total() < 1500) {
     return;
   }
   $link = '<p>';
   $link .= '<a href="'. admin_url( 'post.php?post=' . absint( $order->id ) . '&action=edit' ) .'" >';
-  $link .= __( 'Click here to go to the order page', 'your_domain' );
+  $link .= __( 'Go to the order page to approve or reject', 'your_domain' );
+  $link .= '</a>';
+  $link .= '<a href="'. wp_nonce_url( admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status=processing&order_id=' . $order->id ), 'woocommerce-mark-order-status' ) .'">';
+  $link .= __( 'Approve', 'your_domain' );
+  $link .= '</a>';
+  $link .= '<a href="'. wp_nonce_url( admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status=processing&order_id=' . $order->id ), 'woocommerce-mark-order-status' ) .'">';
+  $link .= __( 'Reject', 'your_domain' );
   $link .= '</a>';
   $link .= '</p>';
   echo $link;
