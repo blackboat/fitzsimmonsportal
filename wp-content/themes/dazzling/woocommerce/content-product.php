@@ -161,13 +161,15 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 		echo '<a class="wpb_wl_preview open-popup-link btn btn-default" href="#wpb_wl_quick_view_'.$pid.'" data-effect="mfp-zoom-in"><i class="fa fa-plus"></i> Add To Cart</a>';
 		
 		$catid_list = wp_get_post_terms($pid,'product_cat',array('fields'=>'ids'));
-		foreach( $catid_list as $cat_id ) {
-			if ($scopes['value'] != false)
-				if (in_array($cat_id, $scopes['value'])) {
-					echo '<div class="oos-panel">OOS</div>';
-					break;
-				}
+		// var_dump($scopes['value']);
+		$scope_list = array();
+		foreach ($scopes['value'] as $scope) {
+			$scope_list[] = $scope->ID;
 		}
+		if ($scopes['value'] != false)
+			if (in_array($pid, $scope_list)) {
+				echo '<div class="oos-panel">OOS</div>';
+			}
 	echo '</div>';
 	?>
 </li>
