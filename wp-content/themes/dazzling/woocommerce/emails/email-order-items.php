@@ -20,6 +20,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
+global $wpdb;
+
 foreach ( $items as $item_id => $item ) :
 	$_product     = apply_filters( 'woocommerce_order_item_product', $order->get_product_from_item( $item ), $item );
 	$item_meta    = new WC_Order_Item_Meta( $item, $_product );
@@ -32,6 +34,10 @@ foreach ( $items as $item_id => $item ) :
 	$unit_price = isset($unit_price['value'])?$unit_price['value']:'';
 	$qty = get_field_object('qty', $product_id);
 	$qty = isset($qty['value'])?$qty['value']:'';
+	$dummy_venue = 'Dutchess';
+	$venue = $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE post_title = %s AND post_type= 'venue'", $dummy_venue));
+	$venue = get_post($venue);
+	$scopes = get_field_object('product', $venue->ID);
 
 	if ( apply_filters( 'woocommerce_order_item_visible', true, $item ) ) {
 		?>
@@ -74,6 +80,27 @@ foreach ( $items as $item_id => $item ) :
 			<td class="td" style="text-align:left; vertical-align:middle; border: 1px solid #eee; font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;"><?php echo apply_filters( 'woocommerce_email_order_item_quantity', $item['qty'], $item ); ?></td>
 			<td class="td" style="text-align:left; vertical-align:middle; border: 1px solid #eee; font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;"><?php echo $qty; ?></td>
 			<td class="td" style="text-align:left; vertical-align:middle; border: 1px solid #eee; font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;"><?php echo $order->get_formatted_line_subtotal( $item ); ?></td>
+			<td class="td" style="text-align:left; vertical-align:middle; border: 1px solid #eee; font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;">
+				<?php
+				$scope_list = array();
+				if ($scopes['value'] != false) {
+					foreach ($scopes['value'] as $scope) {
+						$scope_list[] = $scope->ID;
+					}
+					if (in_array($product_id, $scope_list)) {
+						echo '<div style="display: inline-block;
+								  background: yellow;
+								  width: 46px;
+								  height: 30px;
+								  text-align: center;
+								  line-height: 30px;
+								  margin-left: 20px;">
+								OOS
+							</div>';
+					}
+				}
+				?>
+			</td>
 		</tr>
 		<?php
 	}

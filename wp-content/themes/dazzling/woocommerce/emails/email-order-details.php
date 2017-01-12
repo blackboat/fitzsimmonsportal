@@ -38,6 +38,7 @@ do_action( 'woocommerce_email_before_order_table', $order, $sent_to_admin, $plai
 			<th class="td" scope="col" style="text-align:left;"><?php _e( 'Cartons', 'woocommerce' ); ?></th>
 			<th class="td" scope="col" style="text-align:left;"><?php _e( 'Units', 'woocommerce' ); ?></th>
 			<th class="td" scope="col" style="text-align:left;"><?php _e( 'Price', 'woocommerce' ); ?></th>
+			<th class="td" scope="col" style="text-align:left;"><?php _e( '', 'woocommerce' ); ?></th>
 		</tr>
 	</thead>
 	<tbody>

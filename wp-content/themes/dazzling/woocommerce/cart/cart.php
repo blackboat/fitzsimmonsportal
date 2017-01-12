@@ -153,13 +153,14 @@ do_action( 'woocommerce_before_cart' ); ?>
 					<td class="product-oos" data-title="<?php _e( 'OOS', 'woocommerce' ); ?>">
 					<?php
 					$scope_list = array();
-					foreach ($scopes['value'] as $scope) {
-						$scope_list[] = $scope->ID;
-					}
-					if ($scopes['value'] != false)
+					if ($scopes['value'] != false) {
+						foreach ($scopes['value'] as $scope) {
+							$scope_list[] = $scope->ID;
+						}
 						if (in_array($product_id, $scope_list)) {
 							echo '<div class="oos-panel">OOS</div>';
 						}
+					}
 					?>
 					</td>
 
