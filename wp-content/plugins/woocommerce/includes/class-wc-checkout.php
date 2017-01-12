@@ -199,10 +199,12 @@ class WC_Checkout {
 			 * different items or cost, create a new order. We use a hash to
 			 * detect changes which is based on cart items + order total.
 			 */
+			$this->is_new_order = 0;
 			if ( $order_id && $order_data['cart_hash'] === get_post_meta( $order_id, '_cart_hash', true ) && ( $order = wc_get_order( $order_id ) ) && $order->has_status( array( 'pending', 'failed' ) ) ) {
 
 				$order_data['order_id'] = $order_id;
 				$order                  = wc_update_order( $order_data );
+				$this->is_new_order = 1;
 
 				if ( is_wp_error( $order ) ) {
 					throw new Exception( sprintf( __( 'Error %d: Unable to create order. Please try again.', 'woocommerce' ), 522 ) );
@@ -214,7 +216,7 @@ class WC_Checkout {
 			} else {
 
 				$order = wc_create_order( $order_data );
-				$this->is_new_order = 1;
+				// $this->is_new_order = 1;
 
 				if ( is_wp_error( $order ) ) {
 					throw new Exception( sprintf( __( 'Error %d: Unable to create order. Please try again.', 'woocommerce' ), 520 ) );
