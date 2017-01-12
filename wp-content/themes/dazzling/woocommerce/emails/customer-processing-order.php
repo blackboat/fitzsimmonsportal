@@ -23,11 +23,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * @hooked WC_Emails::email_header() Output the email header
  */
+$total = $order->get_total();
+$email_heading = $total<1500?'Order is approved successfully':'Order sent to Area Manager for approval';
 do_action( 'woocommerce_email_header', $email_heading, $email ); 
-$email_heading = 'Order is approved successfully';
 ?>
 
-<p><?php _e( "Your Area Manager approved your order . Your order details are shown below for your reference:", 'woocommerce' ); ?></p>
+<p>
+	<?php
+	if ($total < 1500) {
+		_e( "Your Area Manager approved your order . Your order details are shown below for your reference:", 'woocommerce' );
+	} else {
+		_e( "Your order is delivered and waiting your Area Manager to approve it. Your order details are shown below for your reference:", 'woocommerce' );
+	}
+	?>
+</p>
 
 <?php
 

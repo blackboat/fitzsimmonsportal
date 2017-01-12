@@ -181,7 +181,7 @@ class WC_Checkout {
 			wc_transaction_query( 'start' );
 
 			$order_data = array(
-				'status'        => apply_filters( 'woocommerce_default_order_status', 'on-hold' ),
+				'status'        => apply_filters( 'woocommerce_default_order_status', 'pending' ),
 				'customer_id'   => $this->customer_id,
 				'customer_note' => isset( $this->posted['order_comments'] ) ? $this->posted['order_comments'] : '',
 				'cart_hash'     => md5( json_encode( wc_clean( WC()->cart->get_cart_for_session() ) ) . WC()->cart->total ),
@@ -662,8 +662,10 @@ class WC_Checkout {
 					// Process Payment
 					$result = $available_gateways[ $this->posted['payment_method'] ]->process_payment( $order_id );
 
-					$order = wc_get_order( $order_id );
-					$order->update_status('on-hold');
+					if ($order->get_total() < 1500) {
+						$order = wc_get_order( $order_id );
+						$order->update_status('processing');
+					}
 
 					// Redirect to success/confirmation/payment page
 					if ( isset( $result['result'] ) && 'success' === $result['result'] ) {
