@@ -454,8 +454,8 @@ function wcqi_enqueue_polyfill() {
 
 // remove order status
 function so_39252649_remove_processing_status( $statuses ){
-    if( isset( $statuses['wc-on-hold'] ) ){
-        unset( $statuses['wc-on-hold'] );
+    if( isset( $statuses['wc-pending'] ) ){
+        unset( $statuses['wc-pending'] );
     }
     if( isset( $statuses['wc-failed'] ) ){
         unset( $statuses['wc-failed'] );
@@ -474,15 +474,15 @@ function wc_renaming_order_status( $order_statuses ) {
         if ( 'wc-processing' === $key ) {
             $order_statuses['wc-processing'] = _x( 'Approved/Awaiting Dispatch', 'Order status', 'woocommerce' );
         }
-        if ( 'wc-pending' === $key ) {
-            $order_statuses['wc-pending'] = _x( 'Pending Approval', 'Order status', 'woocommerce' );
+        if ( 'wc-on-hold' === $key ) {
+            $order_statuses['wc-on-hold'] = _x( 'Pending Approval', 'Order status', 'woocommerce' );
         }
         if ( 'wc-completed' === $key ) {
             $order_statuses['wc-completed'] = _x( 'Dispatch', 'Order status', 'woocommerce' );
         }
-        // if ( 'wc-cancelled' === $key ) {
-        //     $order_statuses['wc-cancelled'] = _x( 'Reject', 'Order status', 'woocommerce' );
-        // }
+        if ( 'wc-cancelled' === $key ) {
+            $order_statuses['wc-cancelled'] = _x( 'Reject', 'Order status', 'woocommerce' );
+        }
     }
     return $order_statuses;
 }
@@ -613,20 +613,6 @@ function remove_built_in_roles() {
         }
     }
 }
-
-// $note = 'Testing Note';
-// $comment_post_ID        = 344;
-// $comment_author_url     = '';
-// $comment_content        = $note;
-// $comment_agent          = 'WooCommerce';
-// $comment_type           = 'order_note';
-// $comment_parent         = 0;
-// $comment_approved       = 1;
-// $compact =  compact( 'comment_post_ID', 'comment_author', 'comment_author_email', 'comment_author_url', 'comment_content', 'comment_agent', 'comment_type', 'comment_parent', 'comment_approved' );
-// $array = array( 'order_id' => 344, 'is_customer_note' => 0 );
-// $commentdata = apply_filters( 'woocommerce_new_order_note_data', $compact, $array );
-// $comment_id = wp_insert_comment( $commentdata );
-// var_dump($comment_id);
 
 
 /* admin customize */

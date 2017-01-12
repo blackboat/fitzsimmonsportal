@@ -62,7 +62,9 @@ if ( $order ) : ?>
 	<?php endif; ?>
 
 	<?php do_action( 'woocommerce_thankyou_' . $order->payment_method, $order->id ); ?>
-	<?php do_action( 'woocommerce_thankyou', $order->id ); ?>
+	<?php wc_get_template( 'order/order-details.php', array(
+			'order_id' => $order->id
+		) ); ?>
 
 <?php else : ?>
 
