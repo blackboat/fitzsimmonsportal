@@ -22,6 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 global $product;
 global $wpdb;
+global $current_user;
 
 // Ensure visibility
 if ( empty( $product ) || ! $product->is_visible() ) {
@@ -161,14 +162,15 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 		echo '<a class="wpb_wl_preview open-popup-link btn btn-default" href="#wpb_wl_quick_view_'.$pid.'" data-effect="mfp-zoom-in"><i class="fa fa-plus"></i> Add To Cart</a>';
 		
 		$catid_list = wp_get_post_terms($pid,'product_cat',array('fields'=>'ids'));
-		// var_dump($scopes['value']);
-		$scope_list = array();
-		if ($scopes['value'] != false) {
-			foreach ($scopes['value'] as $scope) {
-				$scope_list[] = $scope->ID;
-			}
-			if (in_array($pid, $scope_list)) {
-				echo '<div class="oos-panel">OOS</div>';
+		if (!in_array('administrator', array_keys($current_user->caps))) {
+			$scope_list = array();
+			if ($scopes['value'] != false) {
+				foreach ($scopes['value'] as $scope) {
+					$scope_list[] = $scope->ID;
+				}
+				if (!in_array($pid, $scope_list)) {
+					echo '<div class="oos-panel">OOS</div>';
+				}
 			}
 		}
 	echo '</div>';

@@ -21,7 +21,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 global $wpdb;
+global $current_user;
 wc_print_notices();
+var_dump($current_user->caps['administrator']);
 
 do_action( 'woocommerce_before_cart' ); ?>
 
@@ -40,7 +42,9 @@ do_action( 'woocommerce_before_cart' ); ?>
 			<th class="product-carton"><?php _e( 'Cartons', 'woocommerce' ); ?></th>
 			<th class="product-unit"><?php _e( 'Units', 'woocommerce' ); ?></th>
 			<th class="product-subtotal"><?php _e( 'SubTotal', 'woocommerce' ); ?></th>
+			<?php if (!in_array('administrator', array_keys($current_user->caps))) { ?>
 			<th class="product-oos">&nbsp;</th>
+			<?php } ?>
 			<th class="product-remove">&nbsp;</th>
 		</tr>
 	</thead>
@@ -150,6 +154,7 @@ do_action( 'woocommerce_before_cart' ); ?>
 						?>
 					</td>
 
+					<?php if (!in_array('administrator', array_keys($current_user->caps))) { ?>
 					<td class="product-oos" data-title="<?php _e( 'OOS', 'woocommerce' ); ?>">
 					<?php
 					$scope_list = array();
@@ -157,12 +162,13 @@ do_action( 'woocommerce_before_cart' ); ?>
 						foreach ($scopes['value'] as $scope) {
 							$scope_list[] = $scope->ID;
 						}
-						if (in_array($product_id, $scope_list)) {
+						if (!in_array($product_id, $scope_list)) {
 							echo '<div class="oos-panel">OOS</div>';
 						}
 					}
 					?>
 					</td>
+					<?php } ?>
 
 					<td class="product-remove">
 						<?php

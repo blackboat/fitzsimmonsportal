@@ -4701,6 +4701,9 @@ font-weight:bold;
 .woocommerce .order_details {
   background: white;
 }
+.products .button-box .oos-panel {
+  margin-left: 20px;
+}
 .oos-panel {
   display: inline-block;
   background: yellow;

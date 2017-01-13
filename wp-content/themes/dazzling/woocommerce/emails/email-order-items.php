@@ -87,14 +87,13 @@ foreach ( $items as $item_id => $item ) :
 					foreach ($scopes['value'] as $scope) {
 						$scope_list[] = $scope->ID;
 					}
-					if (in_array($product_id, $scope_list)) {
+					if (!in_array($product_id, $scope_list)) {
 						echo '<div style="display: inline-block;
 								  background: yellow;
 								  width: 46px;
 								  height: 30px;
 								  text-align: center;
-								  line-height: 30px;
-								  margin-left: 20px;">
+								  line-height: 30px;">
 								OOS
 							</div>';
 					}
