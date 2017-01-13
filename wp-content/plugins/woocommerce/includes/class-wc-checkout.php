@@ -677,6 +677,8 @@ class WC_Checkout {
 						$order->update_status('processing');
 					} else if ($this->is_new_order == 1 && $order->get_total() >= intval($threshold['value'])) {
 						$order->update_status('pending');
+					} else {
+						add_action( 'woocommerce_email', 'unhook_those_pesky_emails' );
 					}
 					$this->is_new_order = 0;
 
