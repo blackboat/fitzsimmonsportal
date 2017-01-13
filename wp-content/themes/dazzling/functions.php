@@ -543,7 +543,9 @@ function add_link_back_to_order( $order, $is_admin ) {
           transition: all .2s ease-in-out;
           background-color: #5cb85c;
           border-color: #5cb85c;
-          display: inline-block;" 
+          display: inline-block;
+          text-decoration: none !important;
+          margin-right: 50px;" 
         href="'. admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status=processing&order_id=' . $order->id . '&_wpnonce=c497720798' ) .'">';
   $link .= __( 'Approve', 'your_domain' );
   $link .= '</a>';
@@ -567,7 +569,8 @@ function add_link_back_to_order( $order, $is_admin ) {
           transition: all .2s ease-in-out;
           background-color: #d9534f;
           border-color: #d9534f;
-          color: #fff;"
+          color: #fff;
+          text-decoration: none !important;"
         href="'. admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status=cancelled&order_id=' . $order->id . '&_wpnonce=c497720798' ) .'">';
   $link .= __( 'Reject', 'your_domain' );
   $link .= '</a>';
