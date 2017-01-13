@@ -203,8 +203,7 @@ class WC_Checkout {
 			if ( $order_id && $order_data['cart_hash'] === get_post_meta( $order_id, '_cart_hash', true ) && ( $order = wc_get_order( $order_id ) ) && $order->has_status( array( 'pending', 'failed' ) ) ) {
 
 				$order_data['order_id'] = $order_id;
-				$order                  = wc_update_order( $order_data );
-				$this->is_new_order = 1;
+				$order                  = wc_update_order( $order_data ); 
 
 				if ( is_wp_error( $order ) ) {
 					throw new Exception( sprintf( __( 'Error %d: Unable to create order. Please try again.', 'woocommerce' ), 522 ) );
@@ -216,7 +215,7 @@ class WC_Checkout {
 			} else {
 
 				$order = wc_create_order( $order_data );
-				// $this->is_new_order = 1;
+				$this->is_new_order = 1;
 
 				if ( is_wp_error( $order ) ) {
 					throw new Exception( sprintf( __( 'Error %d: Unable to create order. Please try again.', 'woocommerce' ), 520 ) );
@@ -668,11 +667,11 @@ class WC_Checkout {
 					$result = $available_gateways[ $this->posted['payment_method'] ]->process_payment( $order_id );
 
 					$order = wc_get_order( $order_id );
-					if ($this->is_new_order == 1 && $order->get_total() < 1500) {
-						$order->update_status('processing');
-					} else if ($this->is_new_order == 1 && $order->get_total() >= 1500) {
-						$order->update_status('pending');
-					}
+					// if ($this->is_new_order == 1 && $order->get_total() < 1500) {
+					// 	$order->update_status('processing');
+					// } else if ($this->is_new_order == 1 && $order->get_total() >= 1500) {
+					// 	$order->update_status('pending');
+					// }
 					$this->is_new_order = 0;
 
 					// Redirect to success/confirmation/payment page
