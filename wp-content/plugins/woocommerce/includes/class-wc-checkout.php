@@ -354,6 +354,7 @@ class WC_Checkout {
 	 * Process the checkout after the confirm order button is pressed.
 	 */
 	public function process_checkout() {
+		global $wpdb;
 		try {
 			if ( empty( $_POST['_wpnonce'] ) || ! wp_verify_nonce( $_POST['_wpnonce'], 'woocommerce-process_checkout' ) ) {
 				WC()->session->set( 'refresh_totals', true );
@@ -667,9 +668,14 @@ class WC_Checkout {
 					$result = $available_gateways[ $this->posted['payment_method'] ]->process_payment( $order_id );
 
 					$order = wc_get_order( $order_id );
-					if ($this->is_new_order == 1 && $order->get_total() < 1500) {
+
+					$dummy_venue = 'Dutchess';
+					$venue = $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE post_title = %s AND post_type= 'venue'", $dummy_venue));
+					$venue = get_post($venue);
+					$threshold = get_field_object('approval_threshold', $venue->ID);
+					if ($this->is_new_order == 1 && $order->get_total() < $threshold['value']) {
 						$order->update_status('processing');
-					} else if ($this->is_new_order == 1 && $order->get_total() >= 1500) {
+					} else if ($this->is_new_order == 1 && $order->get_total() >= intval($threshold['value'])) {
 						$order->update_status('pending');
 					}
 					$this->is_new_order = 0;

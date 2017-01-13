@@ -25,7 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 $total = $order->get_total();
 $status = $order->status;
-$email_heading = $total<1500?'Order is approved successfully':'Order sent to Area Manager for approval';
+$email_heading = $total<get_approval_threshold()?'Order is approved successfully':'Order sent to Area Manager for approval';
 if ($order->status!='pending')
 	$email_heading = 'Order sent to Area Manager for approval';
 do_action( 'woocommerce_email_header', $email_heading, $email ); 
@@ -33,7 +33,7 @@ do_action( 'woocommerce_email_header', $email_heading, $email );
 
 <p>
 	<?php
-	if ($total < 1500) {
+	if ($total < get_approval_threshold()) {
 		_e( "Your order is approved automatically. Your order details are shown below for your reference:", 'woocommerce' );
 	} else {
 		_e( "Your order is delivered and waiting your Area Manager to approve it. Your order details are shown below for your reference:", 'woocommerce' );

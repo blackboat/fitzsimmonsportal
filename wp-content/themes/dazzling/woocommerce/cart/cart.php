@@ -23,7 +23,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 global $wpdb;
 global $current_user;
 wc_print_notices();
-var_dump($current_user->caps['administrator']);
 
 do_action( 'woocommerce_before_cart' ); ?>
 

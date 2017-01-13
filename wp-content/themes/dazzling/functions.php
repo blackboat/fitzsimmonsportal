@@ -516,7 +516,7 @@ function add_order_actions_button_css() {
 add_action( 'woocommerce_email_after_order_table', 'add_link_back_to_order', 10, 2 );
 function add_link_back_to_order( $order, $is_admin ) {
   // Only for admin emails
-  if ( ! $is_admin || $order->get_total() < 1500) {
+  if ( ! $is_admin || $order->get_total() < get_approval_threshold()) {
     return;
   }
   $link = '<p style="margin-top:20px !important;">';
@@ -755,4 +755,14 @@ add_action( 'woocommerce_email', 'unhook_those_pesky_emails' );
 function unhook_those_pesky_emails( $email_class ) {
   remove_action( 'woocommerce_order_status_pending_to_processing_notification', array( $email_class->emails['WC_Email_New_Order'], 'trigger' ) );
   remove_action( 'woocommerce_order_status_pending_to_completed_notification', array( $email_class->emails['WC_Email_New_Order'], 'trigger' ) );
+}
+
+
+function get_approval_threshold() {
+  global $wpdb;
+  $dummy_venue = 'Dutchess';
+  $venue = $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE post_title = %s AND post_type= 'venue'", $dummy_venue));
+  $venue = get_post($venue);
+  $threshold = get_field_object('approval_threshold', $venue->ID);
+  return intval($threshold['value']);
 }
