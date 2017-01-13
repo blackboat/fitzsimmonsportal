@@ -202,6 +202,8 @@ class WC_Checkout {
 			$this->is_new_order = 0;
 			if ( $order_id && $order_data['cart_hash'] === get_post_meta( $order_id, '_cart_hash', true ) && ( $order = wc_get_order( $order_id ) ) && $order->has_status( array( 'pending', 'failed' ) ) ) {
 
+				remove_action( 'woocommerce_order_status_pending_to_processing_notification', array( WC_Emails::instance()->emails['WC_Email_New_Order'], 'trigger' ) );
+
 				$order_data['order_id'] = $order_id;
 				$order                  = wc_update_order( $order_data ); 
 
@@ -677,8 +679,6 @@ class WC_Checkout {
 						$order->update_status('processing');
 					} else if ($this->is_new_order == 1 && $order->get_total() >= intval($threshold['value'])) {
 						$order->update_status('pending');
-					} else {
-						add_action( 'woocommerce_email', 'unhook_those_pesky_emails' );
 					}
 					$this->is_new_order = 0;
 
