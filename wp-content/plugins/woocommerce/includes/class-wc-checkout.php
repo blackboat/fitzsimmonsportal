@@ -667,11 +667,11 @@ class WC_Checkout {
 					$result = $available_gateways[ $this->posted['payment_method'] ]->process_payment( $order_id );
 
 					$order = wc_get_order( $order_id );
-					// if ($this->is_new_order == 1 && $order->get_total() < 1500) {
-					// 	$order->update_status('processing');
-					// } else if ($this->is_new_order == 1 && $order->get_total() >= 1500) {
-					// 	$order->update_status('pending');
-					// }
+					if ($this->is_new_order == 1 && $order->get_total() < 1500) {
+						$order->update_status('processing');
+					} else if ($this->is_new_order == 1 && $order->get_total() >= 1500) {
+						$order->update_status('pending');
+					}
 					$this->is_new_order = 0;
 
 					// Redirect to success/confirmation/payment page
