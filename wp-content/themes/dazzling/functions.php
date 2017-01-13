@@ -668,14 +668,13 @@ function remove_built_in_roles() {
 // remove or change some rows on email settings
 add_filter('woocommerce_email_classes', 'my_woocommerce_email_classes');
 function my_woocommerce_email_classes($emails) {
-  $row_to_remove = array('WC_Email_Failed_Order', 'WC_Email_Customer_Refunded_Order', 'WC_Email_Customer_Invoice');
+  $row_to_remove = array('WC_Email_Failed_Order', 'WC_Email_Customer_Refunded_Order', 'WC_Email_Customer_Invoice', 'WC_Email_Customer_On_Hold_Order');
   foreach ($row_to_remove as $row) {
     if (isset($emails[$row])) {
       unset($emails[$row]);
     }
   }
 
-  $emails['WC_Email_Customer_Pending_Order']->title = 'Pending Approval order';
   $emails['WC_Email_Customer_Processing_Order']->title = 'Approved/Awaiting Dispatch order';
   $emails['WC_Email_Customer_Completed_Order']->title = 'Dispatch order';
   $emails['WC_Email_Cancelled_Order']->title = 'Reject order';
@@ -749,3 +748,7 @@ function nolo_custom_field_display_cust_order_meta($order){
     echo '<p><strong>'.__('Pickup Location').':</strong> ' . get_post_meta( $order->id, 'Pickup Location', true ). '</p>';
     echo '<p><strong>'.__('Pickup Date').':</strong> ' . get_post_meta( $order->id, 'Pickup Date', true ). '</p>';
 }
+
+
+remove_action( 'woocommerce_order_status_pending_to_processing_notification', array( $email_class->emails['WC_Email_New_Order'], 'trigger' ) );
+remove_action( 'woocommerce_order_status_pending_to_completed_notification', array( $email_class->emails['WC_Email_New_Order'], 'trigger' ) );
