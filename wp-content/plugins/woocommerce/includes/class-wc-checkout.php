@@ -673,7 +673,7 @@ class WC_Checkout {
 					$venue = $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE post_title = %s AND post_type= 'venue'", $dummy_venue));
 					$venue = get_post($venue);
 					$threshold = get_field_object('approval_threshold', $venue->ID);
-					if ($this->is_new_order == 1 && $order->get_total() < $threshold['value']) {
+					if ($this->is_new_order == 1 && $order->get_total() < intval($threshold['value'])) {
 						$order->update_status('processing');
 					} else if ($this->is_new_order == 1 && $order->get_total() >= intval($threshold['value'])) {
 						$order->update_status('pending');
