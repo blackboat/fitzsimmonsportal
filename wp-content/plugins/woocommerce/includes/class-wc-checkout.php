@@ -202,8 +202,6 @@ class WC_Checkout {
 			$this->is_new_order = 0;
 			if ( $order_id && $order_data['cart_hash'] === get_post_meta( $order_id, '_cart_hash', true ) && ( $order = wc_get_order( $order_id ) ) && $order->has_status( array( 'pending', 'failed' ) ) ) {
 
-				remove_action( 'woocommerce_order_status_pending_to_processing_notification', array( WC_Emails::instance()->emails['WC_Email_New_Order'], 'trigger' ) );
-
 				$order_data['order_id'] = $order_id;
 				$order                  = wc_update_order( $order_data ); 
 
@@ -671,10 +669,8 @@ class WC_Checkout {
 
 					$order = wc_get_order( $order_id );
 
-					$dummy_venue = 'Dutchess';
-					$venue = $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE post_title = %s AND post_type= 'venue'", $dummy_venue));
-					$venue = get_post($venue);
-					$threshold = get_field_object('approval_threshold', $venue->ID);
+					$venue_id = get_current_venue_id();
+					$threshold = get_field_object('approval_threshold', $venue_id);
 					if ($this->is_new_order == 1 && $order->get_total() < intval($threshold['value'])) {
 						$order->update_status('processing');
 					} else if ($this->is_new_order == 1 && $order->get_total() >= intval($threshold['value'])) {

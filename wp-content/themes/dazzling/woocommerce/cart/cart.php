@@ -61,10 +61,8 @@ do_action( 'woocommerce_before_cart' ); ?>
 			$description_tbl = get_field_object('product_', $product_id);
 			$unit_price = get_field_object('unit_price', $product_id);
 
-			$dummy_venue = 'Dutchess';
-			$venue = $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE post_title = %s AND post_type= 'venue'", $dummy_venue));
-			$venue = get_post($venue);
-			$scopes = get_field_object('product', $venue->ID);
+			$venue_id = get_current_venue_id();
+			$scopes = get_field_object('product', $venue_id);
 
 			if ( $_product && $_product->exists() && $cart_item['quantity'] > 0 && apply_filters( 'woocommerce_cart_item_visible', true, $cart_item, $cart_item_key ) ) {
 				$product_permalink = apply_filters( 'woocommerce_cart_item_permalink', $_product->is_visible() ? $_product->get_permalink( $cart_item ) : '', $cart_item, $cart_item_key );

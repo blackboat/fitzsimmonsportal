@@ -34,10 +34,8 @@ foreach ( $items as $item_id => $item ) :
 	$unit_price = isset($unit_price['value'])?$unit_price['value']:'';
 	$qty = get_field_object('qty', $product_id);
 	$qty = isset($qty['value'])?$qty['value']:'';
-	$dummy_venue = 'Dutchess';
-	$venue = $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE post_title = %s AND post_type= 'venue'", $dummy_venue));
-	$venue = get_post($venue);
-	$scopes = get_field_object('product', $venue->ID);
+	$venue_id = get_current_venue_id();
+	$scopes = get_field_object('product', $venue_id);
 
 	if ( apply_filters( 'woocommerce_order_item_visible', true, $item ) ) {
 		?>
