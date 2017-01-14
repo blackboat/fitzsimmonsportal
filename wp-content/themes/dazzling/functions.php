@@ -769,3 +769,32 @@ function get_approval_threshold() {
   $threshold = get_field_object('approval_threshold', $venue->ID);
   return intval($threshold['value']);
 }
+
+$products = get_posts(array('post_type' => 'product', 'posts_per_page' => -1));
+foreach ($products as $_product) {
+  set_standard_price($_product->ID);
+}
+function set_standard_price($pid) {
+  $unit_price = get_field_object('unit_price', $pid);
+  $unit_price = isset($unit_price['value'])?$unit_price['value']:'';
+  $custom_prices = get_field_object('custom_prices', $pid);
+  $venues = get_posts(array('post_type' => 'venue', 'posts_per_page' => -1));
+  
+  if (isset($custom_prices['value'])) {
+    if (trim($custom_prices['value']) == '') {
+      $prices = array();
+      foreach ($venues as $venue) {
+        $prices[] = $unit_price;
+      }
+      $sta_prices = implode(';', $prices);
+      update_field('custom_prices', $sta_prices, $pid);
+    }
+  }
+}
+
+// admin script
+add_action('admin_enqueue_scripts', 'my_admin_enqueue_scripts');
+function my_admin_enqueue_scripts() {
+  wp_enqueue_script( 'script', get_template_directory_uri() . '/js/jquery-ui/jquery-ui.js');
+  wp_enqueue_style('style', get_template_directory_uri() . '/js/jquery-ui/jquery-ui.css');
+}
