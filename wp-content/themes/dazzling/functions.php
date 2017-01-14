@@ -766,13 +766,11 @@ function get_current_venue_id() {
     return false;
   global $current_user;
   $venues = get_posts(array('post_type' => 'venue', 'posts_per_page' => -1));
-  $tmp = array($current_user->ID);
   foreach ($venues as $venue) {
     $venue_manager = get_field_object('venue_manager', $venue->ID);
     $venue_manager = isset($venue_manager)?$venue_manager['value']:'Dutchess';
-    $tmp[] = $venue_manager['ID'];
     if (intval($venue_manager['ID']) == $current_user->ID) {
-      return intval($venue_manager['ID']);
+      return $venue->ID;
     }
   }
   return false;
