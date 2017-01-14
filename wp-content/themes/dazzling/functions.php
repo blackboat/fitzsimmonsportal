@@ -761,13 +761,32 @@ function unhook_those_pesky_emails( $email_class ) {
 }
 
 
+function get_current_venue_id() {
+  if (current_user_can('administrator'))
+    return false;
+  global $current_user;
+  $venues = get_posts(array('post_type' => 'venue', 'posts_per_page' => -1));
+  $tmp = array($current_user->ID);
+  foreach ($venues as $venue) {
+    $venue_manager = get_field_object('venue_manager', $venue->ID);
+    $venue_manager = isset($venue_manager)?$venue_manager['value']:'Dutchess';
+    $tmp[] = $venue_manager['ID'];
+    if (intval($venue_manager['ID']) == $current_user->ID) {
+      return intval($venue_manager['ID']);
+    }
+  }
+  return false;
+}
 function get_approval_threshold() {
   global $wpdb;
-  $dummy_venue = 'Dutchess';
-  $venue = $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE post_title = %s AND post_type= 'venue'", $dummy_venue));
-  $venue = get_post($venue);
-  $threshold = get_field_object('approval_threshold', $venue->ID);
-  return intval($threshold['value']);
+  // $dummy_venue = 'Dutchess';
+  // $venue = $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE post_title = %s AND post_type= 'venue'", $dummy_venue));
+  // $venue = get_post($venue);
+  $venue_id = get_current_venue_id();
+  if ($venue_id == false)
+    return false;
+  $threshold = get_field_object('approval_threshold', $venue_id);
+  return $threshold['value']!=''?intval($threshold['value']):1500;
 }
 
 $products = get_posts(array('post_type' => 'product', 'posts_per_page' => -1));

@@ -32,10 +32,11 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 <li <?php post_class(); ?>>
 	<?php
 	$pid = $product->post->ID;
-	$dummy_venue = 'Dutchess';
-	$venue = $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE post_title = %s AND post_type= 'venue'", $dummy_venue));
-	$venue = get_post($venue);
-	$scopes = get_field_object('product', $venue->ID);
+	// $dummy_venue = 'Dutchess';
+	// $venue = $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE post_title = %s AND post_type= 'venue'", $dummy_venue));
+	// $venue = get_post($venue);
+	$venue_id = get_current_venue_id();
+	$scopes = get_field_object('product', $venue_id);
 
 	/**
 	 * woocommerce_before_shop_loop_item hook.
@@ -91,7 +92,7 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 			{
 				if ($field['label']) {
 					echo '<tr>';
-					if ($field['name'] == 'product_' || $field['name'] == 'dimensions' || $field['name'] == 'unit_price') {
+					if ($field['name'] == 'product_' || $field['name'] == 'dimensions' || $field['name'] == 'unit_price' || $field['name'] == 'custom_pricing' || $field['name'] == 'custom_prices') {
 						continue;
 					}
 					echo '<td class="stock-detail">'.$field['label'].': '.'</td>';
@@ -114,7 +115,7 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 			{
 				if ($field['label']) {
 					echo '<tr>';
-					if ($field['name'] == 'range' ||  $field['name'] == 'capacity' || $field['name'] == 'unit_price') {
+					if ($field['name'] == 'range' ||  $field['name'] == 'capacity' || $field['name'] == 'unit_price' || $field['name'] == 'custom_pricing' || $field['name'] == 'custom_prices') {
 						continue;
 					}
 					echo '<td class="stock-detail">'.$field['label'].': '.'</td>';
@@ -135,7 +136,7 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 			{
 				if ($field['label']) {
 					echo '<tr>';
-					if ( $field['name'] == 'capacity' || $field['name'] == 'unit_price') {
+					if ( $field['name'] == 'capacity' || $field['name'] == 'unit_price' || $field['name'] == 'custom_pricing' || $field['name'] == 'custom_prices') {
 						continue;
 					}
 					echo '<td class="stock-detail">'.$field['label'].': '.'</td>';
@@ -162,7 +163,7 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 		echo '<a class="wpb_wl_preview open-popup-link btn btn-default" href="#wpb_wl_quick_view_'.$pid.'" data-effect="mfp-zoom-in"><i class="fa fa-plus"></i> Add To Cart</a>';
 		
 		$catid_list = wp_get_post_terms($pid,'product_cat',array('fields'=>'ids'));
-		if (!in_array('administrator', array_keys($current_user->caps))) {
+		if (!current_user_can('administrator')) {
 			$scope_list = array();
 			if ($scopes['value'] != false) {
 				foreach ($scopes['value'] as $scope) {
@@ -171,6 +172,8 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 				if (!in_array($pid, $scope_list)) {
 					echo '<div class="oos-panel">OOS</div>';
 				}
+			} else {
+				echo '<div class="oos-panel">OOS</div>';
 			}
 		}
 	echo '</div>';
