@@ -81,6 +81,7 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 	if( $fields )
 	{
 		if ($cat_slug == 'tableware') {
+			var_dump(get_current_venue_id());
 			$product_ = get_field_object('product_', $pid);
 			$product_ = $product_ ? $product_['value'] : '';
 			$dimensions = get_field_object('dimensions', $pid);
