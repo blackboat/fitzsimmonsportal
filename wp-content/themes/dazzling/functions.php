@@ -788,7 +788,7 @@ function get_current_venue_id() {
   return false;
 }
 function get_custom_price($pid) {
-  $custom_prices = get_field_object('custom_prices');
+  $custom_prices = get_field_object('custom_prices', $pid);
   $unit_price = get_field_object('unit_price', $pid);
   $custom_prices = isset($custom_prices['value'])?$custom_prices['value']:false;
   $venue_id = get_current_venue_id();
