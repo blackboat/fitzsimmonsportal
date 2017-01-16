@@ -395,7 +395,11 @@ function my_product_update( $post_id ) {
         change_product_price( $post_id, $unit_price * $qty );
       }
     }
-    // else if (get_post_type($post_id) == 'venue') {
+    else if (get_post_type($post_id) == 'venue') {
+      $products = get_posts(array('post_type' => 'product', 'posts_per_page' => -1));
+      foreach ($products as $_product) {
+        set_custom_price($_product->ID);
+      }
     //   $products = get_posts(array('post_type' => 'product', 'posts_per_page' => -1));
     //   $venues = get_posts(array('post_type' => 'venue', 'posts_per_page' => -1));
     //   foreach ($products as $product) {
@@ -405,7 +409,7 @@ function my_product_update( $post_id ) {
 
     //     }
     //   }
-    // }
+    }
 }
 
 add_filter('loop_shop_columns', 'loop_columns');
@@ -816,15 +820,6 @@ function get_approval_threshold() {
   return $threshold['value']!=''?intval($threshold['value']):1500;
 }
 
-$loop = new WP_Query(array('post_type' => 'product', 'posts_per_page' => -1));
-while ( $loop->have_posts() ) : $loop->the_post(); 
-  global $product;
-  set_custom_price($product->ID);
-endwhile;
-wp_reset_query();
-// foreach ($products as $_product) {
-//   set_custom_price($_product->ID);
-// }
 function set_custom_price($pid) {
   $unit_price = get_field_object('unit_price', $pid);
   $unit_price = isset($unit_price['value'])?$unit_price['value']:'';
