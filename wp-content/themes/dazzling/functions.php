@@ -816,10 +816,15 @@ function get_approval_threshold() {
   return $threshold['value']!=''?intval($threshold['value']):1500;
 }
 
-$products = get_posts(array('post_type' => 'product', 'posts_per_page' => -1));
-foreach ($products as $_product) {
-  set_custom_price($_product->ID);
-}
+$loop = new WP_Query(array('post_type' => 'product', 'posts_per_page' => -1));
+while ( $loop->have_posts() ) : $loop->the_post(); 
+  global $product;
+  set_custom_price($product->ID);
+endwhile;
+wp_reset_query();
+// foreach ($products as $_product) {
+//   set_custom_price($_product->ID);
+// }
 function set_custom_price($pid) {
   $unit_price = get_field_object('unit_price', $pid);
   $unit_price = isset($unit_price['value'])?$unit_price['value']:'';
