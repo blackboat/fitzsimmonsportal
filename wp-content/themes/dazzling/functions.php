@@ -395,6 +395,17 @@ function my_product_update( $post_id ) {
         change_product_price( $post_id, $unit_price * $qty );
       }
     }
+    // else if (get_post_type($post_id) == 'venue') {
+    //   $products = get_posts(array('post_type' => 'product', 'posts_per_page' => -1));
+    //   $venues = get_posts(array('post_type' => 'venue', 'posts_per_page' => -1));
+    //   foreach ($products as $product) {
+    //     $custom_prices = get_field_object('custom_prices', $product->ID)['value']
+    //     $custom_prices = explode(';', $custom_prices);
+    //     if (count($custom_prices) != count($venues)) {
+
+    //     }
+    //   }
+    // }
 }
 
 add_filter('loop_shop_columns', 'loop_columns');
@@ -805,6 +816,10 @@ function get_approval_threshold() {
   return $threshold['value']!=''?intval($threshold['value']):1500;
 }
 
+$products = get_posts(array('post_type' => 'product', 'posts_per_page' => -1));
+foreach ($products as $_product) {
+  set_custom_price($_product->ID);
+}
 function set_custom_price($pid) {
   $unit_price = get_field_object('unit_price', $pid);
   $unit_price = isset($unit_price['value'])?$unit_price['value']:'';
@@ -812,14 +827,14 @@ function set_custom_price($pid) {
   $venues = get_posts(array('post_type' => 'venue', 'posts_per_page' => -1));
   
   if (isset($custom_prices['value'])) {
-    if (trim($custom_prices['value']) == '') {
+    // if (trim($custom_prices['value']) == '') {
       $prices = array();
       foreach ($venues as $venue) {
         $prices[] = $unit_price;
       }
       $sta_prices = implode(';', $prices);
       update_field('custom_prices', $sta_prices, $pid);
-    }
+    // }
   }
 }
 
