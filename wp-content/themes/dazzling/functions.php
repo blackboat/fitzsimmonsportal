@@ -393,6 +393,7 @@ function my_product_update( $post_id ) {
         }
         change_product_price( $post_id, $unit_price['value'] * $qty );
       }
+      set_custom_price($post_id);
     }
 }
 
@@ -787,11 +788,7 @@ function get_approval_threshold() {
   return $threshold['value']!=''?intval($threshold['value']):1500;
 }
 
-$products = get_posts(array('post_type' => 'product', 'posts_per_page' => -1));
-foreach ($products as $_product) {
-  set_standard_price($_product->ID);
-}
-function set_standard_price($pid) {
+function set_custom_price($pid) {
   $unit_price = get_field_object('unit_price', $pid);
   $unit_price = isset($unit_price['value'])?$unit_price['value']:'';
   $custom_prices = get_field_object('custom_prices', $pid);
