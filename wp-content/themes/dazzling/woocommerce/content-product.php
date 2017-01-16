@@ -78,10 +78,6 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 		$cat_slug = get_category($cat->parent)->slug;
 	$fields = get_field_objects($pid);
 	$qty = 1;
-	$products = get_posts(array('post_type' => 'product', 'posts_per_page' => -1));
-	foreach ($products as $_product) {
-	  var_dump($_product->ID);
-	}
 	if( $fields )
 	{
 		if ($cat_slug == 'tableware') {
