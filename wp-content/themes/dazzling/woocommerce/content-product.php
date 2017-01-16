@@ -159,7 +159,7 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 	do_action( 'woocommerce_after_shop_loop_item' );
 	echo '<div class="button-box">';
 		$unit_price = get_field_object('unit_price', $pid);
-		echo '<h4 class="prig-title">$' . $unit_price['value'] . '  EA</h4>';
+		echo '<h4 class="prig-title">$' . get_custom_price($pid) . '  EA</h4>';
 		echo '<a class="wpb_wl_preview open-popup-link btn btn-default" href="#wpb_wl_quick_view_'.$pid.'" data-effect="mfp-zoom-in"><i class="fa fa-plus"></i> Add To Cart</a>';
 		
 		$catid_list = wp_get_post_terms($pid,'product_cat',array('fields'=>'ids'));

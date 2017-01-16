@@ -776,6 +776,23 @@ function get_current_venue_id() {
   }
   return false;
 }
+function get_custom_price($pid) {
+  $custom_prices = get_field_object('custom_prices');
+  $unit_price = get_field_object('unit_price', $pid);
+  $custom_prices = isset($custom_prices['value'])?$custom_prices['value']:false;
+  $venue_id = get_current_venue_id();
+  if ($venue_id == false || $custom_prices == false)
+    return $unit_price['value'];
+  $venues = get_posts(array('post_type' => 'venue', 'posts_per_page' => -1));
+  $idx = 0;
+  foreach ($venues as $venue) {
+    if ($venue->ID == $venue_id)
+      break;
+    $idx ++;
+  }
+  return explode(';', $custom_prices)[$idx];
+
+}
 function get_approval_threshold() {
   global $wpdb;
   // $dummy_venue = 'Dutchess';
@@ -811,4 +828,12 @@ add_action('admin_enqueue_scripts', 'my_admin_enqueue_scripts');
 function my_admin_enqueue_scripts() {
   wp_enqueue_script( 'script', get_template_directory_uri() . '/js/jquery-ui/jquery-ui.js');
   wp_enqueue_style('style', get_template_directory_uri() . '/js/jquery-ui/jquery-ui.css');
+}
+
+/* change acf post object order for custom pricing */
+add_filter( 'acf/fields/post_object/query', 'change_posts_order' );
+function change_posts_order( $args ) {
+  $args['orderby'] = 'date';
+  $args['order'] = 'DESC';
+  return $args;
 }

@@ -56,13 +56,10 @@ function wpb_wl_hook_quickview_content(){
 			$fields = get_field_objects($id);
 			if( $fields )
 			{
-				$unit_price = 0;
 				foreach( $fields as $field_name => $field )
 				{
 					if ($field['label'] && $field['value']) {
-						if ($field['name'] == 'unit_price') {
-							$unit_price = $field['value'];
-						} else if ($field['name'] == 'custom_pricing' || $field['name'] == 'custom_prices') {
+						if ($field['name'] == 'unit_price' || $field['name'] == 'custom_pricing' || $field['name'] == 'custom_prices') {
 							continue;
 						} else {
 							echo '<div style="margin-bottom: 20px;">';
@@ -72,6 +69,7 @@ function wpb_wl_hook_quickview_content(){
 					}
 				}
 				$qty = get_field_object('qty', $id)['value'];
+				$unit_price = get_custom_price($id);
 			}
 			?>
 
@@ -80,7 +78,7 @@ function wpb_wl_hook_quickview_content(){
 			<form class="cart" method="post" enctype="multipart/form-data">
 				<div class="Prices">
 					<div class="Units">
-						<h5 style="font-size:22px;">Cost per Unit: $<label class="cost"><?php echo $unit_price!=0?$unit_price:''; ?></label></h5>
+						<h5 style="font-size:22px;">Cost per Unit: $<label class="cost"><?php echo $unit_price; ?></label></h5>
 						<p style="display:none;">Units / Carton: <label class="units"><?php echo $qty; ?></label></p>
 						<h4 class="total_cost_heading">Total Carton Cost: $<label class="totalcost"><?php echo $unit_price * $qty; ?></label></h4>
 					</div>

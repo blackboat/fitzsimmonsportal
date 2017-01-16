@@ -86,7 +86,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					}
 				}
 			}
-			$unit_price = get_field_object('unit_price', $product->post->ID)['value'];
+			$unit_price = get_custom_price($product->post->ID);
 		}
 		?>
 		<form class="cart" method="post" enctype="multipart/form-data">
