@@ -826,7 +826,7 @@ function set_custom_price($pid) {
   $custom_prices = get_field_object('custom_prices', $pid);
   $venues = get_posts(array('post_type' => 'venue', 'posts_per_page' => -1));
   
-  if (isset($custom_prices['value'])) {
+  // if (isset($custom_prices['value'])) {
     // if (trim($custom_prices['value']) == '') {
       $prices = array();
       foreach ($venues as $venue) {
@@ -835,7 +835,7 @@ function set_custom_price($pid) {
       $sta_prices = implode(';', $prices);
       update_field('custom_prices', $sta_prices, $pid);
     // }
-  }
+  // }
 }
 
 // admin script
