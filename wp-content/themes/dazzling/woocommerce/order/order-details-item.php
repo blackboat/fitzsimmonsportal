@@ -33,8 +33,7 @@ $description = get_field_object('description', $product->id);
 $description = isset($description['value'])?$description['value']:'';
 $description_tbl = get_field_object('product_', $product->id);
 $description_tbl = isset($description_tbl['value'])?$description_tbl['value']:'';
-$unit_price = get_field_object('unit_price', $product->id);
-$unit_price = isset($unit_price['value'])?$unit_price['value']:'';
+$unit_price = get_custom_price($product->id);
 ?>
 <tr class="<?php echo esc_attr( apply_filters( 'woocommerce_order_item_class', 'order_item', $item, $order ) ); ?>">
 	<td>
@@ -59,7 +58,7 @@ $unit_price = isset($unit_price['value'])?$unit_price['value']:'';
 			echo apply_filters( 'woocommerce_order_item_quantity_html', sprintf( '%s', $item['qty'] ), $item );
 		?>
 	</td>
-	<td><?php echo $unit; ?></td>
+	<td><?php echo $unit*$item['qty']; ?></td>
 	<td class="product-total">
 		<?php echo $order->get_formatted_line_subtotal( $item ); ?>
 	</td>

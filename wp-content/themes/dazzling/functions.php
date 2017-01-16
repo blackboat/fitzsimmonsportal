@@ -384,16 +384,16 @@ function change_product_price( $product_id, $new_price ) {
 }
 function my_product_update( $post_id ) {
     if (wc_get_product($post_id)) {
-      $unit_price = get_field_object('unit_price', $post_id);
+      set_custom_price($post_id);
+      $unit_price = get_custom_price($post_id);
       if ($unit_price) {
         $qty_obj = get_field_object('qty', $post_id);
         $qty = 1;
         if ($qty_obj) {
           $qty = $qty_obj['value'];
         }
-        change_product_price( $post_id, $unit_price['value'] * $qty );
+        change_product_price( $post_id, $unit_price * $qty );
       }
-      set_custom_price($post_id);
     }
 }
 
