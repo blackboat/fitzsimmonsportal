@@ -384,7 +384,11 @@ function change_product_price( $product_id, $new_price ) {
 }
 function my_product_update( $post_id ) {
     if (wc_get_product($post_id)) {
-      set_custom_price($post_id);
+      // set_custom_price($post_id);
+      $products = get_posts(array('post_type' => 'product', 'posts_per_page' => -1));
+      foreach ($products as $_product) {
+        set_custom_price($_product->ID);
+      }
       $unit_price = get_custom_price($post_id);
       if ($unit_price) {
         $qty_obj = get_field_object('qty', $post_id);
@@ -396,10 +400,6 @@ function my_product_update( $post_id ) {
       }
     }
     else if (get_post_type($post_id) == 'venue') {
-      $products = get_posts(array('post_type' => 'product', 'posts_per_page' => -1));
-      foreach ($products as $_product) {
-        set_custom_price($_product->ID);
-      }
     //   $products = get_posts(array('post_type' => 'product', 'posts_per_page' => -1));
     //   $venues = get_posts(array('post_type' => 'venue', 'posts_per_page' => -1));
     //   foreach ($products as $product) {
