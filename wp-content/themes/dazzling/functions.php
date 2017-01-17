@@ -384,7 +384,6 @@ function change_product_price( $product_id, $new_price ) {
 }
 function my_product_update( $post_id ) {
     if (wc_get_product($post_id)) {
-      set_custom_price($post_id);
       $unit_price = get_custom_price($post_id);
       if ($unit_price) {
         $qty_obj = get_field_object('qty', $post_id);
@@ -816,10 +815,6 @@ function get_approval_threshold() {
   return $threshold['value']!=''?intval($threshold['value']):1500;
 }
 
-// $products = get_posts(array('post_type' => 'product', 'posts_per_page' => -1));
-// foreach ($products as $_product) {
-//   set_custom_price($_product->ID);
-// }
 function set_custom_price($pid) {
   $unit_price = get_field_object('unit_price', $pid);
   $unit_price = isset($unit_price['value'])?$unit_price['value']:'';
@@ -827,13 +822,24 @@ function set_custom_price($pid) {
   $venues = get_posts(array('post_type' => 'venue', 'posts_per_page' => -1));
   
   if (isset($custom_prices['value'])) {
-    if (trim($custom_prices['value']) == '') {
+    parse_str(html_entity_decode($custom_prices['value']), $old_prices);
+    if (count($old_prices) <= 1) {
       $prices = array();
       foreach ($venues as $venue) {
-        $prices[] = $unit_price;
+        $prices[$venue->ID] = $unit_price;
       }
-      $sta_prices = implode(';', $prices);
+      $sta_prices = http_build_query($prices);
       update_field('custom_prices', $sta_prices, $pid);
+    } else {
+      $new_prices = array();
+      foreach ($venues as $venue) {
+        if (array_key_exists(strval($venue->ID), $old_prices))
+          $new_prices[$venue->ID] = $old_prices[$venue->ID];
+        else
+          $new_prices[$venue->ID] = $unit_price;
+      }
+      $new_prices = http_build_query($new_prices);
+      update_field('custom_prices', $new_prices, $pid);
     }
   }
 }
@@ -851,4 +857,17 @@ function change_posts_order( $args ) {
   $args['orderby'] = 'date';
   $args['order'] = 'DESC';
   return $args;
+}
+
+
+/* set custom price when edit product */
+add_action( 'load-post.php', 'custom_load_product' );
+function custom_load_product()
+{
+  if (! empty($_GET['post']) )
+  {
+    if (wc_get_product($_GET['post'])) {
+      set_custom_price($_GET['post']);
+    }
+  }
 }
