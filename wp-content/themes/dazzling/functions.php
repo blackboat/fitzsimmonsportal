@@ -871,3 +871,18 @@ function custom_load_product()
     }
   }
 }
+
+
+/* ajax */
+add_action( 'wp_ajax_get_users_have_venue', 'get_users_have_venue_callback' );
+function get_users_have_venue_callback() {
+  $venues = get_posts(array('post_type' => 'venue', 'posts_per_page' => -1));
+  $data = array();
+  foreach ($venues as $venue) {
+    $venue_manager = get_field_object('venue_manager', $venue->ID);
+    $venue_manager_id = isset($venue_manager['value'])?$venue_manager['value']['ID']:'';
+    $data[] = $venue_manager_id;
+  }
+  echo implode(',', $data);
+  wp_die();
+}
