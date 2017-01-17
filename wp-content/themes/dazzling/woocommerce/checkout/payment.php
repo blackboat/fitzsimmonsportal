@@ -24,6 +24,19 @@ if ( ! is_ajax() ) {
 }
 ?>
 <div id="payment" class="woocommerce-checkout-payment">
+	<?php if ( WC()->cart->needs_payment() ) : ?>
+		<ul class="wc_payment_methods payment_methods methods" style="display:none;">
+			<?php
+				if ( ! empty( $available_gateways ) ) {
+					foreach ( $available_gateways as $gateway ) {
+						wc_get_template( 'checkout/payment-method.php', array( 'gateway' => $gateway ) );
+					}
+				} else {
+					echo '<li>' . apply_filters( 'woocommerce_no_available_payment_methods_message', WC()->customer->get_country() ? __( 'Your order will submitted for approval and you will receive appropriate notification in due course.', 'woocommerce' ) : __( 'Please fill in your details above to see available payment methods.', 'woocommerce' ) ) . '</li>';
+				}
+			?>
+		</ul>
+	<?php endif; ?>
 	<div class="form-row place-order">
 		<noscript>
 			<?php _e( 'Since your browser does not support JavaScript, or it is disabled, please ensure you click the <em>Update Totals</em> button before placing your order. You may be charged more than the amount stated above if you fail to do so.', 'woocommerce' ); ?>
