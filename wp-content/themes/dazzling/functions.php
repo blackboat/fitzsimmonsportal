@@ -800,7 +800,7 @@ function get_custom_price($pid) {
       break;
     $idx ++;
   }
-  return explode(';', $custom_prices)[$idx];
+  return explode('=', explode('&', $custom_prices)[$idx])[1];
 
 }
 function get_approval_threshold() {
