@@ -36,7 +36,6 @@ global $current_user;
 			<?php if (!current_user_can('administrator')) { ?>
 			<th class="product-oos">&nbsp;</th>
 			<?php } ?>
-			<th class="product-remove">&nbsp;</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -157,18 +156,6 @@ global $current_user;
 					?>
 					</td>
 					<?php } ?>
-
-					<td class="product-remove">
-						<?php
-							echo apply_filters( 'woocommerce_cart_item_remove_link', sprintf(
-								'<a href="%s" class="remove" title="%s" data-product_id="%s" data-product_sku="%s">&times;</a>',
-								esc_url( WC()->cart->get_remove_url( $cart_item_key ) ),
-								__( 'Remove this item', 'woocommerce' ),
-								esc_attr( $product_id ),
-								esc_attr( $_product->get_sku() )
-							), $cart_item_key );
-						?>
-					</td>
 				</tr>
 				<?php
 			}

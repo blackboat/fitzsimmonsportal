@@ -79,6 +79,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 				if ($field['label'] && $field['value']) {
 					if ($field['name'] == 'qty') {
 						$qty = $field['value'];
+					} else if ($field['name'] == 'custom_prices' || $field['name'] == 'custom_pricing') {
+						continue;
 					} else {
 						echo '<div style="margin-bottom: 20px;">';
 							echo '<h4 style="color: black;"><label style="width:50%">' . $field['label'] . ' :</label><label class="'.$field_name.'" style="width:45%; text-align: right;">' . $field['value'] . '</label></h4>';
