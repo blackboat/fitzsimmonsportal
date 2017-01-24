@@ -4713,3 +4713,24 @@ font-weight:bold;
   line-height: 30px;
   margin-left: 20px;
 }
+
+span.required {
+  color: red;
+  font-weight: 700;
+  border: 0;
+}
+.user-profile .row {
+  margin-bottom: 10px;
+}
+.user-profile .form-submit {
+  margin-top: 50px;
+}
+.user-profile .form-profile-image label {
+  margin-top: 40px;
+}
+.user-profile .image {
+  padding-left: 3px;
+}
+.user-profile img {
+  margin-right: 40px;
+}

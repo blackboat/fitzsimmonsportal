@@ -166,17 +166,15 @@
 						<div class="uese-info">
 
 							<?php
-    // Retrieve The Post's Author ID
-    $user_id = get_the_author_meta('ID');
-    // Set the image size. Accepts all registered images sizes and array(int, int)
-    $size = 'thumbnail';
 
-    // Get the image URL using the author ID and image size params
-    $imgURL = get_cupp_meta($user_id, $size);
+                                $user_id = get_the_author_meta('ID');
+                                mt_profile_img( $user_id, array(
+                                        'size' => 'thumbnail',
+                                        'attr' => array( 'alt' => 'Alternative Text' ),
+                                        'echo' => true )
+                                );
 
-    // Print the image on the page
-    echo '<img src="'. $imgURL .'" alt="">';
-?>
+                            ?>
 
 							<div class="dropdown">
 
@@ -189,8 +187,7 @@
 							  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
 
 							    <!-- <li><a href="#">Action</a></li> -->
-
-							    <li><a href="<?php echo get_permalink( get_option('woocommerce_myaccount_page_id') ); ?>">My Profile</a></li>
+                                <li><a href="<?php echo get_page_link( get_page_by_path( 'user-profile' )->ID ); ?>">My Profile</a></li>
 
 							    <li><a href="<?php echo wp_logout_url(home_url()); ?>">Logout</a></li>
 
