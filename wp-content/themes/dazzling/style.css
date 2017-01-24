@@ -4725,8 +4725,9 @@ span.required {
 .user-profile .form-submit {
   margin-top: 50px;
 }
-.user-profile .form-profile-image label {
-  margin-top: 40px;
+.user-profile .form-profile-image {
+  display: flex;
+  align-items: center;
 }
 .user-profile .image {
   padding-left: 3px;
