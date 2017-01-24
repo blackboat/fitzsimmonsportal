@@ -44,16 +44,36 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
     /* Redirect so the page will show updated info.*/
   /*I am not Author of this Code- i dont know why but it worked for me after changing below line to if ( count($error) == 0 ){ */
     if ( count($error) == 0 ) {
-        //action hook for plugins and extra fields saving
+
         $post_id = get_user_meta( $current_user->ID, 'wp_metronet_post_id', true );
+        if (!$post_id) {
+            // get post id in metro profile plugin
+            $post_args = array(
+                'post_type' => 'mt_pp',
+                'author' => $current_user->ID,
+                'post_status' => 'publish'
+            );
+            $posts = get_posts($post_args);
+            if (!$posts) {
+                $post_id = wp_insert_post(array(
+                    'post_author' => $current_user->ID,
+                    'post_type' => 'mt_pp',
+                    'post_status' => 'publish',
+                ));
+            } else {
+                $post = end($posts);
+                $post_id = $post->ID;
+            }
+        }
+
         $thumbnail_id = empty( $_POST['shr_image_id']) ? '' : $_POST['shr_image_id'];
+        update_user_option( $current_user->ID, 'metronet_post_id', $post_id );
         update_user_option( $current_user->ID, 'metronet_image_id', $thumbnail_id );
         set_post_thumbnail( $post_id, $thumbnail_id );
         wp_redirect( get_permalink() );
         exit;
     }
 }
-//var_dump(get_user_meta(1));
 ?>
 
 <?php
@@ -99,11 +119,6 @@ wp_enqueue_media(); ?>
                     $image = wp_get_attachment_image_src( $profile_pic, 'thumbnail' );
                 }
 
-//                mt_profile_img( $current_user->ID, array(
-//                        'size' => 'thumbnail',
-//                        'attr' => array( 'alt' => 'Alternative Text' ),
-//                        'echo' => true )
-//                );
                 ?>
                 <div class="row <?php echo $layout_class; ?>">
 					<div id="primary" class="content-area col-sm-12 col-md-12">
