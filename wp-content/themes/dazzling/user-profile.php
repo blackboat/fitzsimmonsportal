@@ -136,41 +136,43 @@ wp_enqueue_media(); ?>
 						            <?php else : ?>
 						                <?php if ( count($error) > 0 ) echo '<ul class="woocommerce-error"><li>' . implode("<br />", $error) . '</li></ul>'; ?>
 						                <form method="post" id="adduser" action="<?php the_permalink(); ?>">
-                                            <div class="form-profile-image row">
-                                                <label class="col-md-3" for="first-name"><?php _e('Profile Image', 'profile'); ?></label>
-                                                <div class="col-md-6 image">
+                                            <p class="form-profile-image form-row">
+                                                <label for="first-name"><?php _e('Avatar', 'profile'); ?></label>
+                                                <!-- <div class="image"> -->
                                                     <input type="hidden" class="button" name="shr_image_id" id="shr_image_id" value="<?php echo !empty($profile_pic) ? $profile_pic : ''; ?>" />
                                                     <img id="shr-img" src="<?php echo !empty($profile_pic) ? $image[0] : 'http://dev.fitzsimmonsportal.com/wp-content/plugins/metronet-profile-picture/img/mystery.png'; ?>" style="max-width: 100px; max-height: 100px;" />
                                                     <input type="button" data-id="shr_image_id" data-src="shr-img" class="button shr-image" name="shr_image" id="shr-image" value="Upload" />
-                                                </div>
-                                            </div>
-						                    <div class="form-username row">
-						                        <label class="col-md-3" for="first-name"><?php _e('First Name ', 'profile'); ?><span class="required">*</span></label>
-						                        <input class="col-md-6 text-input" name="first-name" type="text" id="first-name" value="<?php the_author_meta( 'first_name', $current_user->ID ); ?>" required />
-						                    </div><!-- .form-username -->
-						                    <div class="form-username row">
-						                        <label class="col-md-3" for="last-name"><?php _e('Last Name ', 'profile'); ?><span class="required">*</span></label>
-						                        <input class="col-md-6 text-input" name="last-name" type="text" id="last-name" value="<?php the_author_meta( 'last_name', $current_user->ID ); ?>" required />
-						                    </div><!-- .form-username -->
-						                    <div class="form-email row">
-						                        <label class="col-md-3" for="email"><?php _e('E-mail ', 'profile'); ?><span class="required">*</span></label>
-						                        <input class="col-md-6 text-input" name="email" type="text" id="email" value="<?php the_author_meta( 'user_email', $current_user->ID ); ?>" required />
-						                    </div><!-- .form-email -->
-						                    <div class="form-password row">
-						                        <label class="col-md-3" for="pass1"><?php _e('Password', 'profile'); ?> </label>
-						                        <input class="col-md-6 text-input" name="pass1" type="password" id="pass1" />
-						                    </div><!-- .form-password -->
-						                    <div class="form-password row">
-						                        <label class="col-md-3" for="pass2"><?php _e('Repeat Password', 'profile'); ?></label>
-						                        <input class="col-md-6 text-input" name="pass2" type="password" id="pass2" />
-						                    </div><!-- .form-password -->
+                                                <!-- </div> -->
+                                            </p>
+                                            <div class="clear"></div>
+						                    <p class="form-username form-row form-row-first">
+						                        <label for="first-name"><?php _e('First Name ', 'profile'); ?><span class="required">*</span></label>
+						                        <input class="input-text" name="first-name" type="text" id="first-name" value="<?php the_author_meta( 'first_name', $current_user->ID ); ?>" required />
+						                    </p><!-- .form-username -->
+						                    <p class="form-username form-row form-row-last">
+						                        <label for="last-name"><?php _e('Last Name ', 'profile'); ?><span class="required">*</span></label>
+						                        <input class="input-text" name="last-name" type="text" id="last-name" value="<?php the_author_meta( 'last_name', $current_user->ID ); ?>" required />
+						                    </p><!-- .form-username -->
+						                    <div class="clear"></div>
+						                    <p class="form-email form-row">
+						                        <label for="email"><?php _e('E-mail ', 'profile'); ?><span class="required">*</span></label>
+						                        <input class="input-text" name="email" type="text" id="email" value="<?php the_author_meta( 'user_email', $current_user->ID ); ?>" required />
+						                    </p><!-- .form-email -->
+						                    <p class="form-password form-row">
+						                        <label for="pass1"><?php _e('Password', 'profile'); ?> </label>
+						                        <input class="input-text" name="pass1" type="password" id="pass1" />
+						                    </p><!-- .form-password -->
+						                    <p class="form-password form-row">
+						                        <label for="pass2"><?php _e('Repeat Password', 'profile'); ?></label>
+						                        <input class="input-text" name="pass2" type="password" id="pass2" />
+						                    </p><!-- .form-password -->
 
 						                    <?php 
 						                        //action hook for plugin and extra fields
 						                        do_action('edit_user_profile',$current_user); 
 						                    ?>
 						                    <div class="form-submit">
-						                        <input name="updateuser" type="submit" id="updateuser" class="submit button" value="<?php _e('Update', 'profile'); ?>" />
+						                        <input name="updateuser" type="submit" id="updateuser" class="submit button" value="<?php _e('Save Changes', 'profile'); ?>" />
 						                        <?php wp_nonce_field( 'update-user' ) ?>
 						                        <input name="action" type="hidden" id="action" value="update-user" />
 						                    </div><!-- .form-submit -->

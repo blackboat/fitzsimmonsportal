@@ -4725,13 +4725,19 @@ span.required {
 .user-profile .form-submit {
   margin-top: 50px;
 }
-.user-profile .form-profile-image {
-  display: flex;
-  align-items: center;
-}
 .user-profile .image {
   padding-left: 3px;
 }
 .user-profile img {
   margin-right: 40px;
+}
+.user-profile .form-row-first {
+  float: left;
+  width: 47%;
+  overflow: visible;
+}
+.user-profile .form-row-last {
+  float: left;
+  width: 47%;
+  overflow: visible;
 }
