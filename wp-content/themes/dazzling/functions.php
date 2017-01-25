@@ -886,3 +886,18 @@ function get_users_have_venue_callback() {
   echo implode(',', $data);
   wp_die();
 }
+
+add_action( 'template_redirect', 'check_reorder' );
+function check_reorder() {
+  global $woocommerce;
+
+  if (!empty($_GET['reorder'])) {
+      $woocommerce->cart->empty_cart();
+      $order_id = $_GET['reorder'];
+      $order = wc_get_order($order_id);
+      foreach ($order->get_items() as $item_id => $item) {
+          $product = apply_filters('woocommerce_order_item_product', $order->get_product_from_item($item), $item);
+          $woocommerce->cart->add_to_cart($product->id, $item['qty']);
+      }
+  }
+}
