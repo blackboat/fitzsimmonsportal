@@ -65,6 +65,7 @@ class WC_Emails {
 			'woocommerce_low_stock',
 			'woocommerce_no_stock',
 			'woocommerce_product_on_backorder',
+			'woocommerce_order_status_pending',
 			'woocommerce_order_status_pending_to_processing',
 			'woocommerce_order_status_pending_to_completed',
 			'woocommerce_order_status_pending_to_cancelled',
@@ -135,6 +136,7 @@ class WC_Emails {
 		$this->emails['WC_Email_Cancelled_Order'] 		             = include( 'emails/class-wc-email-cancelled-order.php' );
 		$this->emails['WC_Email_Failed_Order'] 		                 = include( 'emails/class-wc-email-failed-order.php' );
 		$this->emails['WC_Email_Customer_On_Hold_Order'] 		     = include( 'emails/class-wc-email-customer-on-hold-order.php' );
+		$this->emails['WC_Email_Customer_Pending_Order']			 = include( 'emails/class-wc-email-customer-pending-order.php' );
 		$this->emails['WC_Email_Customer_Processing_Order'] 		 = include( 'emails/class-wc-email-customer-processing-order.php' );
 		$this->emails['WC_Email_Customer_Completed_Order'] 		     = include( 'emails/class-wc-email-customer-completed-order.php' );
 		$this->emails['WC_Email_Customer_Refunded_Order'] 		     = include( 'emails/class-wc-email-customer-refunded-order.php' );

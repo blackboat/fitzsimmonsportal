@@ -901,3 +901,21 @@ function check_reorder() {
       }
   }
 }
+
+add_filter( 'woocommerce_cod_process_payment_order_status', 'change_initial_order_status', 10, 2 );
+function change_initial_order_status($var, $order) {
+    $venue_id = get_current_venue_id();
+    if (!$venue_id)
+        return $var;
+    $threshold = get_field_object('approval_threshold', $venue_id);
+    if ( empty( $threshold['value'] ) ) {
+        $threshold = 1500;
+        update_field('approval_threshold', $threshold, $venue_id);
+    } else {
+        $threshold = $threshold['value'];
+    }
+
+    if ( $order->get_total() < intval($threshold) )
+        return 'processing';
+    return 'pending';
+}

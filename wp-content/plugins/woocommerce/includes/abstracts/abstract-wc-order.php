@@ -2367,7 +2367,8 @@ abstract class WC_Abstract_Order {
 
 		// If the statuses are the same there is no need to update, unless the post status is not a valid 'wc' status.
 		if ( $new_status === $old_status && in_array( $this->post_status, array_keys( wc_get_order_statuses() ) ) ) {
-			return false;
+		    if ($new_status != 'pending')
+			    return false;
 		}
 
 		$this->post_status = 'wc-' . $new_status;
