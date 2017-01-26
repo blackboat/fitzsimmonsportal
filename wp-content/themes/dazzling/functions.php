@@ -526,15 +526,16 @@ function add_order_actions_button_css() {
 // add order admin link to new order email
 add_action( 'woocommerce_email_after_order_table', 'add_link_back_to_order', 10, 2 );
 function add_link_back_to_order( $order, $is_admin ) {
-  // Only for admin emails
-  if ( ! $is_admin || $order->get_total() < get_approval_threshold()) {
-    return;
-  }
-  $link = '<p style="margin-top:20px !important;">';
-  // $link .= '<a href="'. admin_url( 'post.php?post=' . absint( $order->id ) . '&action=edit' ) .'" >';
-  // $link .= __( 'Go to the order page to approve or reject', 'your_domain' );
-  // $link .= '</a>';
-  $link .= '<a class="btn btn-success" 
+    // Only for admin emails
+    if ( ! $is_admin || $order->get_total() < get_approval_threshold()) {
+        return;
+    }
+    $link = '<p style="margin-top:20px !important;">';
+    // $link .= '<a href="'. admin_url( 'post.php?post=' . absint( $order->id ) . '&action=edit' ) .'" >';
+    // $link .= __( 'Go to the order page to approve or reject', 'your_domain' );
+    // $link .= '</a>';
+    $nonce = wp_create_nonce( 'woocommerce-mark-order-status' );
+    $link .= '<a class="btn btn-success" 
         style="display: inline-block;
           font-weight: 400;
           line-height: 1.25;
@@ -557,10 +558,10 @@ function add_link_back_to_order( $order, $is_admin ) {
           display: inline-block;
           text-decoration: none !important;
           margin-right: 50px;" 
-        href="'. wp_nonce_url( admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status=processing&order_id=' . $order->id ), 'woocommerce-mark-order-status' ) .'">';
-  $link .= __( 'Approve', 'your_domain' );
-  $link .= '</a>';
-  $link .= '<a class="btn btn-danger" 
+        href="'. admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status=processing&order_id=' . $order->id . '&_wpnonce=' . $nonce ) .'">';
+    $link .= __( 'Approve', 'your_domain' );
+    $link .= '</a>';
+    $link .= '<a class="btn btn-danger" 
         style="display: inline-block;
           font-weight: 400;
           line-height: 1.25;
@@ -582,11 +583,11 @@ function add_link_back_to_order( $order, $is_admin ) {
           border-color: #d9534f;
           color: #fff;
           text-decoration: none !important;"
-        href="'. wp_nonce_url( admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status=cancelled&order_id=' . $order->id ), 'woocommerce-mark-order-status' ) .'">';
-  $link .= __( 'Reject', 'your_domain' );
-  $link .= '</a>';
-  $link .= '</p>';
-  echo $link;
+        href="'. admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status=cancelled&order_id=' . $order->id . '&_wpnonce=' . $nonce ) .'">';
+    $link .= __( 'Reject', 'your_domain' );
+    $link .= '</a>';
+    $link .= '</p>';
+    echo $link;
 }
 
 
