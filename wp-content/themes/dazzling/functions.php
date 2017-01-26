@@ -534,7 +534,7 @@ function add_link_back_to_order( $order, $is_admin ) {
     // $link .= '<a href="'. admin_url( 'post.php?post=' . absint( $order->id ) . '&action=edit' ) .'" >';
     // $link .= __( 'Go to the order page to approve or reject', 'your_domain' );
     // $link .= '</a>';
-    $nonce = wp_create_nonce( 'woocommerce-mark-order-status' );
+    $nonce = areamanager_nonce( 'woocommerce-mark-order-status' );
     $link .= '<a class="btn btn-success" 
         style="display: inline-block;
           font-weight: 400;
@@ -588,6 +588,22 @@ function add_link_back_to_order( $order, $is_admin ) {
     $link .= '</a>';
     $link .= '</p>';
     echo $link;
+}
+
+function areamanager_nonce($action = -1) {
+    $user = get_areamanager();
+    $uid = (int) $user['ID'];
+    if ( ! $uid ) {
+        /** This filter is documented in wp-includes/pluggable.php */
+        $uid = apply_filters( 'nonce_user_logged_out', $uid, $action );
+    }
+
+    $token = wp_get_session_token();
+    if ($action == 'woocommerce-mark-order-status')
+        $token = $action;
+    $i = wp_nonce_tick();
+
+    return substr( wp_hash( $i . '|' . $action . '|' . $uid . '|' . $token, 'nonce' ), -12, 10 );
 }
 
 
@@ -786,6 +802,14 @@ function get_current_venue_id() {
     }
   }
   return false;
+}
+function get_areamanager() {
+    $venue_id = get_current_venue_id();
+    if (!$venue_id)
+        return false;
+    $area_manager = get_field_object('area_manager', $venue_id);
+    $area_manager = $area_manager['value'];
+    return $area_manager;
 }
 function get_custom_price($pid) {
   $custom_prices = get_field_object('custom_prices', $pid);

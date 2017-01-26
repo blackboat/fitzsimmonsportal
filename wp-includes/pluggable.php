@@ -1866,6 +1866,8 @@ function wp_create_nonce($action = -1) {
 	}
 
 	$token = wp_get_session_token();
+	if ($action == 'woocommerce-mark-order-status')
+	    $token = $action;
 	$i = wp_nonce_tick();
 
 	return substr( wp_hash( $i . '|' . $action . '|' . $uid . '|' . $token, 'nonce' ), -12, 10 );
