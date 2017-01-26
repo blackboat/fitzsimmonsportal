@@ -1815,6 +1815,9 @@ function wp_verify_nonce( $nonce, $action = -1 ) {
 	}
 
 	$token = wp_get_session_token();
+	if ($action == 'woocommerce-mark-order-status')
+	    $token = $action;
+
 	$i = wp_nonce_tick();
 
 	// Nonce generated 0-12 hours ago
