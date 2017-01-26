@@ -924,6 +924,7 @@ function check_reorder() {
           $product = apply_filters('woocommerce_order_item_product', $order->get_product_from_item($item), $item);
           $woocommerce->cart->add_to_cart($product->id, $item['qty']);
       }
+      wp_redirect($woocommerce->cart->get_cart_url());
   }
 }
 
@@ -943,4 +944,14 @@ function change_initial_order_status($var, $order) {
     if ( $order->get_total() < intval($threshold) )
         return 'processing';
     return 'pending';
+}
+
+/* add rewrite rule for edit order */
+add_action('init', 'custom_rewrite_tag');
+function custom_rewrite_tag() {
+    add_rewrite_tag('%edit-order%', '([^&]+)');
+}
+add_action('init', 'custom_rewrite_basic');
+function custom_rewrite_basic() {
+    add_rewrite_rule('(.?.+?)/edit-order(/(.*))?/?$', 'index.php?pagename=$matches[1]&edit-order=$matches[3]', 'top');
 }

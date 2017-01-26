@@ -81,10 +81,10 @@ if ( $customer_orders ) : ?>
 											'url'  => $order->get_view_order_url(),
 											'name' => __( 'View', 'woocommerce' )
 										),
-										'amend'   => array(
-											'url'  => $order->get_view_order_url(),
-											'name' => __( 'Amend', 'woocommerce' )
-										),
+//										'amend'   => array(
+//											'url'  => $order->get_view_order_url(),
+//											'name' => __( 'Amend', 'woocommerce' )
+//										),
 										'cancel' => array(
 											'url'  => $order->get_cancel_order_url( wc_get_page_permalink( 'myaccount' ) ),
 											'name' => __( 'Cancel', 'woocommerce' )
