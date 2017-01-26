@@ -530,64 +530,66 @@ function add_link_back_to_order( $order, $is_admin ) {
     if ( ! $is_admin || $order->get_total() < get_approval_threshold()) {
         return;
     }
-    $link = '<p style="margin-top:20px !important;">';
-    // $link .= '<a href="'. admin_url( 'post.php?post=' . absint( $order->id ) . '&action=edit' ) .'" >';
-    // $link .= __( 'Go to the order page to approve or reject', 'your_domain' );
-    // $link .= '</a>';
-    $nonce = areamanager_nonce( 'woocommerce-mark-order-status' );
-    $link .= '<a class="btn btn-success" 
-        style="display: inline-block;
-          font-weight: 400;
-          line-height: 1.25;
-          text-align: center;
-          white-space: nowrap;
-          vertical-align: middle;
-          -webkit-user-select: none;
-          -moz-user-select: none;
-          -ms-user-select: none;
-          user-select: none;
-          border: 1px solid transparent;
-          padding: .5rem 1rem;
-          font-size: 1rem;
-          border-radius: .25rem;
-          -webkit-transition: all .2s ease-in-out;
-          -o-transition: all .2s ease-in-out;
-          transition: all .2s ease-in-out;
-          background-color: #5cb85c;
-          border-color: #5cb85c;
-          display: inline-block;
-          text-decoration: none !important;
-          margin-right: 50px;" 
-        href="'. admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status=processing&order_id=' . $order->id . '&_wpnonce=' . $nonce ) .'">';
-    $link .= __( 'Approve', 'your_domain' );
-    $link .= '</a>';
-    $link .= '<a class="btn btn-danger" 
-        style="display: inline-block;
-          font-weight: 400;
-          line-height: 1.25;
-          text-align: center;
-          white-space: nowrap;
-          vertical-align: middle;
-          -webkit-user-select: none;
-          -moz-user-select: none;
-          -ms-user-select: none;
-          user-select: none;
-          border: 1px solid transparent;
-          padding: .5rem 1rem;
-          font-size: 1rem;
-          border-radius: .25rem;
-          -webkit-transition: all .2s ease-in-out;
-          -o-transition: all .2s ease-in-out;
-          transition: all .2s ease-in-out;
-          background-color: #d9534f;
-          border-color: #d9534f;
-          color: #fff;
-          text-decoration: none !important;"
-        href="'. admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status=cancelled&order_id=' . $order->id . '&_wpnonce=' . $nonce ) .'">';
-    $link .= __( 'Reject', 'your_domain' );
-    $link .= '</a>';
-    $link .= '</p>';
-    echo $link;
+    if ($order->status == 'processing') {
+      $link = '<p style="margin-top:20px !important;">';
+      // $link .= '<a href="'. admin_url( 'post.php?post=' . absint( $order->id ) . '&action=edit' ) .'" >';
+      // $link .= __( 'Go to the order page to approve or reject', 'your_domain' );
+      // $link .= '</a>';
+      $nonce = areamanager_nonce( 'woocommerce-mark-order-status' );
+      $link .= '<a class="btn btn-success" 
+          style="display: inline-block;
+            font-weight: 400;
+            line-height: 1.25;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            border: 1px solid transparent;
+            padding: .5rem 1rem;
+            font-size: 1rem;
+            border-radius: .25rem;
+            -webkit-transition: all .2s ease-in-out;
+            -o-transition: all .2s ease-in-out;
+            transition: all .2s ease-in-out;
+            background-color: #5cb85c;
+            border-color: #5cb85c;
+            display: inline-block;
+            text-decoration: none !important;
+            margin-right: 50px;" 
+          href="'. admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status=processing&order_id=' . $order->id . '&_wpnonce=' . $nonce ) .'">';
+      $link .= __( 'Approve', 'your_domain' );
+      $link .= '</a>';
+      $link .= '<a class="btn btn-danger" 
+          style="display: inline-block;
+            font-weight: 400;
+            line-height: 1.25;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            border: 1px solid transparent;
+            padding: .5rem 1rem;
+            font-size: 1rem;
+            border-radius: .25rem;
+            -webkit-transition: all .2s ease-in-out;
+            -o-transition: all .2s ease-in-out;
+            transition: all .2s ease-in-out;
+            background-color: #d9534f;
+            border-color: #d9534f;
+            color: #fff;
+            text-decoration: none !important;"
+          href="'. admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status=cancelled&order_id=' . $order->id . '&_wpnonce=' . $nonce ) .'">';
+      $link .= __( 'Reject', 'your_domain' );
+      $link .= '</a>';
+      $link .= '</p>';
+      echo $link;
+    }
 }
 
 function areamanager_nonce($action = -1) {
