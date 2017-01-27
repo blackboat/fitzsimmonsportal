@@ -559,8 +559,7 @@ function add_link_back_to_order( $order, $is_admin ) {
             display: inline-block;
             text-decoration: none !important;
             margin-right: 50px;" 
-          href="' . admin_url( 'edit.php?post_type=shop_order' ) . '&cancel_comment=' . $order->id . '" 
-          ajax-src="'. admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status=processing&order_id=' . $order->id . '&_wpnonce=' . $nonce ) .'">';
+          href="'. admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status=processing&order_id=' . $order->id . '&_wpnonce=' . $nonce ) .'">';
       $link .= __( 'Approve', 'your_domain' );
       $link .= '</a>';
       $link .= '<a class="btn btn-danger" 
@@ -584,8 +583,8 @@ function add_link_back_to_order( $order, $is_admin ) {
             background-color: #d9534f;
             border-color: #d9534f;
             color: #fff;
-            text-decoration: none !important;"
-          href="'. admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status=cancelled&order_id=' . $order->id . '&_wpnonce=' . $nonce ) .'">';
+            text-decoration: none !important;" 
+          href="' . admin_url( 'edit.php?post_type=shop_order' ) . '&cancel_comment=' . $order->id . '">' ;
       $link .= __( 'Reject', 'your_domain' );
       $link .= '</a>';
       $link .= '</p>';

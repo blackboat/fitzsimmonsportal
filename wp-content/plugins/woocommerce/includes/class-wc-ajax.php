@@ -530,7 +530,17 @@ class WC_AJAX {
 			}
 		}
 
-		wp_safe_redirect( wp_get_referer() ? substr(wp_get_referer(), 0, strpos(wp_get_referer(), 'cancel_comment')-1) : admin_url( 'edit.php?post_type=shop_order' ) );
+        $redirect_to = '';
+		if (wp_get_referer()) {
+		    if (strpos(wp_get_referer(), 'cancel_comment') == false) {
+                $redirect_to = wp_get_referer();
+		    } else {
+		        $redirect_to = substr(wp_get_referer(), 0, strpos(wp_get_referer(), 'cancel_comment')-1);
+            }
+        } else {
+		    $redirect_to = admin_url( 'edit.php?post_type=shop_order' );
+        }
+		wp_safe_redirect( $redirect_to );
 		die();
 	}
 
