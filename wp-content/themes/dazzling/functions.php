@@ -828,6 +828,8 @@ function get_custom_price($pid) {
       break;
     $idx ++;
   }
+  if (count(explode('&', $custom_prices)) <= $idx)
+    $idx = count(explode('&', $custom_prices) - 1;
   return explode('=', explode('&', $custom_prices)[$idx])[1];
 
 }
