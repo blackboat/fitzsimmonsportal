@@ -530,7 +530,7 @@ class WC_AJAX {
 			}
 		}
 
-		wp_safe_redirect( wp_get_referer() ? wp_get_referer() : admin_url( 'edit.php?post_type=shop_order' ) );
+		wp_safe_redirect( wp_get_referer() ? substr(wp_get_referer(), 0, strpos(wp_get_referer(), 'cancel_comment')-1) : admin_url( 'edit.php?post_type=shop_order' ) );
 		die();
 	}
 
