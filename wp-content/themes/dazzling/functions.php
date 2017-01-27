@@ -872,10 +872,11 @@ function set_custom_price($pid) {
 }
 
 // admin script
-add_action('admin_enqueue_scripts', 'my_admin_enqueue_scripts');
-function my_admin_enqueue_scripts() {
-  wp_enqueue_script( 'script', get_template_directory_uri() . '/js/jquery-ui/jquery-ui.js');
-  wp_enqueue_style('style', get_template_directory_uri() . '/js/jquery-ui/jquery-ui.css');
+add_action('admin_enqueue_scripts', 'admin_jquery_ui_scripts');
+function admin_jquery_ui_scripts() {
+  wp_enqueue_script( 'jquery-ui-script', get_template_directory_uri() . '/js/jquery-ui/jquery-ui.js' );
+  wp_enqueue_style( 'jquery-ui-style', get_template_directory_uri() . '/js/jquery-ui/jquery-ui.css' );
+  wp_enqueue_script( 'admin-custom-script', get_template_directory_uri() . '/js/custom-admin.js' );
 }
 
 /* change acf post object order for custom pricing */

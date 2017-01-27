@@ -525,7 +525,7 @@ class WC_AJAX {
 
 			if ( wc_is_order_status( 'wc-' . $status ) && $order_id ) {
 				$order = wc_get_order( $order_id );
-				$order->update_status( $status, 'asdfqwe123', true );
+				$order->update_status( $status, $_POST['comment'], true );
 				do_action( 'woocommerce_order_edit_status', $order_id, $status );
 			}
 		}

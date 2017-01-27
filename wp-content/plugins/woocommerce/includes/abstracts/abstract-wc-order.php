@@ -2404,9 +2404,13 @@ abstract class WC_Abstract_Order {
 
 		// Status was changed.
 		if ( $new_status !== $old_status ) {
-			$this->add_order_note( trim( $note . ' ' . sprintf( __( 'Order status changed from %1$s to %2$s.', 'woocommerce' ), wc_get_order_status_name( $old_status ), wc_get_order_status_name( $new_status ) ) ), 1, $manual );
-			do_action( 'woocommerce_order_status_' . $old_status . '_to_' . $new_status, $this->id );
-			do_action( 'woocommerce_order_status_changed', $this->id, $old_status, $new_status );
+		    if ( $new_status == 'cancelled' ) {
+                $this->add_order_note( $note, 1, $manual );
+            } else {
+//                $this->add_order_note(trim($note . ' ' . sprintf(__('Order status changed from %1$s to %2$s.', 'woocommerce'), wc_get_order_status_name($old_status), wc_get_order_status_name($new_status))), 0, $manual);
+                do_action('woocommerce_order_status_' . $old_status . '_to_' . $new_status, $this->id);
+                do_action('woocommerce_order_status_changed', $this->id, $old_status, $new_status);
+            }
 		} else {
 			$this->add_order_note( trim( $note . ' ' . sprintf( __( 'Order status changed to %s.', 'woocommerce' ), wc_get_order_status_name( $new_status ) ) ), 0, $manual );
 		}
