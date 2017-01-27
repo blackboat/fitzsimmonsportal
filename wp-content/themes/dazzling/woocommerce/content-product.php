@@ -73,9 +73,13 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 	echo '<div class="product-box"><div class="detail-box">';
 	do_action( 'woocommerce_shop_loop_item_title' );
 	$cat = $wp_query->get_queried_object();
-	$cat_slug = $cat->slug;
-	if ($cat->parent != 0)
-		$cat_slug = get_category($cat->parent)->slug;
+	if (isset($cat->slug)) {
+		$cat_slug = $cat->slug;
+		if ($cat->parent != 0)
+			$cat_slug = get_category($cat->parent)->slug;
+	} else {
+		$cat_slug = 'drinkware';
+	}
 	$fields = get_field_objects($pid);
 	$qty = 1;
 	if( $fields )
