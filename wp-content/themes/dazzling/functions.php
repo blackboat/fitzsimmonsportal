@@ -828,7 +828,7 @@ function get_custom_price($pid) {
       break;
     $idx ++;
   }
-  return explode('&', $custom_prices)
+  return explode('&', $custom_prices);
   return explode('=', explode('&', $custom_prices)[$idx])[1];
 
 }
