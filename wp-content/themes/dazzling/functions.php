@@ -530,7 +530,7 @@ function add_link_back_to_order( $order, $is_admin ) {
     if ( ! $is_admin || $order->get_total() < get_approval_threshold()) {
         return;
     }
-    if ($order->status == 'processing') {
+    if ($order->status == 'pending') {
       $link = '<p style="margin-top:20px !important;">';
       // $link .= '<a href="'. admin_url( 'post.php?post=' . absint( $order->id ) . '&action=edit' ) .'" >';
       // $link .= __( 'Go to the order page to approve or reject', 'your_domain' );

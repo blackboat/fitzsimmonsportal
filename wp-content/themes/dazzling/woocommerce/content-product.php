@@ -37,7 +37,6 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 	// $venue = get_post($venue);
 	$venue_id = get_current_venue_id();
 	$scopes = get_field_object('product', $venue_id);
-	var_dump(get_approval_threshold());
 
 	/**
 	 * woocommerce_before_shop_loop_item hook.
