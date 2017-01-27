@@ -819,7 +819,6 @@ function get_custom_price($pid) {
   $unit_price = get_field_object('unit_price', $pid);
   $custom_prices = isset($custom_prices['value'])?$custom_prices['value']:false;
   $venue_id = get_current_venue_id();
-  return $venue_id;
   if ($venue_id == false || $custom_prices == false)
     return $unit_price['value'];
   $venues = get_posts(array('post_type' => 'venue', 'posts_per_page' => -1));
@@ -829,6 +828,7 @@ function get_custom_price($pid) {
       break;
     $idx ++;
   }
+  return explode('&', $custom_prices);
   return explode('=', explode('&', $custom_prices)[$idx])[1];
 
 }
