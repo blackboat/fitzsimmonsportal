@@ -60,7 +60,6 @@ do_action( 'woocommerce_before_cart' ); ?>
 			$description = get_field_object('description', $product_id);
 			$description_tbl = get_field_object('product_', $product_id);
 			$unit_price = get_custom_price($product_id);
-			var_dump($unit_price);
 
 			$venue_id = get_current_venue_id();
 			$scopes = get_field_object('product', $venue_id);
