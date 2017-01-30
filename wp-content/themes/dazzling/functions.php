@@ -492,7 +492,7 @@ function wc_renaming_order_status( $order_statuses ) {
             $order_statuses['wc-completed'] = _x( 'Dispatch', 'Order status', 'woocommerce' );
         }
         if ( 'wc-cancelled' === $key ) {
-            $order_statuses['wc-cancelled'] = _x( 'Reject', 'Order status', 'woocommerce' );
+            $order_statuses['wc-cancelled'] = _x( 'Cancelled/Rejected', 'Order status', 'woocommerce' );
         }
     }
     return $order_statuses;
