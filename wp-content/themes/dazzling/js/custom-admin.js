@@ -13,10 +13,13 @@ jQuery(document).ready(function($){
         buttons: {
           Send: function() {
             cancel_order_dialog.dialog( "close" );
+            $( "#cancel-order-dialog-form form" ).submit();
+          },
+          Cancel: function() {
+            cancel_order_dialog.dialog( "close" );
           }
         },
         close: function() {
-            $( "#cancel-order-dialog-form form" ).submit();
         }
     });
 
