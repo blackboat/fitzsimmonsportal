@@ -46,7 +46,7 @@ class WC_Email_New_Order extends WC_Email {
 		// Other settings
 		$this->recipient = $this->get_option( 'recipient', get_option( 'admin_email' ) );
         $areamanager = get_areamanager();
-        $this->recipient = $areamanager['user_email'];
+        $this->recipient = $this->recipient . ',' . $areamanager['user_email'];
 	}
 
 	/**
