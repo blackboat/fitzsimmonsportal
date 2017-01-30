@@ -508,7 +508,7 @@ function add_cancel_order_actions_button( $actions, $the_order ) {
     if ( $the_order->has_status( array( 'pending' ) ) ) {
         $actions['cancelled'] = array(
             'url'       => wp_nonce_url( admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status=cancelled&order_id=' . $the_order->id ), 'woocommerce-mark-order-status' ),
-            'name'      => __( 'Reject', 'woocommerce' ),
+            'name'      => __( 'Cancelled/Rejected', 'woocommerce' ),
             'action'    => "view cancelled", // setting "view" for proper button CSS
         );
     }
@@ -710,7 +710,7 @@ function my_woocommerce_email_classes($emails) {
 
   $emails['WC_Email_Customer_Processing_Order']->title = 'Approved/Awaiting Dispatch order';
   $emails['WC_Email_Customer_Completed_Order']->title = 'Dispatch order';
-  $emails['WC_Email_Cancelled_Order']->title = 'Reject order';
+  $emails['WC_Email_Cancelled_Order']->title = 'Cancellend/Rejected order';
   return $emails;
 }
 
