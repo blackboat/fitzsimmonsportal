@@ -710,7 +710,7 @@ function my_woocommerce_email_classes($emails) {
 
   $emails['WC_Email_Customer_Processing_Order']->title = 'Approved/Awaiting Dispatch order';
   $emails['WC_Email_Customer_Completed_Order']->title = 'Dispatch order';
-  $emails['WC_Email_Cancelled_Order']->title = 'Cancellend/Rejected order';
+  $emails['WC_Email_Cancelled_Order']->title = 'Cancelled/Rejected order';
   return $emails;
 }
 
