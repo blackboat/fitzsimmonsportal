@@ -38,6 +38,9 @@ class WC_Email_Customer_Processing_Order extends WC_Email {
 
 		// Call parent constructor
 		parent::__construct();
+
+		// Other settings
+		$this->recipient = $this->get_option( 'recipient', get_option( 'admin_email' ) );
 	}
 
 	/**
@@ -95,6 +98,53 @@ class WC_Email_Customer_Processing_Order extends WC_Email {
 			'plain_text'    => true,
 			'email'			=> $this
 		) );
+	}
+
+	/**
+	 * Initialise settings form fields.
+	 */
+	public function init_form_fields() {
+		$this->form_fields    = array(
+			'enabled'         => array(
+				'title'       => __( 'Enable/Disable', 'woocommerce' ),
+				'type'        => 'checkbox',
+				'label'       => __( 'Enable this email notification', 'woocommerce' ),
+				'default'     => 'yes'
+			),
+			'recipient' 		=> array(
+				'title'         => __( 'Recipient(s)', 'woocommerce' ),
+				'type'          => 'text',
+				'description'   => sprintf( __( 'Enter recipients (comma separated) for this email. Defaults to <code>%s</code>.', 'woocommerce' ), esc_attr( get_option('admin_email') ) ),
+				'placeholder'   => '',
+				'default'       => '',
+				'desc_tip'      => true
+			),
+			'subject'         => array(
+				'title'       => __( 'Email Subject', 'woocommerce' ),
+				'type'        => 'text',
+				'description' => sprintf( __( 'Defaults to <code>%s</code>', 'woocommerce' ), $this->subject ),
+				'placeholder' => '',
+				'default'     => '',
+				'desc_tip'    => true
+			),
+			'heading'         => array(
+				'title'       => __( 'Email Heading', 'woocommerce' ),
+				'type'        => 'text',
+				'description' => sprintf( __( 'Defaults to <code>%s</code>', 'woocommerce' ), $this->heading ),
+				'placeholder' => '',
+				'default'     => '',
+				'desc_tip'    => true
+			),
+			'email_type'      => array(
+				'title'       => __( 'Email type', 'woocommerce' ),
+				'type'        => 'select',
+				'description' => __( 'Choose which format of email to send.', 'woocommerce' ),
+				'default'     => 'html',
+				'class'       => 'email_type wc-enhanced-select',
+				'options'     => $this->get_email_type_options(),
+				'desc_tip'    => true
+			)
+		);
 	}
 }
 
