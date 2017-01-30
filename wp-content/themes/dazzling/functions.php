@@ -792,7 +792,7 @@ function unhook_those_pesky_emails( $email_class ) {
 
 
 function get_current_venue_id() {
-  if (current_user_can('administrator'))
+  if (current_user_can('administrator') && !current_user_can('area_manager') && !current_user_can('venue_manager'))
     return false;
   global $current_user;
   $venues = get_posts(array('post_type' => 'venue', 'posts_per_page' => -1));

@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * @hooked WC_Emails::email_header() Output the email header
  */
-$email_heading = 'For orders requiring No approval';
+$email_heading = 'Purchase Order Submitted';
 do_action( 'woocommerce_email_header', $email_heading, $email ); 
 ?>
 
