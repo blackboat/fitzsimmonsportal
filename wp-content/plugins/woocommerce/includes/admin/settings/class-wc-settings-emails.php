@@ -257,7 +257,7 @@ class WC_Settings_Emails extends WC_Settings_Page {
 									break;
 									case 'recipient' :
 										echo '<td class="wc-email-settings-table-' . esc_attr( $key ) . '">
-											' . esc_html( $email->is_customer_email() ? __( 'Customer', 'woocommerce' ) : $email->get_recipient() ) . '
+											' . esc_html( $email->is_customer_email() ? __( $email->get_recipient()?('Customer, '.$email->get_recipient()):'Customer', 'woocommerce' ) : $email->get_recipient() ) . '
 										</td>';
 									break;
 									case 'status' :
