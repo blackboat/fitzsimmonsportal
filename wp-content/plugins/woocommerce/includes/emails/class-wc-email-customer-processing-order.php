@@ -19,6 +19,8 @@ if ( ! class_exists( 'WC_Email_Customer_Processing_Order' ) ) :
  */
 class WC_Email_Customer_Processing_Order extends WC_Email {
 
+    public $venue_name;
+
 	/**
 	 * Constructor.
 	 */
@@ -52,6 +54,8 @@ class WC_Email_Customer_Processing_Order extends WC_Email {
 
 		if ( $order_id ) {
 			$this->object       = wc_get_order( $order_id );
+            $user_id = $this->object->get_user()->ID;
+            $this->venue_name   = get_post(get_venue_id($user_id))->post_title;
 
 			$this->find['order-date']      = '{order_date}';
 			$this->find['order-number']    = '{order_number}';
