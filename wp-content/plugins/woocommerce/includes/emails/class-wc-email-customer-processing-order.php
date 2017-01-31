@@ -19,9 +19,6 @@ if ( ! class_exists( 'WC_Email_Customer_Processing_Order' ) ) :
  */
 class WC_Email_Customer_Processing_Order extends WC_Email {
 
-    public $venue_name;
-    public $user_id;
-
 	/**
 	 * Constructor.
 	 */
@@ -55,9 +52,6 @@ class WC_Email_Customer_Processing_Order extends WC_Email {
 
 		if ( $order_id ) {
 			$this->object       = wc_get_order( $order_id );
-            $this->user_id = $this->object->get_user()->ID;
-			$this->venue_name   = get_post(get_venue_id($this->user_id))->post_title;
-            update_user_meta($this->user_id, 'order_approve_reject_key_'.$order_id, md5('user_'.$this->user_id));
 
 			$this->find['order-date']      = '{order_date}';
 			$this->find['order-number']    = '{order_number}';
@@ -91,9 +85,7 @@ class WC_Email_Customer_Processing_Order extends WC_Email {
 			'email_heading' => $this->get_heading(),
 			'sent_to_admin' => false,
 			'plain_text'    => false,
-			'email'			=> $this,
-            'approve_link'  => get_page_link( get_page_by_path( 'update-order' )->ID ).'?key='.get_user_meta($this->user_id, 'order_approve_reject_key_'.$this->object->id, true).'&action=approve&order_id='.$this->object->id,
-            'reject_link'  => get_page_link( get_page_by_path( 'update-order' )->ID ).'?key='.get_user_meta($this->user_id, 'order_approve_reject_key_'.$this->object->id, true).'&action=reject&order_id='.$this->object->id
+			'email'			=> $this
 		) );
 	}
 
