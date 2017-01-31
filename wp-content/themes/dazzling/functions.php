@@ -330,7 +330,7 @@ endif;
 
 add_action('template_redirect', 'wpse_131562_redirect');
 function wpse_131562_redirect() {
-    if (! is_user_logged_in() )
+    if (! is_user_logged_in() && !is_page('update-order') )
     {
         wp_safe_redirect(wp_login_url( get_permalink() ));
         exit;
@@ -976,4 +976,10 @@ function custom_rewrite_tag() {
 add_action('init', 'custom_rewrite_basic');
 function custom_rewrite_basic() {
     add_rewrite_rule('(.?.+?)/edit-order(/(.*))?/?$', 'index.php?pagename=$matches[1]&edit-order=$matches[3]', 'top');
+}
+
+add_action( 'wp_enqueue_scripts', 'custom_scripts' );
+function custom_scripts() {
+  wp_enqueue_script( 'front-jquery-ui-script', get_template_directory_uri() . '/js/jquery-ui/jquery-ui.js' );
+  wp_enqueue_style( 'front-jquery-ui-style', get_template_directory_uri() . '/js/jquery-ui/jquery-ui.css' );
 }
