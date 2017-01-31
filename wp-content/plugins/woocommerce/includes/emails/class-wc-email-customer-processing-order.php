@@ -19,6 +19,8 @@ if ( ! class_exists( 'WC_Email_Customer_Processing_Order' ) ) :
  */
 class WC_Email_Customer_Processing_Order extends WC_Email {
 
+    public $venue_name;
+
 	/**
 	 * Constructor.
 	 */
@@ -52,7 +54,8 @@ class WC_Email_Customer_Processing_Order extends WC_Email {
 
 		if ( $order_id ) {
 			$this->object       = wc_get_order( $order_id );
- 			$this->recipient    = $this->recipient . ',' . $this->object->billing_email;
+			$this->venue_name   = get_post(get_venue_id($this->object->get_user()->ID))->post_title;
+// 			$this->recipient    = $this->recipient . ',' . $this->object->billing_email;
 
 			$this->find['order-date']      = '{order_date}';
 			$this->find['order-number']    = '{order_number}';
@@ -65,8 +68,14 @@ class WC_Email_Customer_Processing_Order extends WC_Email {
 			return;
 		}
 
-		$this->send( $this->get_recipient(), $this->get_subject(), $this->get_content(), $this->get_headers(), $this->get_attachments() );
+        $this->send( $this->object->billing_email, $this->get_subject(), $this->get_content(), $this->get_headers(), $this->get_attachments() );
+        add_filter( 'woocommerce_email_heading_' . $this->id, array($this, 'custom_heading'), 10, 2 );
+        $this->send( $this->get_recipient(), $this->get_subject(), $this->get_content(), $this->get_headers(), $this->get_attachments() );
 	}
+
+    public function custom_heading($heading, $object) {
+        return $heading.' - Venue: '.$this->venue_name;
+    }
 
 	/**
 	 * Get content html.

@@ -811,6 +811,17 @@ function get_current_venue_id() {
   }
   return false;
 }
+function get_venue_id( $user_id ) {
+    $venues = get_posts(array('post_type' => 'venue', 'posts_per_page' => -1));
+    foreach ($venues as $venue) {
+        $venue_manager = get_field_object('venue_manager', $venue->ID);
+        $venue_manager = $venue_manager['value'];
+        if (intval($venue_manager['ID']) == $user_id) {
+            return $venue->ID;
+        }
+    }
+    return false;
+}
 function get_areamanager() {
     $venue_id = get_current_venue_id();
     if (!$venue_id)
