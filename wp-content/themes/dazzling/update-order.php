@@ -36,6 +36,7 @@ if ( !empty( $_GET['order_id'] ) ) {
     <p class="validateTips">Order #<?php echo $_GET['order_id']; ?> is approved.</p>
     <form method="POST">
         <input type="hidden" name="action" value="approve" />
+        <input type="hidden" name="order_id" value="<?php echo $_GET['order_id']; ?>" />
     </form>
 </div>
 <div id="reject-order-dialog" title="Reject Order" style="display:none;">
@@ -69,10 +70,6 @@ if ( !empty( $_GET['order_id'] ) ) {
 //            Login: function() {
 //              dialog.dialog( "close" );
 //            }
-          },
-          open: function() {
-          },
-          close: function() {
           }
         });
         <?php if (!empty( $_POST['action'] ) && $_POST['action'] == 'reject') { ?>
@@ -83,9 +80,9 @@ if ( !empty( $_GET['order_id'] ) ) {
             modal: true,
             title: 'Order is rejected',
             buttons: {
-                Login: function() {
-                    reject_dlg.dialog( "close" );
-                }
+//                Login: function() {
+//                    reject_dlg.dialog( "close" );
+//                }
             }
         });
         <?php } else { ?>
