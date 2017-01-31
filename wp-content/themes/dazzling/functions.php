@@ -530,7 +530,7 @@ function add_order_actions_button_css() {
 
 
 // add order admin link to new order email
-add_action( 'woocommerce_email_after_order_table', 'add_link_back_to_order', 10, 2 );
+// add_action( 'woocommerce_email_after_order_table', 'add_link_back_to_order', 10, 2 );
 function add_link_back_to_order( $order, $is_admin ) {
     // Only for admin emails
     if ( ! $is_admin || $order->get_total() < get_approval_threshold()) {

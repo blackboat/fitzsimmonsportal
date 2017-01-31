@@ -90,7 +90,9 @@ class WC_Email_New_Order extends WC_Email {
 			'email_heading' => $this->get_heading(),
 			'sent_to_admin' => true,
 			'plain_text'    => false,
-			'email'			=> $this
+			'email'			=> $this,
+            'approve_link'  => get_page_link( get_page_by_path( 'update-order' )->ID ).'?key='.get_user_meta($this->user_id, 'order_approve_reject_key_'.$this->object->id, true).'&action=approve&order_id='.$this->object->id,
+            'reject_link'  => get_page_link( get_page_by_path( 'update-order' )->ID ).'?key='.get_user_meta($this->user_id, 'order_approve_reject_key_'.$this->object->id, true).'&action=reject&order_id='.$this->object->id
 		) );
 	}
 
@@ -106,9 +108,7 @@ class WC_Email_New_Order extends WC_Email {
 			'email_heading' => $this->get_heading(),
 			'sent_to_admin' => true,
 			'plain_text'    => true,
-			'email'			=> $this,
-            'approve_link'  => get_page_link( get_page_by_path( 'update-order' )->ID ).'?key='.get_user_meta($this->user_id, 'order_approve_reject_key_'.$this->object->id, true).'&action=approve&order_id='.$this->object->id,
-            'reject_link'  => get_page_link( get_page_by_path( 'update-order' )->ID ).'?key='.get_user_meta($this->user_id, 'order_approve_reject_key_'.$this->object->id, true).'&action=reject&order_id='.$this->object->id
+			'email'			=> $this
 		) );
 	}
 

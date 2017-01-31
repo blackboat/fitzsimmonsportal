@@ -103,7 +103,7 @@ if ($order->get_total() >= get_approval_threshold()) { ?>
             text-decoration: none !important;"
        href="<?php echo reject_link; ?>">Reject</a>
 </p>
-<?php } ?>
+<?php }
 
  /**
   * @hooked WC_Emails::email_footer() Output the email footer
