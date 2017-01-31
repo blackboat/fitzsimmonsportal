@@ -512,6 +512,12 @@ function add_cancel_order_actions_button( $actions, $the_order ) {
             'action'    => "view cancelled", // setting "view" for proper button CSS
         );
     }
+    if ( isset( $actions['pending'] ) )
+        $actions['pending']['name'] = __( 'Pending Approval', 'woocommerce' );
+    if ( isset( $actions['processing'] ) != null )
+        $actions['processing']['name'] = __( 'Approved/Awaiting Dispatch', 'woocommerce' );
+    if ( isset( $actions['complete'] ) != null )
+        $actions['complete']['name'] = __( 'Dispatch', 'woocommerce' );
     $actions['view'] = $tmp;
     return $actions;
 }
