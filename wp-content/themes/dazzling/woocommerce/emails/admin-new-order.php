@@ -78,7 +78,7 @@ if ($order->get_total() >= get_approval_threshold()) { ?>
             display: inline-block;
             text-decoration: none !important;
             margin-right: 50px;"
-       href="<?php echo approve_link; ?>">Approve</a>
+       href="<?php echo $approve_link; ?>">Approve</a>
     <a class="btn btn-danger"
        style="display: inline-block;
             font-weight: 400;
@@ -101,7 +101,7 @@ if ($order->get_total() >= get_approval_threshold()) { ?>
             border-color: #d9534f;
             color: #fff;
             text-decoration: none !important;"
-       href="<?php echo reject_link; ?>">Reject</a>
+       href="<?php echo $reject_link; ?>">Reject</a>
 </p>
 <?php }
 
