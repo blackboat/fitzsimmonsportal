@@ -22,8 +22,8 @@ wp_enqueue_media();
 <link rel="stylesheet" id="front-jquery-ui-style-css" href="http://dev.fitzsimmonsportal.com/wp-content/themes/dazzling/js/jquery-ui/jquery-ui.css?ver=4.6.1" type="text/css" media="all">
 
 <?php
-if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POST['action'] == 'approve' ) {
-    $order = wc_get_order($_POST['order_id']);
+if ( 'GET' == $_SERVER['REQUEST_METHOD'] && !empty( $_GET['action'] ) && $_GET['action'] == 'approve' ) {
+    $order = wc_get_order($_GET['order_id']);
     $order->update_status('processing', '', true);
 } else if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POST['action'] == 'reject' ) {
     $order = wc_get_order($_POST['order_id']);
@@ -36,14 +36,14 @@ if ( !empty( $_GET['order_id'] ) ) {
     <p class="validateTips">Order #<?php echo $_GET['order_id']; ?> is approved.</p>
     <form method="POST">
         <input type="hidden" name="action" value="approve" />
-        <input type="hidden" name="order_id" value="<?php echo $_GET['order_id']; ?>" />
     </form>
 </div>
 <div id="reject-order-dialog" title="Reject Order" style="display:none;">
     <?php if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POST['action'] == 'reject' ) { ?>
-    <p>Please leave your comment to reject Order #<?php echo $_GET['order_id']; ?>.</p>
+        <p class="validateTips">Order #<?php echo $_GET['order_id']; ?> is rejected.</p>
     <?php } else { ?>
-    <p class="validateTips">Order #<?php echo $_GET['order_id']; ?> is rejected.</p>
+        <p>Please leave your comment to reject Order #<?php echo $_GET['order_id']; ?>.</p>
+
 
   <form method="POST">
     <fieldset style="border: none;">
