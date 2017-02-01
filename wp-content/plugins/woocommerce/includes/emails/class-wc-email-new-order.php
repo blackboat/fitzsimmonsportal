@@ -36,7 +36,7 @@ class WC_Email_New_Order extends WC_Email {
 
 		// Triggers for this email
 		add_action( 'woocommerce_order_status_pending_notification', array( $this, 'trigger' ) );
-		add_action( 'woocommerce_order_status_pending_to_processing_notification', array( $this, 'trigger' ) );
+//		add_action( 'woocommerce_order_status_pending_to_processing_notification', array( $this, 'trigger' ) );
 		add_action( 'woocommerce_order_status_pending_to_completed_notification', array( $this, 'trigger' ) );
 		add_action( 'woocommerce_order_status_pending_to_on-hold_notification', array( $this, 'trigger' ) );
 		add_action( 'woocommerce_order_status_failed_to_processing_notification', array( $this, 'trigger' ) );
