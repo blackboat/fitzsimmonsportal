@@ -74,6 +74,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		$fields = get_field_objects($product->post->ID);
 		if ($fields){
 			$qty = 1;
+			$unit_price = get_custom_price($product->post->ID);
 			foreach( $fields as $field_name => $field )
 			{
 				if ($field['label'] && $field['value']) {
@@ -81,6 +82,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 						$qty = $field['value'];
 					} else if ($field['name'] == 'custom_prices' || $field['name'] == 'custom_pricing') {
 						continue;
+					} else if ($field['name'] == 'unit_price') {
+						echo '<div style="margin-bottom: 20px;">';
+							echo '<h4 style="color: black;"><label style="width:50%">' . $field['label'] . ' :</label><label class="'.$field_name.'" style="width:45%; text-align: right;">' . $unit_price . '</label></h4>';
+						echo '</div>';
 					} else {
 						echo '<div style="margin-bottom: 20px;">';
 							echo '<h4 style="color: black;"><label style="width:50%">' . $field['label'] . ' :</label><label class="'.$field_name.'" style="width:45%; text-align: right;">' . $field['value'] . '</label></h4>';
@@ -88,7 +93,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 					}
 				}
 			}
-			$unit_price = get_custom_price($product->post->ID);
 		}
 		?>
 		<form class="cart" method="post" enctype="multipart/form-data">
