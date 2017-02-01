@@ -22,7 +22,7 @@ get_header(); ?>
 			<form method="post" action="<?php echo add_query_arg('do', 'login', get_permalink( $post->ID )); ?>">
 				<div class="form-group">
 					<div class="logo-login">
-							<a href="http://fitzsimmonsportal.com.au/restore/"><img src="http://fitzsimmonsportal.com.au/restore/wp-content/uploads/2016/12/fh-logo-2.png" alt="" /></a>
+							<a href="https://fitzsimmonsportal.com.au/"><img src="http://fitzsimmonsportal.com.au/wp-content/uploads/2016/12/fh-logo-2.png" alt="" /></a>
 					</div>
 				</div>
 				<div class="login-inner">

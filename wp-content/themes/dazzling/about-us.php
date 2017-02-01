@@ -29,36 +29,18 @@ get_header();
 		<div class="row">
 			<br><br><br><br>
 			<div class="col-sm-6 col-xs-12">
-				<p>Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</p>
+			<p>With over 17 years’ experience in the hospitality industry, Paul Fitzsimmons has owned and operated all types of venues ranging from cafes, pubs, restaurants, nightclubs and cocktail bars.</p>
+			<p>In 2016, Fitzsimmons Hospitality was established with the sole mission to optimise the procurement chain for venue operators in Australia through direct sourcing. With superior access to preferential pricing, we guarantee to provide the best price. </p>
+			<p>We understand the service industry and we aim to be your provider of choice for all your hospitality supplies.</p>
 				<br>
-				<p>Wendisse quis malesuada ante. Donec tempor leo sit amet fringilla euismod. Aliquam condimen tum velit ut sapien dignissim, ut blandit neque fermentum. Suspendisse ante nunc, eleifend eget turpis sit amet, sodales porttitor felis. Pellentesque et lectus risus. Sed porttitor fermentum luctus. Aliquam condimen tum velit ut sapien dignissim, ut blandit neque fermentum. Suspendisse ante nunc, eleifend eget turpis sit amet, sodales porttitor felis.</p>
 			</div>
 			<div class="col-sm-6 col-xs-12">
-				<img src="<?php echo get_home_url(); ?>/wp-content/uploads/2016/12/about-photo.jpg" alt="" />
+				<img src="<?php echo get_home_url(); ?>/wp-content/uploads/2016/12/Collection Bar Image.jpeg" alt="" />
 			</div>
 		</div>
 	</div>
 	</div>
 
-	<div class="review-wp">
-		<div class="container">
-			<div class="row">
-				<div class="col-xs-12">
-					<?php echo do_shortcode('[sp_testimonials_slider slides_column="2" arrows="true" dots="false" sp_testimonials order="ASC"] '); ?>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="partners-wp">
-		<div class="container">
-			<div class="row">
-				<div class="col-xs-12">
-					<h2>Our Partners</h2>
-					<?php echo do_shortcode('[slick-carousel-slider slidestoshow="6" slick-carousel-slider order="ASC" autoplay="false" arrows="false"]'); ?>
-				</div>
-			</div>
-		</div>
-	</div>
 	
 
 <?php

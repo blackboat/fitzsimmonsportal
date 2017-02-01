@@ -907,7 +907,7 @@ default:
 <form name="loginform" id="loginform" action="<?php echo esc_url( site_url( 'wp-login.php', 'login_post' ) ); ?>" method="post">
 	<div class="form-group">
 		<div class="logo-login">
-				<a href="http://fitzsimmonsportal.com.au/restore/"><img src="http://fitzsimmonsportal.com.au/restore/wp-content/uploads/2016/12/fh-logo-2.png" alt="" /></a>
+				<a href="https://fitzsimmonsportal.com.au/"><img src="http://fitzsimmonsportal.com.au/wp-content/uploads/2016/12/fh-logo-2.png" alt="" /></a>
 		</div>
 	</div>
 	<div class="login-inner">

@@ -664,7 +664,7 @@ function be_display_posts_facebook( $output, $atts, $image, $title, $date, $exce
       '</div>' .
       '<div class="venues-text">' .
         '<h5>' . $title . '</h5>' .
-        '<p><img src="http://fitzsimmonsportal.com.au/restore/wp-content/uploads/2016/12/map-marker.png" alt="">' .
+        '<p><img src="http://fitzsimmonsportal.com.au/wp-content/uploads/2016/12/map-marker.png" alt="">' .
           $address .
         '</p>' .
       '</div>' .
