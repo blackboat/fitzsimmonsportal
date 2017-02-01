@@ -17,9 +17,9 @@ wp_enqueue_media();
 
 
 ?>
-<script type="text/javascript" src="http://dev.fitzsimmonsportal.com/wp-includes/js/jquery/jquery.js?ver=1.12.4"></script>
-<script type="text/javascript" src="http://dev.fitzsimmonsportal.com/wp-content/themes/dazzling/js/jquery-ui/jquery-ui.js?ver=4.6.1"></script>
-<link rel="stylesheet" id="front-jquery-ui-style-css" href="http://dev.fitzsimmonsportal.com/wp-content/themes/dazzling/js/jquery-ui/jquery-ui.css?ver=4.6.1" type="text/css" media="all">
+<script type="text/javascript" src="http://fitzsimmonsportal.com.au/wp-includes/js/jquery/jquery.js?ver=1.12.4"></script>
+<script type="text/javascript" src="http://fitzsimmonsportal.com.au/wp-content/themes/dazzling/js/jquery-ui/jquery-ui.js?ver=4.6.1"></script>
+<link rel="stylesheet" id="front-jquery-ui-style-css" href="http://fitzsimmonsportal.com.au/wp-content/themes/dazzling/js/jquery-ui/jquery-ui.css?ver=4.6.1" type="text/css" media="all">
 
 <?php
 if ( 'GET' == $_SERVER['REQUEST_METHOD'] && !empty( $_GET['action'] ) && $_GET['action'] == 'approve' ) {
