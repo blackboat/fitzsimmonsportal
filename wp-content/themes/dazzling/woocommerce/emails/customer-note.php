@@ -26,7 +26,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ($venue_name == '')
     $email_heading = 'Your order is rejected by your area manager.';
 else
-    $email_heading = 'You cancelled an order.';
+    $email_heading = 'You cancelled an order. - Venue: '.$venue_name;
 do_action( 'woocommerce_email_header', $email_heading, $email ); ?>
 
 <p><?php
