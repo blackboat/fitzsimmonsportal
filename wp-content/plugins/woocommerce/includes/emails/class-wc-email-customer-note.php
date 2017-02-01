@@ -25,6 +25,7 @@ class WC_Email_Customer_Note extends WC_Email {
 	 * @var string
 	 */
 	public $customer_note;
+    public $venue_name;
 
 	/**
 	 * Constructor.
@@ -67,7 +68,14 @@ class WC_Email_Customer_Note extends WC_Email {
 
 			extract( $args );
 
+            $this->venue_name   = '';
+
 			if ( $order_id && ( $this->object = wc_get_order( $order_id ) ) ) {
+                $user_id = $this->object->get_user()->ID;
+                $venue_id = get_venue_id($user_id);
+
+                $area_email = get_field_object('area_manager', $venue_id)['value']['user_email'];
+
 				$this->recipient               = $this->object->billing_email;
 				$this->customer_note           = $customer_note;
 
@@ -86,7 +94,14 @@ class WC_Email_Customer_Note extends WC_Email {
 		}
 
 		$this->send( $this->get_recipient(), $this->get_subject(), $this->get_content(), $this->get_headers(), $this->get_attachments() );
+        $this->venue_name   = get_post($venue_id)->post_title;
+        add_filter( 'woocommerce_email_heading_' . $this->id, array($this, 'custom_heading'), 10, 2 );
+        $this->send( $this->get_recipient(), $this->get_subject(), $this->get_content(), $this->get_headers(), $this->get_attachments() );
 	}
+
+    public function custom_heading($heading, $object) {
+        return 'Order is cancelled. - Venue: '.$this->venue_name;
+    }
 
 	/**
 	 * Get content html.
@@ -101,7 +116,8 @@ class WC_Email_Customer_Note extends WC_Email {
 			'customer_note' => $this->customer_note,
 			'sent_to_admin' => false,
 			'plain_text'    => false,
-			'email'			=> $this
+			'email'			=> $this,
+            'venue_name'    => $this->venue_name
 		) );
 	}
 

@@ -23,10 +23,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * @hooked WC_Emails::email_header() Output the email header
  */
-$email_heading = 'Your order is rejected by your area manager.';
+if ($venue_name == '')
+    $email_heading = 'Your order is rejected by your area manager.';
+else
+    $email_heading = 'You cancelled an order.';
 do_action( 'woocommerce_email_header', $email_heading, $email ); ?>
 
-<p><?php _e( "Hello, your order is cancelled by area manager. They left following message:", 'woocommerce' ); ?></p>
+<p><?php
+    if ($venue_name == '')
+        _e( "Hello, your order is cancelled by area manager. They left following message:", 'woocommerce' );
+    else
+        _e( "An order is cancelled. You left following message:", 'woocommerce' );
+    ?>
+</p>
 
 <blockquote><?php echo wpautop( wptexturize( $customer_note ) ) ?></blockquote>
 
