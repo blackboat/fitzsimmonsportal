@@ -96,7 +96,7 @@ class WC_Email_Customer_Note extends WC_Email {
 		$this->send( $this->get_recipient(), $this->get_subject(), $this->get_content(), $this->get_headers(), $this->get_attachments() );
         $this->venue_name   = get_post($venue_id)->post_title;
         add_filter( 'woocommerce_email_heading_' . $this->id, array($this, 'custom_heading'), 10, 2 );
-        $this->send( $this->get_recipient(), $this->get_subject(), $this->get_content(), $this->get_headers(), $this->get_attachments() );
+        $this->send( $area_email, $this->get_subject(), $this->get_content(), $this->get_headers(), $this->get_attachments() );
 	}
 
     public function custom_heading($heading, $object) {
