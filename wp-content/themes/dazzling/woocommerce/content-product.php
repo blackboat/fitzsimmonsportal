@@ -173,7 +173,7 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 					$scope_list[] = $scope->ID;
 				}
 				if (!in_array($pid, $scope_list)) {
-					echo '<div class="oos-panel">OOS</div>';
+					echo '<div class="oos-panel"><acronym title="OOS – Out of Scope<br/>Note this product is not part of the usual range of goods that you stock in your venue">OOS</acronym></div>';
 				}
 			} else {
 				echo '<div class="oos-panel">OOS</div>';
