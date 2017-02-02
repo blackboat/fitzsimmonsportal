@@ -161,7 +161,7 @@ do_action( 'woocommerce_before_cart' ); ?>
 						}
 						if (!in_array($product_id, $scope_list)) {
 							echo '<div class="oos-panel"><acronym title="OOS – Out of Scope
-							Note this product is not part of the usual range of goods that you stock in your venue">OOS</acronym></div>';
+Note this product is not part of the usual range of goods that you stock in your venue">OOS</acronym></div>';
 						}
 					}
 					?>
