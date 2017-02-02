@@ -21,6 +21,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 global $current_user;
+$acronym = "OOS – Out of Scope
+Note this product is not part of the usual range of goods that you stock in your venue";
 ?>
 <table class="shop_table woocommerce-checkout-review-order-table">
 	<thead>
@@ -150,7 +152,7 @@ global $current_user;
 							$scope_list[] = $scope->ID;
 						}
 						if (!in_array($product_id, $scope_list)) {
-							echo '<div class="oos-panel"><acronym title="OOS – Out of Scope<br/>Note this product is not part of the usual range of goods that you stock in your venue">OOS</acronym></div>';
+							echo '<div class="oos-panel"><acronym title="'.$acronym.'">OOS</acronym></div>';
 						}
 					}
 					?>
