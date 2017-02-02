@@ -24,7 +24,9 @@ global $wpdb;
 global $current_user;
 wc_print_notices();
 
-do_action( 'woocommerce_before_cart' ); ?>
+do_action( 'woocommerce_before_cart' ); 
+$acronym = "OOS – Out of Scope
+Note this product is not part of the usual range of goods that you stock in your venue";?>
 
 <form class="cart-form" action="<?php echo esc_url( wc_get_cart_url() ); ?>" method="post">
 
@@ -160,9 +162,7 @@ do_action( 'woocommerce_before_cart' ); ?>
 							$scope_list[] = $scope->ID;
 						}
 						if (!in_array($product_id, $scope_list)) {
-							$acronym = "OOS – Out of Scope 
-							Note this product is not part of the usual range of goods that you stock in your venue";
-							echo '<div class="oos-panel"><acronym title='.$acronym.'>OOS</acronym></div>';
+							echo '<div class="oos-panel"><acronym title="'.$acronym.'">OOS</acronym></div>';
 						}
 					}
 					?>
