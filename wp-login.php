@@ -60,10 +60,10 @@ function login_header( $title = 'Log In', $message = '', $wp_error = '' ) {
 
 	?><!DOCTYPE html>
 	<!--[if IE 8]>
-		<html xmlns="http://www.w3.org/1999/xhtml" class="ie8" <?php language_attributes(); ?>>
+		<html xmlns="https://www.w3.org/1999/xhtml" class="ie8" <?php language_attributes(); ?>>
 	<![endif]-->
 	<!--[if !(IE 8) ]><!-->
-		<html xmlns="http://www.w3.org/1999/xhtml" <?php language_attributes(); ?>>
+		<html xmlns="https://www.w3.org/1999/xhtml" <?php language_attributes(); ?>>
 	<!--<![endif]-->
 	<head>
 	<meta http-equiv="Content-Type" content="<?php bloginfo('html_type'); ?>; charset=<?php bloginfo('charset'); ?>" />
@@ -907,7 +907,7 @@ default:
 <form name="loginform" id="loginform" action="<?php echo esc_url( site_url( 'wp-login.php', 'login_post' ) ); ?>" method="post">
 	<div class="form-group">
 		<div class="logo-login">
-				<a href="https://fitzsimmonsportal.com.au/"><img src="http://fitzsimmonsportal.com.au/wp-content/uploads/2016/12/fh-logo-2.png" alt="" /></a>
+				<a href="https://fitzsimmonsportal.com.au/"><img src="https://fitzsimmonsportal.com.au/wp-content/uploads/2016/12/fh-logo-2.png" alt="" /></a>
 		</div>
 	</div>
 	<div class="login-inner">
