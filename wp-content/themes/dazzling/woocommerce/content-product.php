@@ -166,6 +166,8 @@ Note this product is not part of the usual range of goods that you stock in your
 	echo '<div class="button-box">';
 		if (get_custom_price($pid))
 			echo '<h4 class="prig-title">$' . get_custom_price($pid) . '  EA</h4>';
+		else
+			echo '<h4 class="prig-title">&nbsp;</h4>';
 		echo '<a class="wpb_wl_preview open-popup-link btn btn-default" href="#wpb_wl_quick_view_'.$pid.'" data-effect="mfp-zoom-in"><i class="fa fa-plus"></i> Add To Cart</a>';
 		
 		$catid_list = wp_get_post_terms($pid,'product_cat',array('fields'=>'ids'));
