@@ -143,7 +143,7 @@ Note this product is not part of the usual range of goods that you stock in your
 			{
 				if ($field['label']) {
 					echo '<tr>';
-					if ( $field['name'] == 'range' ||  $field['name'] == 'capacity' || $field['name'] == 'unit_price' || $field['name'] == 'custom_pricing' || $field['name'] == 'custom_prices') {
+					if ( $field['name'] == 'height_(mm)' || $field['name'] == 'diameter_(mm)' ||  $field['name'] == 'range' ||  $field['name'] == 'capacity' || $field['name'] == 'unit_price' || $field['name'] == 'custom_pricing' || $field['name'] == 'custom_prices') {
 						continue;
 					}
 					echo '<td class="stock-detail">'.$field['label'].': '.'</td>';
