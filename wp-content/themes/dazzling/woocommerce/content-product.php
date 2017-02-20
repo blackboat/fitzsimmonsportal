@@ -33,7 +33,6 @@ Note this product is not part of the usual range of goods that you stock in your
 ?>
 <li <?php post_class(); ?>>
 	<?php
-	var_dump($product);
 	$pid = $product->post->ID;
 	// $dummy_venue = 'Dutchess';
 	// $venue = $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE post_title = %s AND post_type= 'venue'", $dummy_venue));
@@ -84,6 +83,7 @@ Note this product is not part of the usual range of goods that you stock in your
 		$cat_slug = '';
 	}
 	$fields = get_field_objects($pid);
+	var_dump('unit_price', $pid);
 	$qty = 1;
 	if( $fields )
 	{
