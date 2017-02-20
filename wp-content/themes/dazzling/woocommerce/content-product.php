@@ -33,6 +33,7 @@ Note this product is not part of the usual range of goods that you stock in your
 ?>
 <li <?php post_class(); ?>>
 	<?php
+	var_dump($product);
 	$pid = $product->post->ID;
 	// $dummy_venue = 'Dutchess';
 	// $venue = $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE post_title = %s AND post_type= 'venue'", $dummy_venue));
@@ -140,7 +141,6 @@ Note this product is not part of the usual range of goods that you stock in your
 			echo '<table style="width:100%;">';
 			foreach( $fields as $field_name => $field )
 			{
-				var_dump($field['label']);
 				if ($field['label']) {
 					echo '<tr>';
 					if ( $field['name'] == 'capacity' || $field['name'] == 'unit_price' || $field['name'] == 'custom_pricing' || $field['name'] == 'custom_prices') {
