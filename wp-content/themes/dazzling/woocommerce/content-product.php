@@ -84,7 +84,6 @@ Note this product is not part of the usual range of goods that you stock in your
 	}
 	$fields = get_field_objects($pid);
 	$qty = 1;
-	var_dump($fields);
 	if( $fields )
 	{
 		if ($cat_slug == 'tableware') {
@@ -141,6 +140,7 @@ Note this product is not part of the usual range of goods that you stock in your
 			echo '<table style="width:100%;">';
 			foreach( $fields as $field_name => $field )
 			{
+				var_dump($field['label'].'   '.$field['value']);
 				if ($field['label']) {
 					echo '<tr>';
 					if ( $field['name'] == 'capacity' || $field['name'] == 'unit_price' || $field['name'] == 'custom_pricing' || $field['name'] == 'custom_prices') {
