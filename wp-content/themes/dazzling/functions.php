@@ -984,7 +984,7 @@ function custom_scripts() {
   wp_enqueue_style( 'front-jquery-ui-style', get_template_directory_uri() . '/js/jquery-ui/jquery-ui.css' );
 }
 
-// add_action('init','example_hide');
+add_action('init','example_hide');
 
 function example_hide(){
 
