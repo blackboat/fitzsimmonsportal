@@ -983,16 +983,3 @@ function custom_scripts() {
   wp_enqueue_script( 'front-jquery-ui-script', get_template_directory_uri() . '/js/jquery-ui/jquery-ui.js' );
   wp_enqueue_style( 'front-jquery-ui-style', get_template_directory_uri() . '/js/jquery-ui/jquery-ui.css' );
 }
-
-// add_action('init','example_hide');
-
-function example_hide(){
-
-    $my_posts = get_posts( array('post_type' => 'product' ) );
-
-    foreach ( $my_posts as $my_post ) {
-
-    wp_update_post( $my_post );
-
-    }
-}
