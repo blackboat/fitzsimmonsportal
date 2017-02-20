@@ -80,10 +80,11 @@ Note this product is not part of the usual range of goods that you stock in your
 		if ($cat->parent != 0)
 			$cat_slug = get_category($cat->parent)->slug;
 	} else {
-		$cat_slug = 'drinkware';
+		$cat_slug = '';
 	}
 	$fields = get_field_objects($pid);
 	$qty = 1;
+	var_dump($fields);
 	if( $fields )
 	{
 		if ($cat_slug == 'tableware') {
