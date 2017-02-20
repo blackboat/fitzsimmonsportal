@@ -83,7 +83,7 @@ Note this product is not part of the usual range of goods that you stock in your
 		$cat_slug = '';
 	}
 	$fields = get_field_objects($pid);
-	var_dump('unit_price', $pid);
+	var_dump(get_field_object('unit_price', $pid));
 	$qty = 1;
 	if( $fields )
 	{
