@@ -140,7 +140,7 @@ Note this product is not part of the usual range of goods that you stock in your
 			echo '<table style="width:100%;">';
 			foreach( $fields as $field_name => $field )
 			{
-				var_dump($field['label'].'   '.$field['value']);
+				var_dump($field['label']);
 				if ($field['label']) {
 					echo '<tr>';
 					if ( $field['name'] == 'capacity' || $field['name'] == 'unit_price' || $field['name'] == 'custom_pricing' || $field['name'] == 'custom_prices') {
