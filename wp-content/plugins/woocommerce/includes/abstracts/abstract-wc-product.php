@@ -856,7 +856,11 @@ class WC_Product {
 	 * @return string price
 	 */
 	public function get_price() {
-		return apply_filters( 'woocommerce_get_price', $this->price, $this );
+		$product_id = $this->id;
+		$unit_price = get_custom_price($product_id);
+		$unit = get_field_object('qty', $product_id);
+		$price = $unit_price * $unit['value'];
+		return apply_filters( 'woocommerce_get_price', $price, $this );
 	}
 
 	/**
