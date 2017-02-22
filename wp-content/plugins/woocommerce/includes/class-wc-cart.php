@@ -2148,7 +2148,8 @@ class WC_Cart {
 
 				if ( $this->tax_display_cart == 'excl' ) {
 
-					$row_price        = $_product->get_price_excluding_tax( $quantity );
+					// $row_price        = $_product->get_price_excluding_tax( $quantity );
+					$row_price = $price * $quantity;
 					$product_subtotal = wc_price( $row_price );
 
 					if ( $this->prices_include_tax && $this->tax_total > 0 ) {
@@ -2157,7 +2158,8 @@ class WC_Cart {
 
 				} else {
 
-					$row_price        = $_product->get_price_including_tax( $quantity );
+					// $row_price        = $_product->get_price_including_tax( $quantity );
+					$row_price = $price * $quantity;
 					$product_subtotal = wc_price( $row_price );
 
 					if ( ! $this->prices_include_tax && $this->tax_total > 0 ) {
