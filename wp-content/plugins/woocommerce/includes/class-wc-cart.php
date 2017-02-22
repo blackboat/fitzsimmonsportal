@@ -2136,11 +2136,7 @@ class WC_Cart {
 		 */
 		public function get_product_subtotal( $_product, $quantity ) {
 
-			$product_id = $_product->id;
-			$unit_price = get_custom_price($product_id);
-			$unit = get_field_object('qty', $product_id);
-			$price = $unit_price * $unit['value'];
-			// $price 			= $_product->get_price();
+			$price 			= $_product->get_price();
 			$taxable 		= $_product->is_taxable();
 
 			// Taxable
@@ -2148,8 +2144,7 @@ class WC_Cart {
 
 				if ( $this->tax_display_cart == 'excl' ) {
 
-					// $row_price        = $_product->get_price_excluding_tax( $quantity );
-					$row_price = $price * $quantity;
+					$row_price        = $_product->get_price_excluding_tax( $quantity );
 					$product_subtotal = wc_price( $row_price );
 
 					if ( $this->prices_include_tax && $this->tax_total > 0 ) {
@@ -2158,8 +2153,7 @@ class WC_Cart {
 
 				} else {
 
-					// $row_price        = $_product->get_price_including_tax( $quantity );
-					$row_price = $price * $quantity;
+					$row_price        = $_product->get_price_including_tax( $quantity );
 					$product_subtotal = wc_price( $row_price );
 
 					if ( ! $this->prices_include_tax && $this->tax_total > 0 ) {
