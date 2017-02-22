@@ -2136,7 +2136,11 @@ class WC_Cart {
 		 */
 		public function get_product_subtotal( $_product, $quantity ) {
 
-			$price 			= $_product->get_price();
+			$product_id = $_product->id;
+			$unit_price = get_custom_price($product_id);
+			$unit = get_field_object('qty', $product_id);
+			$price = $unit_price * $unit['value'];
+			// $price 			= $_product->get_price();
 			$taxable 		= $_product->is_taxable();
 
 			// Taxable
