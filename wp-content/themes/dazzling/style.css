@@ -4603,6 +4603,11 @@ p:empty {
     float: right;
 }
 
+.our-products .products-box img.img-consumables {
+  height: 120px !important;
+  margin-top: 20px;
+}
+
 .widget_product_categories .product-categories>li>a {
   font-weight: 700;
   font-size: 18px;
