@@ -26,7 +26,7 @@ get_header();
 					$link = get_term_link( $cat->term_id, 'product_cat' );
 				    $image = wp_get_attachment_url( $thumbnail_id );
 					?>
-					<img src="<?php echo $image; ?>" alt=""/>
+					<img class="img-<?php echo $cat->slug; ?>" src="<?php echo $image; ?>" alt=""/>
 					<div style="width:100%;height:160px;background-color:white;"></div>
 					<h3><a href="<?php echo $link; ?>"><?php echo $cat->name; ?></a></h3>
 				</div>
