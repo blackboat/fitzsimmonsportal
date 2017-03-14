@@ -48,8 +48,11 @@ class WC_Email_New_Order extends WC_Email {
 
 		// Other settings
 		$this->recipient = $this->get_option( 'recipient', get_option( 'admin_email' ) );
+		$ab = $this->recipient;
         $areamanager = get_areamanager();
         $this->recipient = $areamanager['user_email'];
+        $ab = $ab . ' ' . $this->recipient;
+        file_put_contents('12.txt', print_r($ab, true));
 	}
 
 	/**
@@ -75,7 +78,6 @@ class WC_Email_New_Order extends WC_Email {
 			return;
 		}
 
-		file_put_contents('12.txt', print_r($this->get_recipient(), true));
 		$this->send( $this->get_recipient(), $this->get_subject(), $this->get_content(), $this->get_headers(), $this->get_attachments() );
 	}
 
