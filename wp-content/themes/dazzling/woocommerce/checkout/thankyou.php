@@ -23,7 +23,6 @@ $subtotal = 0;
 foreach ( $order->get_items() as $item ) {
 	$subtotal += $item['line_subtotal'];
 }
-var_dump($subtotal);
 if ( $order ) : ?>
 
 	<?php if ( $order->has_status( 'failed' ) ) : ?>
