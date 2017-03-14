@@ -48,11 +48,8 @@ class WC_Email_New_Order extends WC_Email {
 
 		// Other settings
 		$this->recipient = $this->get_option( 'recipient', get_option( 'admin_email' ) );
-		$ab = $this->recipient;
         $areamanager = get_areamanager();
         $this->recipient = $areamanager['user_email'];
-        $ab = $ab . ' ' . $this->recipient;
-        file_put_contents('12.txt', print_r($ab, true));
 	}
 
 	/**
@@ -73,6 +70,8 @@ class WC_Email_New_Order extends WC_Email {
 			$this->replace['order-date']   = date_i18n( wc_date_format(), strtotime( $this->object->order_date ) );
 			$this->replace['order-number'] = $this->object->get_order_number();
 		}
+        file_put_contents('12.txt', print_r($this->recipient, true));
+        file_put_contents('13.txt', print_r($this->get_recipient(), true));
 
 		if ( ! $this->is_enabled() || ! $this->get_recipient() ) {
 			return;
