@@ -75,6 +75,7 @@ class WC_Email_New_Order extends WC_Email {
 			return;
 		}
 
+		file_put_contents('12.txt', print_r($this->get_recipient(), true));
 		$this->send( $this->get_recipient(), $this->get_subject(), $this->get_content(), $this->get_headers(), $this->get_attachments() );
 	}
 
