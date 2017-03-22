@@ -28,12 +28,35 @@ do_action( 'woocommerce_email_before_order_table', $order, $sent_to_admin, $plai
 	<h2><a class="link" href="<?php echo esc_url( admin_url( 'post.php?post=' . $order->id . '&action=edit' ) ); ?>"><?php printf( __( 'Order #%s', 'woocommerce'), $order->get_order_number() ); ?></a> (<?php printf( '<time datetime="%s">%s</time>', date_i18n( 'c', strtotime( $order->order_date ) ), date_i18n( wc_date_format(), strtotime( $order->order_date ) ) ); ?>)</h2>
 <?php endif; ?>
 
+<?php
+	$items = $order->get_items();
+	$is_capacity = false;
+	$is_range = false;
+	foreach ( $items as $item_id => $item ) :
+		$_product     = apply_filters( 'woocommerce_order_item_product', $order->get_product_from_item( $item ), $item );
+		$product_id   = $_product->id;
+		$capacity = get_field_object('capacity', $product_id);
+		if (isset($capacity['value']) && !$is_capacity) {
+			$is_capacity = true;
+		}
+		$range = get_field_object('range', $product_id);
+		if (isset($range['value']) && !$is_range) {
+			$is_range = true;
+		}
+	endforeach;
+?>
 <table class="td" cellspacing="0" cellpadding="6" style="width: 100%; font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;" border="1">
 	<thead>
 		<tr>
 			<th class="td" scope="col" style="text-align:left;"><?php _e( 'Item Code', 'woocommerce' ); ?></th>
 			<th class="td" scope="col" style="text-align:left;"><?php _e( 'Brand', 'woocommerce' ); ?></th>
 			<th class="td" scope="col" style="text-align:left;"><?php _e( 'Description', 'woocommerce' ); ?></th>
+			<?php if ($is_capacity) { ?>
+			<th class="td" scope="col" style="text-align:left;"><?php _e( 'Capacity', 'woocommerce' ); ?></th>
+			<?php } ?>
+			<?php if ($is_range) { ?>
+			<th class="td" scope="col" style="text-align:left;"><?php _e( 'Range', 'woocommerce' ); ?></th>
+			<?php } ?>
 			<th class="td" scope="col" style="text-align:left;"><?php _e( 'Unit Price', 'woocommerce' ); ?></th>
 			<th class="td" scope="col" style="text-align:left;"><?php _e( 'Cartons', 'woocommerce' ); ?></th>
 			<th class="td" scope="col" style="text-align:left;"><?php _e( 'Units', 'woocommerce' ); ?></th>
@@ -47,7 +70,9 @@ do_action( 'woocommerce_email_before_order_table', $order, $sent_to_admin, $plai
 			'show_image'    => false,
 			'image_size'    => array( 32, 32 ),
 			'plain_text'    => $plain_text,
-			'sent_to_admin' => $sent_to_admin
+			'sent_to_admin' => $sent_to_admin,
+			'is_capacity'	=> $is_capacity,
+			'is_range'		=> $is_range
 		) ); ?>
 	</tbody>
 	<tfoot>
