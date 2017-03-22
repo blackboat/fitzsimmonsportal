@@ -32,16 +32,19 @@ do_action( 'woocommerce_email_before_order_table', $order, $sent_to_admin, $plai
 	$items = $order->get_items();
 	$is_capacity = false;
 	$is_range = false;
+	$cols = 6;
 	foreach ( $items as $item_id => $item ) :
 		$_product     = apply_filters( 'woocommerce_order_item_product', $order->get_product_from_item( $item ), $item );
 		$product_id   = $_product->id;
 		$capacity = get_field_object('capacity', $product_id);
 		if (isset($capacity['value']) && !$is_capacity) {
 			$is_capacity = true;
+			$cols += 1;
 		}
 		$range = get_field_object('range', $product_id);
 		if (isset($range['value']) && !$is_range) {
 			$is_range = true;
+			$cols += 1;
 		}
 	endforeach;
 ?>
@@ -82,7 +85,7 @@ do_action( 'woocommerce_email_before_order_table', $order, $sent_to_admin, $plai
 				foreach ( $totals as $total ) {
 					$i++;
 					?><tr>
-						<th class="td" scope="row" colspan="6" style="text-align:left; <?php if ( $i === 1 ) echo 'border-top-width: 4px;'; ?>"><?php echo $total['label']; ?></th>
+						<th class="td" scope="row" colspan="<?php echo $cols; ?>" style="text-align:left; <?php if ( $i === 1 ) echo 'border-top-width: 4px;'; ?>"><?php echo $total['label']; ?></th>
 						<td class="td" colspan="2" style="text-align:left; <?php if ( $i === 1 ) echo 'border-top-width: 4px;'; ?>"><?php echo $total['value']; ?></td>
 					</tr><?php
 				}
