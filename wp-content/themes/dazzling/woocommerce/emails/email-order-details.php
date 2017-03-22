@@ -38,13 +38,17 @@ do_action( 'woocommerce_email_before_order_table', $order, $sent_to_admin, $plai
 		$product_id   = $_product->id;
 		$capacity = get_field_object('capacity', $product_id);
 		if (isset($capacity['value']) && !$is_capacity) {
-			$is_capacity = true;
-			$cols += 1;
+			if (trim($capacity['value']) != '') {
+				$is_capacity = true;
+				$cols += 1;
+			}
 		}
 		$range = get_field_object('range', $product_id);
 		if (isset($range['value']) && !$is_range) {
-			$is_range = true;
-			$cols += 1;
+			if (trim($range['value']) != '') {
+				$is_range = true;
+				$cols += 1;
+			}
 		}
 	endforeach;
 ?>
