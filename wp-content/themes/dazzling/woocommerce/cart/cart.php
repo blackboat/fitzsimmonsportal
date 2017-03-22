@@ -236,7 +236,7 @@ Note this product is not part of the usual range of goods that you stock in your
 <script type="text/javascript">
 jQuery(document).ready(function( $ ){
 	$('#submit_order').on('click', function() {
-		var total = parseInt($('.order-total .woocommerce-Price-amount').text().replace('$', ''));
+		var total = parseFloat($('.order-total .woocommerce-Price-amount').text().replace('$', '').replace(',',''));
 		$('#submit_modal').append(
 			'<form action="<?php echo esc_url( wc_get_checkout_url() ) ;?>" method="GET">' +
 			    '<fieldset>' +

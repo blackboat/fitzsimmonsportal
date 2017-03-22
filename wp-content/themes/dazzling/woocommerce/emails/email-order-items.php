@@ -20,8 +20,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-$is_capacity = false;
-$is_range = flase;
 foreach ( $items as $item_id => $item ) :
 	$_product     = apply_filters( 'woocommerce_order_item_product', $order->get_product_from_item( $item ), $item );
 	$item_meta    = new WC_Order_Item_Meta( $item, $_product );
