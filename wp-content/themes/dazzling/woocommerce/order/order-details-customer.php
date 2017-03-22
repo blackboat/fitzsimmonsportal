@@ -34,7 +34,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<tr>
 		<th><?php _e( 'Venue Name:', 'woocommerce' ); ?></th>
 		<td>
-			<?php echo 'Dutchess'; ?>
+			<?php
+				$venues = get_posts(array('post_type' => 'venue', 'posts_per_page' => -1));
+				foreach ($venues as $venue) {
+				    $venue_manager = get_field_object('venue_manager', $venue->ID);
+				    $venue_manager = $venue_manager['value'];
+				    if (intval($venue_manager['ID']) == $current_user->ID) {
+				      	echo $venue->post_title;
+				      	break;
+				    }
+				}
+			?>
 		</td>
 	</tr>
 
