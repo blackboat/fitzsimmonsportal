@@ -225,9 +225,57 @@ Note this product is not part of the usual range of goods that you stock in your
 	<div class="col-xs-12">
 		<div class="btn-row">
 			<div class="btn-group"><a href="<?php echo get_home_url(); ?>" class="btn btn-default">Continue Shopping</a></div>
-			<div class="btn-group"><a href="<?php echo esc_url( wc_get_checkout_url() ) ;?>" class="btn btn-success">Submit Order</a></div>
+			<div class="btn-group"><a href="<?php echo esc_url( wc_get_checkout_url() ) ;?>" id="submit_order" class="btn btn-success">Submit Order</a></div>
 		</div>
 	</div>
 </div>
+
+<div id="submit_modal" title="Custom Price">
+  
+</div>
+<script type="text/javascript">
+jQuery(document).ready(function( $ ){
+	$('#submit_order').on('click', function() {
+		var total = parseFloat($('.order-total .woocommerce-Price-amount').text().replace('$', '').replace(',',''));
+		$('#submit_modal').append(
+			'<form action="<?php echo esc_url( wc_get_checkout_url() ) ;?>" method="GET">' +
+			    '<fieldset>' +
+			      '<label for="name">All orders to metro capital cities under $100.00 in net value will attract a $20.00 delivery surcharge</label>' +
+				'</fieldset>' +
+			'</form>'
+		);
+		if (total<=100) {
+			$('#submit_modal form').show();
+			dialog = $( "#submit_modal form" ).dialog({
+		      autoOpen: false,
+		      width: 450,
+		      position: { my: 'center', at: 'center' },
+		      modal: true,
+		      title: 'Notification',
+		      buttons: [
+		      	{
+		            text: "Submit",
+		            click: function() {
+		            	dialog.submit();
+		            }
+		        },
+		        {
+		            text: "Close",
+		            click: function() {
+		                $('#submit_modal form').hide();
+		                $( this ).dialog( "close" );
+		            }
+		        }
+        	]
+		    });
+		    dialog.dialog( "open" );
+		    return false;
+		} else {
+			$('#submit_modal form').hide();
+		}
+		return true;
+	});
+});
+</script>
 
 <?php do_action( 'woocommerce_after_cart' ); ?>

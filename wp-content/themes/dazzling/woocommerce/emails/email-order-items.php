@@ -29,6 +29,14 @@ foreach ( $items as $item_id => $item ) :
 	$description = get_field_object('description', $product_id);
 	$description_tbl = get_field_object('product_', $product_id);
 	$description = $description['value']?$description['value']:$description_tbl['value'];
+	if ($is_capacity) {
+		$capacity = get_field_object('capacity', $product_id);
+		$capacity = isset($capacity['value'])?$capacity['value']:'';
+	}
+	if ($is_range) {
+		$range = get_field_object('range', $product_id);
+		$range = isset($range['value'])?$range['value']:'';
+	}
 	$unit_price = get_custom_price($product_id);
 	$qty = get_field_object('qty', $product_id);
 	$qty = isset($qty['value'])?$qty['value']:'';
@@ -72,7 +80,9 @@ foreach ( $items as $item_id => $item ) :
 			?></td>
 			<td class="td" style="text-align:left; vertical-align:middle; border: 1px solid #eee; font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif; word-wrap:break-word;"><?php echo $brand; ?></td>
 			<td class="td" style="text-align:left; vertical-align:middle; border: 1px solid #eee; font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif; word-wrap:break-word;"><?php echo $description; ?></td>
-			<td class="td" style="text-align:left; vertical-align:middle; border: 1px solid #eee; font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;"><?php echo $unit_price; ?></td>
+			<?php if ($is_capacity) { ?><td class="td" style="text-align:left; vertical-align:middle; border: 1px solid #eee; font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif; word-wrap:break-word;"><?php echo $capacity; ?></td><?php } ?>
+			<?php if ($is_range) { ?><td class="td" style="text-align:left; vertical-align:middle; border: 1px solid #eee; font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif; word-wrap:break-word;"><?php echo $range; ?></td><?php } ?>
+			<td class="td" style="text-align:left; vertical-align:middle; border: 1px solid #eee; font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;"><?php echo $item['line_subtotal']/($qty * $item['qty']); ?></td>
 			<td class="td" style="text-align:left; vertical-align:middle; border: 1px solid #eee; font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;"><?php echo apply_filters( 'woocommerce_email_order_item_quantity', $item['qty'], $item ); ?></td>
 			<td class="td" style="text-align:left; vertical-align:middle; border: 1px solid #eee; font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;"><?php echo $qty * $item['qty']; ?></td>
 			<td class="td" style="text-align:left; vertical-align:middle; border: 1px solid #eee; font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;"><?php echo $order->get_formatted_line_subtotal( $item ); ?></td>

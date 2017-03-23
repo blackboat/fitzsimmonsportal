@@ -2059,7 +2059,9 @@ abstract class WC_Abstract_Order {
 			'show_image'          => $args['show_image'],
 			'image_size'          => $args['image_size'],
 			'plain_text'          => $args['plain_text'],
-			'sent_to_admin'       => $args['sent_to_admin']
+			'sent_to_admin'       => $args['sent_to_admin'],
+			'is_capacity'		  => $args['is_capacity'],
+			'is_range'			  => $args['is_range']
 		) ) );
 
 		return apply_filters( 'woocommerce_email_order_items_table', ob_get_clean(), $this );

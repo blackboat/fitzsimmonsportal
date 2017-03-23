@@ -140,7 +140,7 @@ wp_enqueue_media(); ?>
                                                 <label for="first-name"><?php _e('Avatar', 'profile'); ?></label>
                                                 <!-- <div class="image"> -->
                                                     <input type="hidden" class="button" name="shr_image_id" id="shr_image_id" value="<?php echo !empty($profile_pic) ? $profile_pic : ''; ?>" />
-                                                    <img id="shr-img" src="<?php echo !empty($profile_pic) ? $image[0] : 'http://dev.fitzsimmonsportal.com/wp-content/plugins/metronet-profile-picture/img/mystery.png'; ?>" style="max-width: 100px; max-height: 100px;" />
+                                                    <img id="shr-img" src="<?php echo !empty($profile_pic) ? $image[0] : 'https://fitzsimmonsportal.com.au/wp-content/plugins/metronet-profile-picture/img/mystery.png'; ?>" style="max-width: 100px; max-height: 100px;" />
                                                     <input type="button" data-id="shr_image_id" data-src="shr-img" class="button shr-image" name="shr_image" id="shr-image" value="Upload" />
                                                 <!-- </div> -->
                                             </p>
