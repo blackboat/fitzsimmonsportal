@@ -60,7 +60,4 @@ jQuery(document).ready(function($){
         }
         return true;
     });
-    $("#product_cat-all input").on("click", function() {
-        custom_pricing();
-    });
 });
