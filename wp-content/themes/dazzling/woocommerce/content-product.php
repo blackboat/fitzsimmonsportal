@@ -130,7 +130,7 @@ Note this product is not part of the usual range of goods that you stock in your
 				}
 			}
 			echo '</table>';
-		} else if ($cat_slug == 'barware' || $cat_slug == 'consumables') {
+		} else if ($cat_slug == 'barware' || $cat_slug == 'consumables' || $cat_slug == 'cutlery') {
 			$description = get_field_object('description', $pid);
 			$description = $description ? $description['value'] : '';
 			$capacity = get_field_object('capacity', $pid);
