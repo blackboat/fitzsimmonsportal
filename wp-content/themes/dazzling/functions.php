@@ -895,7 +895,7 @@ add_action('admin_enqueue_scripts', 'admin_jquery_ui_scripts');
 function admin_jquery_ui_scripts() {
   wp_enqueue_script( 'jquery-ui-script', get_template_directory_uri() . '/js/jquery-ui/jquery-ui.js' );
   wp_enqueue_style( 'jquery-ui-style', get_template_directory_uri() . '/js/jquery-ui/jquery-ui.css' );
-  wp_enqueue_script( 'admin-custom-script', get_template_directory_uri() . '/js/custom-admin.js' );
+  wp_enqueue_script( 'admin-custom-script', get_template_directory_uri() . '/js/custom-admin.js', array(), false, true );
 }
 
 /* change acf post object order for custom pricing */
